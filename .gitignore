@@ -28,3 +28,6 @@ htmlcov/
 temp_files/
 *.tmp
 *.temp
+
+# CLI progress tracking
+.progress.json

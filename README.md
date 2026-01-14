@@ -29,6 +29,30 @@ A hands-on exercise series designed for experienced JavaScript developers who wa
 
 ## How to Use
 
+### Option 1: Interactive CLI (Recommended)
+
+Run the interactive command-line interface for a guided experience:
+
+```bash
+python3 cli.py
+```
+
+The CLI will:
+- Walk you through exercises in order
+- Track your progress with streaks and statistics
+- Provide encouragement (and occasional teasing when you make mistakes)
+- Detect JavaScript habits sneaking into your Python code
+
+CLI options:
+```bash
+python3 cli.py              # Interactive mode
+python3 cli.py --list       # List all exercises
+python3 cli.py --progress   # Show detailed progress
+python3 cli.py --reset      # Reset progress
+```
+
+### Option 2: Manual
+
 1. **Clone this repository**
    ```bash
    git clone <repo-url>
