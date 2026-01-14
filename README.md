@@ -1,6 +1,14 @@
 # Python for JavaScript Developers
 
-A hands-on exercise series designed for experienced JavaScript developers who want to learn Python. Each exercise highlights the differences and similarities between the two languages.
+A hands-on exercise series designed for experienced JavaScript developers who want to learn Python. Each exercise highlights the differences and similarities between the two languages, with built-in tests to verify your solutions.
+
+## What's Included
+
+- **20 exercises** covering Python fundamentals through advanced topics
+- **Side-by-side comparisons** of JavaScript and Python syntax
+- **Built-in tests** that run when you execute each exercise file
+- **Solutions** for when you get stuck (but try first!)
+- **Claude Code integration** for an interactive, guided learning experience
 
 ## Prerequisites
 
@@ -29,19 +37,40 @@ A hands-on exercise series designed for experienced JavaScript developers who wa
 
 ## How to Use
 
-### Option 1: Interactive CLI (Recommended)
+### Option 1: Claude Code (Recommended)
 
-Run the interactive command-line interface for a guided experience:
+If you have [Claude Code](https://claude.ai/claude-code) installed, use the `/practice` command for the best experience:
+
+```bash
+claude
+# Then type: /practice
+```
+
+The `/practice` skill provides:
+- **Guided progression** through all 20 exercises
+- **Progress tracking** with streaks and statistics
+- **Instant feedback** when you run tests
+- **Helpful hints** without giving away answers
+- **JS habit detection** - it'll catch when you accidentally write `===` instead of `==`
+- **Encouraging (and playfully teasing) tutor** personality
+
+Commands:
+| Command | Description |
+|---------|-------------|
+| `/practice` | Show current exercise and progress |
+| `/practice list` | List all exercises with completion status |
+| `/practice [n]` | Jump to exercise number n |
+| `/practice hint` | Get a hint for the current exercise |
+| `/practice run` | Run tests for current exercise |
+| `/practice solution` | Show solution (try not to peek!) |
+
+### Option 2: Interactive CLI
+
+Run the standalone command-line interface:
 
 ```bash
 python3 cli.py
 ```
-
-The CLI will:
-- Walk you through exercises in order
-- Track your progress with streaks and statistics
-- Provide encouragement (and occasional teasing when you make mistakes)
-- Detect JavaScript habits sneaking into your Python code
 
 CLI options:
 ```bash
@@ -51,7 +80,7 @@ python3 cli.py --progress   # Show detailed progress
 python3 cli.py --reset      # Reset progress
 ```
 
-### Option 2: Manual
+### Option 3: Manual
 
 1. **Clone this repository**
    ```bash
@@ -115,4 +144,14 @@ Found an issue or want to add exercises? PRs welcome!
 
 ## License
 
-MIT
+This project is licensed under the **PolyForm Noncommercial License 1.0.0**.
+
+You are free to:
+- Use, modify, and fork this project for personal or educational purposes
+- Share your modifications with others
+
+You may not:
+- Sell this software or any derivative works
+- Include this code in commercial products
+
+See [LICENSE](LICENSE) for full details.

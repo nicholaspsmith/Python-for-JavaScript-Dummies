@@ -73,7 +73,7 @@ today = ???  # Use date.today()
 # Get current datetime
 now = ???  # Use datetime.now()
 
-# Create a date for January 1, 2024
+# Create a date for January 1, 2026
 new_year = ???  # Use date(year, month, day)
 
 
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     # Test 1.4
     assert isinstance(today, date)
     assert isinstance(now, datetime)
-    assert new_year == date(2024, 1, 1)
+    assert new_year == date(2026, 1, 1)
     assert word_counts["apple"] == 3
     assert json_string == '{"name": "Alice", "age": 30}'
     assert parsed_data == {"name": "Alice", "age": 30}

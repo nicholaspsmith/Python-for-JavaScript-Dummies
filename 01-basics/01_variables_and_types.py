@@ -29,17 +29,17 @@ Complete each exercise below. Run this file with: python3 01_variables_and_types
 # Exercise 1.1: Create variables
 # Create the following variables:
 # - A string variable called 'greeting' with value "Hello, Python!"
-# - An integer variable called 'year' with value 2024
+# - An integer variable called 'year' with value 2026
 # - A float variable called 'pi_value' with value 3.14159
 # - A boolean variable called 'is_learning' with value True
 # - A variable called 'nothing' with value None
 
 # YOUR CODE HERE:
-greeting = None  # Replace None with your answer
-year = None
-pi_value = None
-is_learning = None
-nothing = "replace me"
+greeting = "Hello, Python!"  # Replace None with your answer
+year = 2026
+pi_value = 3.14159
+is_learning = True
+nothing = None
 
 
 # Exercise 1.2: Type checking
@@ -48,13 +48,27 @@ nothing = "replace me"
 # JavaScript: typeof "hello" === "string"
 # Python: type("hello") == str  OR  isinstance("hello", str)
 #
-# Fix the assertions below by replacing the ??? with correct types
+# When to use each:
+# - type(x) returns the exact type of x (useful for exact matching)
+# - isinstance(x, Type) returns True/False (works with inheritance, multiple types)
 
-string_type = ???  # What type is "hello"?
-int_type = ???     # What type is 42?
-float_type = ???   # What type is 3.14?
-bool_type = ???    # What type is True?
-none_type = ???    # What type is None? (Hint: it's called NoneType)
+# Part A: Use type() to get the exact type of each value
+# Example: type("hello") returns <class 'str'>, which equals str
+
+hello_type = ???          # Use type() on "hello"
+answer_type = ???         # Use type() on 42
+pi_type = ???             # Use type() on 3.14
+flag_type = ???           # Use type() on True
+empty_type = ???          # Use type() on None
+
+# Part B: Use isinstance() to check types (returns True or False)
+# Example: isinstance("hello", str) returns True
+# Bonus: isinstance(x, (type1, type2)) checks multiple types!
+
+is_string = ???           # Is "hello" a str?
+is_integer = ???          # Is 3.14 an int? (Hint: it's not!)
+is_numeric = ???          # Is 42 either an int OR float? Use isinstance with tuple: (int, float)
+is_none = ???             # Is None a NoneType? (Hint: use type(None) as the type to check)
 
 
 # Exercise 1.3: Type conversion
@@ -124,18 +138,23 @@ if __name__ == "__main__":
 
     # Test 1.1
     assert greeting == "Hello, Python!", "greeting should be 'Hello, Python!'"
-    assert year == 2024, "year should be 2024"
+    assert year == 2026, "year should be 2026"
     assert pi_value == 3.14159, "pi_value should be 3.14159"
     assert is_learning == True, "is_learning should be True"
     assert nothing is None, "nothing should be None"
     print("✓ Exercise 1.1 passed")
 
-    # Test 1.2
-    assert string_type == str, "string_type should be str"
-    assert int_type == int, "int_type should be int"
-    assert float_type == float, "float_type should be float"
-    assert bool_type == bool, "bool_type should be bool"
-    assert none_type == type(None), "none_type should be type(None) or NoneType"
+    # Test 1.2 Part A - type()
+    assert hello_type == str, "hello_type should be str (use type('hello'))"
+    assert answer_type == int, "answer_type should be int (use type(42))"
+    assert pi_type == float, "pi_type should be float (use type(3.14))"
+    assert flag_type == bool, "flag_type should be bool (use type(True))"
+    assert empty_type == type(None), "empty_type should be NoneType (use type(None))"
+    # Test 1.2 Part B - isinstance()
+    assert is_string == True, "is_string should be True (isinstance('hello', str))"
+    assert is_integer == False, "is_integer should be False (3.14 is not an int!)"
+    assert is_numeric == True, "is_numeric should be True (use isinstance(42, (int, float)))"
+    assert is_none == True, "is_none should be True (isinstance(None, type(None)))"
     print("✓ Exercise 1.2 passed")
 
     # Test 1.3
@@ -154,7 +173,8 @@ if __name__ == "__main__":
     assert stripped == "Hello, Python!", "stripped should have no leading/trailing spaces"
     assert lowered == "  hello, python!  ", "lowered should be lowercase"
     assert replaced == "  Hello, JavaScript!  ", "replaced should have JavaScript"
-    assert split_list == ["apple", "banana", "cherry"], "split_list should be a list"
+    assert split_list == ["apple", "banana",
+                          "cherry"], "split_list should be a list"
     print("✓ Exercise 1.5 passed")
 
     print("\n🎉 All tests passed! Great job!")
