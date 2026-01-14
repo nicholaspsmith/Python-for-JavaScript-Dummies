@@ -6,6 +6,7 @@
   import { progress } from '$lib/stores/progress';
   import { currentExerciseId, currentExerciseMetadata } from '$lib/stores/exercises';
   import { initPyodide } from '$lib/stores/pyodide';
+  import { initAuth } from '$lib/stores/supabase';
   import { parseExercise } from '$lib/utils/exerciseParser';
   import { runTests, detectJsHabits } from '$lib/utils/pyodideRunner';
   import type { ParsedExercise, TestResult } from '$lib/types';
@@ -15,12 +16,16 @@
   let testResult: TestResult | null = null;
   let isRunning = false;
   let jsHabits: string[] = [];
+  let sidebarOpen = false;
 
   onMount(async () => {
     mounted = true;
 
-    // Initialize progress from localStorage
-    progress.init();
+    // Initialize Supabase auth (if configured)
+    await initAuth();
+
+    // Initialize progress from localStorage/cloud
+    await progress.init();
 
     // Start loading Pyodide in background
     initPyodide();
@@ -59,6 +64,14 @@
   function handleExerciseSelect(event: CustomEvent<{ id: string }>) {
     currentExerciseId.set(event.detail.id);
     progress.setCurrentExercise(event.detail.id);
+  }
+
+  function handleSidebarClose() {
+    sidebarOpen = false;
+  }
+
+  function handleToggleSidebar() {
+    sidebarOpen = !sidebarOpen;
   }
 
   function handleCodeChange(event: CustomEvent<{ value: string }>) {
@@ -106,12 +119,17 @@
 
 <svelte:head>
   <title>Python Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </svelte:head>
 
 <div class="app">
-  <Header />
+  <Header {sidebarOpen} on:toggleSidebar={handleToggleSidebar} />
   <main>
-    <Sidebar on:select={handleExerciseSelect} />
+    <Sidebar
+      isOpen={sidebarOpen}
+      on:select={handleExerciseSelect}
+      on:close={handleSidebarClose}
+    />
     <ExerciseView
       bind:this={exerciseView}
       exercise={currentExercise}
@@ -134,6 +152,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #1e1e1e;
     color: #d4d4d4;
+    overflow: hidden;
   }
 
   :global(*) {
@@ -144,6 +163,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     overflow: hidden;
   }
 
@@ -151,5 +171,13 @@
     flex: 1;
     display: flex;
     overflow: hidden;
+    position: relative;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+    }
   }
 </style>

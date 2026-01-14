@@ -3,6 +3,8 @@
   import { progress } from '../stores/progress';
   import { createEventDispatcher } from 'svelte';
 
+  export let isOpen = false;
+
   const dispatch = createEventDispatcher();
 
   let expandedCategories: Set<string> = new Set();
@@ -29,6 +31,12 @@
 
   function selectExercise(id: string) {
     dispatch('select', { id });
+    // Close sidebar on mobile after selection
+    dispatch('close');
+  }
+
+  function handleBackdropClick() {
+    dispatch('close');
   }
 
   function getStatus(exerciseId: string): 'completed' | 'current' | 'not-started' {
@@ -39,9 +47,19 @@
   }
 </script>
 
-<aside>
+<!-- Backdrop for mobile -->
+{#if isOpen}
+  <div class="backdrop" on:click={handleBackdropClick} on:keydown={() => {}} role="button" tabindex="-1"></div>
+{/if}
+
+<aside class:open={isOpen}>
   <div class="sidebar-header">
     <h2>Exercises</h2>
+    <button class="close-btn" on:click={() => dispatch('close')} aria-label="Close sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
   </div>
 
   <nav>
@@ -94,6 +112,10 @@
 </aside>
 
 <style>
+  .backdrop {
+    display: none;
+  }
+
   aside {
     width: 280px;
     min-width: 280px;
@@ -107,6 +129,9 @@
   .sidebar-header {
     padding: 1rem;
     border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .sidebar-header h2 {
@@ -116,6 +141,22 @@
     color: #888;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .close-btn:hover {
+    background: #333;
+    color: #fff;
   }
 
   nav {
@@ -234,5 +275,46 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    aside {
+      width: 240px;
+      min-width: 240px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 40;
+    }
+
+    aside {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 280px;
+      min-width: 280px;
+      z-index: 50;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    aside.open {
+      transform: translateX(0);
+    }
+
+    .close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 </style>
