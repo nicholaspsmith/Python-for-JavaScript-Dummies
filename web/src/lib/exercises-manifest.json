@@ -1,0 +1,186 @@
+{
+  "generated": "2026-01-14T20:14:38.688Z",
+  "total": 20,
+  "exercises": [
+    {
+      "id": "1.1",
+      "name": "Variables And Types",
+      "category": "Basics",
+      "categoryFolder": "01-basics",
+      "filename": "01_variables_and_types.py",
+      "path": "exercises/01-basics/01_variables_and_types.py",
+      "description": "Exercise 1: Variables and Types"
+    },
+    {
+      "id": "1.2",
+      "name": "Operators",
+      "category": "Basics",
+      "categoryFolder": "01-basics",
+      "filename": "02_operators.py",
+      "path": "exercises/01-basics/02_operators.py",
+      "description": "Exercise 2: Operators"
+    },
+    {
+      "id": "2.1",
+      "name": "Lists",
+      "category": "Collections",
+      "categoryFolder": "02-collections",
+      "filename": "01_lists.py",
+      "path": "exercises/02-collections/01_lists.py",
+      "description": "Exercise 1: Lists"
+    },
+    {
+      "id": "2.2",
+      "name": "Dictionaries",
+      "category": "Collections",
+      "categoryFolder": "02-collections",
+      "filename": "02_dictionaries.py",
+      "path": "exercises/02-collections/02_dictionaries.py",
+      "description": "Exercise 2: Dictionaries"
+    },
+    {
+      "id": "2.3",
+      "name": "Tuples Sets",
+      "category": "Collections",
+      "categoryFolder": "02-collections",
+      "filename": "03_tuples_sets.py",
+      "path": "exercises/02-collections/03_tuples_sets.py",
+      "description": "Exercise 3: Tuples and Sets"
+    },
+    {
+      "id": "3.1",
+      "name": "Conditionals",
+      "category": "Control Flow",
+      "categoryFolder": "03-control-flow",
+      "filename": "01_conditionals.py",
+      "path": "exercises/03-control-flow/01_conditionals.py",
+      "description": "Exercise 1: Conditionals"
+    },
+    {
+      "id": "3.2",
+      "name": "Loops",
+      "category": "Control Flow",
+      "categoryFolder": "03-control-flow",
+      "filename": "02_loops.py",
+      "path": "exercises/03-control-flow/02_loops.py",
+      "description": "Exercise 2: Loops"
+    },
+    {
+      "id": "3.3",
+      "name": "Comprehensions",
+      "category": "Control Flow",
+      "categoryFolder": "03-control-flow",
+      "filename": "03_comprehensions.py",
+      "path": "exercises/03-control-flow/03_comprehensions.py",
+      "description": "Exercise 3: Comprehensions"
+    },
+    {
+      "id": "4.1",
+      "name": "Functions Basics",
+      "category": "Functions",
+      "categoryFolder": "04-functions",
+      "filename": "01_functions_basics.py",
+      "path": "exercises/04-functions/01_functions_basics.py",
+      "description": "Exercise 1: Functions Basics"
+    },
+    {
+      "id": "4.2",
+      "name": "Args Kwargs",
+      "category": "Functions",
+      "categoryFolder": "04-functions",
+      "filename": "02_args_kwargs.py",
+      "path": "exercises/04-functions/02_args_kwargs.py",
+      "description": "Exercise 2: *args and **kwargs"
+    },
+    {
+      "id": "5.1",
+      "name": "Classes Basics",
+      "category": "Oop",
+      "categoryFolder": "05-oop",
+      "filename": "01_classes_basics.py",
+      "path": "exercises/05-oop/01_classes_basics.py",
+      "description": "Exercise 1: Classes Basics"
+    },
+    {
+      "id": "5.2",
+      "name": "Inheritance",
+      "category": "Oop",
+      "categoryFolder": "05-oop",
+      "filename": "02_inheritance.py",
+      "path": "exercises/05-oop/02_inheritance.py",
+      "description": "Exercise 2: Inheritance"
+    },
+    {
+      "id": "6.1",
+      "name": "Exceptions",
+      "category": "Error Handling",
+      "categoryFolder": "06-error-handling",
+      "filename": "01_exceptions.py",
+      "path": "exercises/06-error-handling/01_exceptions.py",
+      "description": "Exercise 1: Error Handling"
+    },
+    {
+      "id": "7.1",
+      "name": "Imports",
+      "category": "Modules",
+      "categoryFolder": "07-modules",
+      "filename": "01_imports.py",
+      "path": "exercises/07-modules/01_imports.py",
+      "description": "Exercise 1: Imports and Modules"
+    },
+    {
+      "id": "8.1",
+      "name": "File Operations",
+      "category": "File Io",
+      "categoryFolder": "08-file-io",
+      "filename": "01_file_operations.py",
+      "path": "exercises/08-file-io/01_file_operations.py",
+      "description": "Exercise 1: File I/O"
+    },
+    {
+      "id": "9.1",
+      "name": "Decorators",
+      "category": "Decorators",
+      "categoryFolder": "09-decorators",
+      "filename": "01_decorators.py",
+      "path": "exercises/09-decorators/01_decorators.py",
+      "description": "Exercise 1: Decorators"
+    },
+    {
+      "id": "10.1",
+      "name": "Generators",
+      "category": "Generators",
+      "categoryFolder": "10-generators",
+      "filename": "01_generators.py",
+      "path": "exercises/10-generators/01_generators.py",
+      "description": "Exercise 1: Generators and Iterators"
+    },
+    {
+      "id": "11.1",
+      "name": "Context Managers",
+      "category": "Context Managers",
+      "categoryFolder": "11-context-managers",
+      "filename": "01_context_managers.py",
+      "path": "exercises/11-context-managers/01_context_managers.py",
+      "description": "Exercise 1: Context Managers"
+    },
+    {
+      "id": "12.1",
+      "name": "Type Hints",
+      "category": "Type Hints",
+      "categoryFolder": "12-type-hints",
+      "filename": "01_type_hints.py",
+      "path": "exercises/12-type-hints/01_type_hints.py",
+      "description": "Exercise 1: Type Hints"
+    },
+    {
+      "id": "13.1",
+      "name": "Pytest Basics",
+      "category": "Testing",
+      "categoryFolder": "13-testing",
+      "filename": "01_pytest_basics.py",
+      "path": "exercises/13-testing/01_pytest_basics.py",
+      "description": "Exercise 1: Testing with pytest"
+    }
+  ]
+}
