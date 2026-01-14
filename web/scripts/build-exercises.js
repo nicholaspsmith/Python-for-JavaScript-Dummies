@@ -82,6 +82,14 @@ async function main() {
   const exercises = [];
   const folders = await getExerciseFolders();
 
+  // If no exercise folders found (e.g., on Vercel where only web/ is deployed),
+  // skip regeneration - the static files are already committed
+  if (folders.length === 0) {
+    console.log('No exercise folders found in parent directory.');
+    console.log('Using pre-committed static exercises.\n');
+    return;
+  }
+
   // Ensure output directory exists
   if (!existsSync(OUTPUT_DIR)) {
     await mkdir(OUTPUT_DIR, { recursive: true });
