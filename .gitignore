@@ -31,3 +31,4 @@ temp_files/
 
 # CLI progress tracking
 .progress.json
+.claude/practice-progress.json
