@@ -1,0 +1,13 @@
+# Python Practice Requirements
+
+# Testing
+pytest>=7.0.0
+
+# Type checking (optional)
+mypy>=1.0.0
+
+# Code formatting (optional)
+black>=23.0.0
+
+# Linting (optional)
+ruff>=0.1.0
