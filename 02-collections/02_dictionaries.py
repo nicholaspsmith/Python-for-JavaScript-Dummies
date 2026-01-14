@@ -126,18 +126,57 @@ bob_salary = ???
 ???
 
 
-# Exercise 2.8: setdefault and defaultdict-like behavior
-# setdefault: get value if exists, otherwise set and return default
+# Exercise 2.8: .get() vs .setdefault() vs defaultdict
+# Three ways to handle missing keys:
+# 1. .get(key, default) - returns default but doesn't modify dict
+# 2. .setdefault(key, default) - returns value AND inserts default if missing
+# 3. defaultdict(factory) - automatically creates default values
 
+# Part A: Use .get() to safely access with defaults
+# .get() returns the default but DOESN'T modify the dictionary
+config = {"theme": "dark", "language": "en"}
+
+# Get 'theme' value, or "light" if missing
+theme_value = ???  # Use config.get()
+
+# Get 'timeout' value, or 30 if missing (config won't be modified)
+timeout_value = ???  # Use config.get()
+
+# Verify: 'timeout' should NOT be in config after using .get()
+
+
+# Part B: Use .setdefault() to get-or-create
+# .setdefault() returns the value AND inserts the default if key was missing
+user_settings = {"name": "Alice"}
+
+# Get 'name' value using setdefault (key exists, so just returns value)
+name_from_setdefault = ???  # Use user_settings.setdefault()
+
+# Get 'role' value using setdefault with default "guest"
+# This WILL add 'role' to the dict since it's missing
+role_from_setdefault = ???  # Use user_settings.setdefault()
+
+# After this, user_settings should have both 'name' and 'role' keys
+
+
+# Part C: Use .setdefault() for grouping pattern
+# Group words by their first letter: {"a": ["apple", "apricot"], "b": ["banana"], ...}
+words_to_group = ["apple", "banana", "apricot", "blueberry", "cherry"]
+grouped_words = {}
+
+for word in words_to_group:
+    first_letter = word[0]
+    # Use setdefault to get-or-create the list, then append
+    ???  # grouped_words.setdefault(first_letter, []).append(word)
+
+
+# Part D: Count words using .get() pattern (alternative to setdefault)
+words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
 word_count = {}
 
-# Use setdefault to initialize counts, then increment
-# This is a common pattern for building dictionaries
-words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
-
 for word in words:
-    # Initialize to 0 if not exists, then increment
-    word_count[word] = word_count.get(word, 0) + 1
+    # Use .get() with default 0, then add 1
+    word_count[word] = ???  # word_count.get(word, 0) + 1
 
 # word_count should be {"apple": 3, "banana": 2, "cherry": 1}
 
@@ -186,7 +225,17 @@ if __name__ == "__main__":
     assert company["employees"]["charlie"] == {"role": "manager", "salary": 90000}
     print("✓ Exercise 2.7 passed")
 
-    # Test 2.8
+    # Test 2.8 Part A - .get()
+    assert theme_value == "dark", "theme_value should be 'dark'"
+    assert timeout_value == 30, "timeout_value should be 30 (default)"
+    assert "timeout" not in config, ".get() should NOT modify the dictionary"
+    # Test 2.8 Part B - .setdefault()
+    assert name_from_setdefault == "Alice", "setdefault returns existing value"
+    assert role_from_setdefault == "guest", "setdefault returns default for missing key"
+    assert user_settings.get("role") == "guest", "setdefault SHOULD add key to dict"
+    # Test 2.8 Part C - grouping with setdefault
+    assert grouped_words == {"a": ["apple", "apricot"], "b": ["banana", "blueberry"], "c": ["cherry"]}
+    # Test 2.8 Part D - counting with .get()
     assert word_count == {"apple": 3, "banana": 2, "cherry": 1}
     print("✓ Exercise 2.8 passed")
 

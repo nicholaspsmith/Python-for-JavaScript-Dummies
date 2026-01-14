@@ -20,7 +20,7 @@ This document contains hints and solutions for all exercises. Try to complete th
 
 ```python
 greeting = "Hello, Python!"
-year = 2024
+year = 2026
 pi_value = 3.14159
 is_learning = True
 nothing = None
@@ -31,12 +31,24 @@ nothing = None
 <summary>Exercise 1.2 Solution</summary>
 
 ```python
-string_type = str
-int_type = int
-float_type = float
-bool_type = bool
-none_type = type(None)
+# Part A: Using type()
+hello_type = type("hello")      # Returns str
+answer_type = type(42)          # Returns int
+pi_type = type(3.14)            # Returns float
+flag_type = type(True)          # Returns bool
+empty_type = type(None)         # Returns NoneType
+
+# Part B: Using isinstance()
+is_string = isinstance("hello", str)           # True
+is_integer = isinstance(3.14, int)             # False - it's a float!
+is_numeric = isinstance(42, (int, float))      # True - checks multiple types
+is_none = isinstance(None, type(None))         # True
 ```
+
+**When to use which:**
+- `type(x) == SomeType` - exact type match only
+- `isinstance(x, SomeType)` - preferred in most cases, works with inheritance
+- `isinstance(x, (Type1, Type2))` - check against multiple types
 </details>
 
 <details>
@@ -196,6 +208,24 @@ expensive = {k: v for k, v in prices.items() if v >= 0.75}
 alice_role = company["employees"]["alice"]["role"]
 bob_salary = company["employees"]["bob"]["salary"]
 company["employees"]["charlie"] = {"role": "manager", "salary": 90000}
+
+# 2.8 - .get() vs .setdefault()
+# Part A: .get() returns default but doesn't modify dict
+theme_value = config.get("theme", "light")         # Returns "dark" (exists)
+timeout_value = config.get("timeout", 30)          # Returns 30 (missing, default)
+
+# Part B: .setdefault() returns value AND inserts if missing
+name_from_setdefault = user_settings.setdefault("name", "Unknown")  # Returns "Alice"
+role_from_setdefault = user_settings.setdefault("role", "guest")    # Returns "guest" AND adds it
+
+# Part C: Grouping pattern with setdefault
+for word in words_to_group:
+    first_letter = word[0]
+    grouped_words.setdefault(first_letter, []).append(word)
+
+# Part D: Counting with .get()
+for word in words:
+    word_count[word] = word_count.get(word, 0) + 1
 ```
 </details>
 
