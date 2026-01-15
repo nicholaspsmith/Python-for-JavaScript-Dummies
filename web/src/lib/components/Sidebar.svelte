@@ -119,8 +119,8 @@
   aside {
     width: 280px;
     min-width: 280px;
-    background: #1e1e1e;
-    border-right: 1px solid #333;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -128,7 +128,7 @@
 
   .sidebar-header {
     padding: 1rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -138,7 +138,7 @@
     margin: 0;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #888;
+    color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -147,7 +147,7 @@
     display: none;
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-tertiary);
     cursor: pointer;
     padding: 0.25rem;
     border-radius: 4px;
@@ -155,8 +155,8 @@
   }
 
   .close-btn:hover {
-    background: #333;
-    color: #fff;
+    background: var(--bg-active);
+    color: var(--text-primary);
   }
 
   nav {
@@ -177,7 +177,7 @@
     padding: 0.5rem 0.75rem;
     background: none;
     border: none;
-    color: #ccc;
+    color: var(--text-secondary);
     font-size: 0.875rem;
     cursor: pointer;
     border-radius: 4px;
@@ -185,12 +185,12 @@
   }
 
   .category-header:hover {
-    background: #2a2a2a;
+    background: var(--bg-hover);
   }
 
   .chevron {
     font-size: 0.625rem;
-    color: #666;
+    color: var(--text-muted);
     width: 12px;
   }
 
@@ -202,7 +202,7 @@
 
   .category-count {
     font-size: 0.75rem;
-    color: #666;
+    color: var(--text-muted);
   }
 
   .exercise-list {
@@ -219,7 +219,7 @@
     padding: 0.375rem 0.75rem;
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-tertiary);
     font-size: 0.8125rem;
     cursor: pointer;
     border-radius: 4px;
@@ -228,13 +228,13 @@
   }
 
   .exercise-item:hover {
-    background: #2a2a2a;
-    color: #ccc;
+    background: var(--bg-hover);
+    color: var(--text-secondary);
   }
 
   .exercise-item.current {
-    background: #264f78;
-    color: #fff;
+    background: var(--selection-bg);
+    color: var(--text-primary);
   }
 
   .exercise-item.completed {
@@ -262,7 +262,7 @@
   .exercise-id {
     font-family: monospace;
     font-size: 0.75rem;
-    color: #666;
+    color: var(--text-muted);
     min-width: 2rem;
   }
 

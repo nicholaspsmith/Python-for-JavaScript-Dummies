@@ -127,8 +127,8 @@
     width: 400px;
     min-width: 300px;
     max-width: 500px;
-    background: #252526;
-    border-right: 1px solid #333;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -138,7 +138,7 @@
     width: 100%;
     padding: 1rem;
     border: none;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
     background: none;
     display: flex;
     align-items: center;
@@ -165,7 +165,7 @@
   .expand-icon {
     display: none;
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-tertiary);
   }
 
   .exercise-number {
@@ -183,7 +183,7 @@
     margin: 0;
     font-size: 1.125rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -191,8 +191,8 @@
 
   .category-badge {
     font-size: 0.6875rem;
-    color: #888;
-    background: #333;
+    color: var(--text-tertiary);
+    background: var(--bg-active);
     padding: 0.25rem 0.5rem;
     border-radius: 999px;
     text-transform: uppercase;
@@ -210,7 +210,7 @@
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: #ccc;
+    color: var(--text-secondary);
     white-space: pre-wrap;
     word-wrap: break-word;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -219,7 +219,7 @@
   .loading {
     padding: 2rem;
     text-align: center;
-    color: #888;
+    color: var(--text-tertiary);
   }
 
   .editor-panel {
@@ -227,7 +227,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: #1e1e1e;
+    background: var(--bg-primary);
   }
 
   .editor-toolbar {
@@ -235,15 +235,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    background: #2d2d2d;
-    border-bottom: 1px solid #333;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .toolbar-left {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #888;
+    color: var(--text-tertiary);
     font-size: 0.875rem;
   }
 
@@ -276,12 +276,12 @@
   }
 
   .btn-secondary {
-    background: #333;
-    color: #ccc;
+    background: var(--bg-active);
+    color: var(--text-secondary);
   }
 
   .btn-secondary:hover:not(:disabled) {
-    background: #444;
+    background: var(--bg-hover);
   }
 
   .btn-primary {
@@ -322,7 +322,7 @@
       min-width: 100%;
       max-width: 100%;
       border-right: none;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--border-color);
       max-height: none;
       flex-shrink: 0;
     }
@@ -340,7 +340,7 @@
     }
 
     .exercise-header:hover {
-      background: #2a2a2a;
+      background: var(--bg-hover);
     }
 
     .expand-icon {
