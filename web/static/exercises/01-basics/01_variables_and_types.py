@@ -35,11 +35,11 @@ Complete each exercise below. Run this file with: python3 01_variables_and_types
 # - A variable called 'nothing' with value None
 
 # YOUR CODE HERE:
-greeting = "Hello, Python!"  # Replace None with your answer
-year = 2026
-pi_value = 3.14159
-is_learning = True
-nothing = None
+greeting = None
+year = None
+pi_value = None
+is_learning = None
+nothing = ???  # What represents "no value" in Python?
 
 
 # Exercise 1.2: Type checking

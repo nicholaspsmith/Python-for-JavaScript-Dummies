@@ -1,0 +1,87 @@
+"""
+Spiral Matrix
+==============
+
+Given an m x n matrix, return all elements in spiral order.
+
+Spiral order: Start top-left, go right, then down, then left, then up,
+and repeat inward until all elements are visited.
+
+Example:
+    Input: [[1,2,3],
+            [4,5,6],
+            [7,8,9]]
+    Output: [1,2,3,6,9,8,7,4,5]
+
+    Input: [[1,2,3,4],
+            [5,6,7,8],
+            [9,10,11,12]]
+    Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+JS to Python Tips:
+-----------------
+- 2D array access: `matrix[row][col]` (same as JS).
+- Empty check: `if not matrix or not matrix[0]:`.
+- `len(matrix)` for rows, `len(matrix[0])` for columns.
+- Use boundary variables: top, bottom, left, right.
+- `range(left, right + 1)` for inclusive iteration.
+- `range(right, left - 1, -1)` for reverse iteration (step = -1).
+
+Approach:
+- Maintain four boundaries: top, bottom, left, right.
+- Traverse in order: right across top row, down right column,
+  left across bottom row, up left column.
+- After each direction, shrink the corresponding boundary.
+- Continue until boundaries cross.
+"""
+
+from typing import List
+
+
+def spiral_order(matrix: List[List[int]]) -> List[int]:
+    """
+    Return matrix elements in spiral order.
+
+    Hint: Use four boundaries (top, bottom, left, right).
+    Go right, then down, then left, then up.
+    After each direction, shrink that boundary and check if done.
+    """
+    # Your code here
+    ...
+
+
+# ============= TESTS =============
+if __name__ == "__main__":
+    print("Running tests...")
+
+    # Test 1: 3x3 matrix
+    result = spiral_order([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    assert result == [1, 2, 3, 6, 9, 8, 7, 4, 5], f"Got {result}"
+    print("✓ Exercise 2.1 passed: 3x3 matrix")
+
+    # Test 2: 3x4 matrix
+    result = spiral_order([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+    assert result == [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7], f"Got {result}"
+    print("✓ Exercise 2.2 passed: 3x4 matrix")
+
+    # Test 3: Single row
+    result = spiral_order([[1, 2, 3]])
+    assert result == [1, 2, 3], f"Got {result}"
+    print("✓ Exercise 2.3 passed: Single row")
+
+    # Test 4: Single column
+    result = spiral_order([[1], [2], [3]])
+    assert result == [1, 2, 3], f"Got {result}"
+    print("✓ Exercise 2.4 passed: Single column")
+
+    # Test 5: Single element
+    result = spiral_order([[1]])
+    assert result == [1], f"Got {result}"
+    print("✓ Exercise 2.5 passed: Single element")
+
+    # Test 6: Empty matrix
+    result = spiral_order([])
+    assert result == [], f"Got {result}"
+    print("✓ Exercise 2.6 passed: Empty matrix")
+
+    print("\n🎉 All tests passed!")

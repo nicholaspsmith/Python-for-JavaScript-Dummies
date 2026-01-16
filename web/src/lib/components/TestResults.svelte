@@ -78,8 +78,8 @@
 <style>
   .results-container {
     padding: 1rem;
-    background: #252526;
-    border-top: 1px solid #333;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
     max-height: 300px;
     overflow-y: auto;
   }
@@ -94,23 +94,23 @@
   }
 
   .status.running {
-    background: #2d2d2d;
+    background: var(--bg-tertiary);
     color: #fbbf24;
   }
 
   .status.success {
-    background: #1a3d1a;
+    background: var(--success-bg);
     color: #4ade80;
   }
 
   .status.error {
-    background: #3d1a1a;
+    background: var(--error-bg);
     color: #f87171;
   }
 
   .status.idle {
-    background: #2d2d2d;
-    color: #888;
+    background: var(--bg-tertiary);
+    color: var(--text-tertiary);
   }
 
   .icon {
@@ -169,12 +169,12 @@
   }
 
   .test-item.passed {
-    background: #1a3d1a;
+    background: var(--success-bg);
     color: #4ade80;
   }
 
   .test-item.failed {
-    background: #3d1a1a;
+    background: var(--error-bg);
     color: #f87171;
   }
 
@@ -189,7 +189,7 @@
   .js-habits {
     margin-top: 1rem;
     padding: 0.75rem;
-    background: #2d2d2d;
+    background: var(--bg-tertiary);
     border-radius: 6px;
     border-left: 3px solid #fbbf24;
   }
@@ -204,7 +204,7 @@
     margin: 0;
     padding: 0 0 0 1.25rem;
     font-size: 0.8125rem;
-    color: #ccc;
+    color: var(--text-secondary);
   }
 
   .js-habits li {
@@ -218,21 +218,21 @@
   .output-details summary {
     cursor: pointer;
     font-size: 0.8125rem;
-    color: #888;
+    color: var(--text-tertiary);
     padding: 0.375rem;
   }
 
   .output-details summary:hover {
-    color: #ccc;
+    color: var(--text-secondary);
   }
 
   .output {
     margin: 0.5rem 0 0 0;
     padding: 0.75rem;
-    background: #1e1e1e;
+    background: var(--bg-primary);
     border-radius: 4px;
     font-size: 0.75rem;
-    color: #ccc;
+    color: var(--text-secondary);
     overflow-x: auto;
     white-space: pre-wrap;
     word-break: break-word;
@@ -241,11 +241,11 @@
   kbd {
     display: inline-block;
     padding: 0.125rem 0.375rem;
-    background: #333;
+    background: var(--bg-active);
     border-radius: 3px;
     font-family: monospace;
     font-size: 0.75rem;
-    color: #ccc;
-    border: 1px solid #444;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
   }
 </style>

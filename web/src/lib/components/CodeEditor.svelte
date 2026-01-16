@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import type * as Monaco from 'monaco-editor';
+  import { theme } from '../stores/theme';
 
   export let value: string = '';
   export let language: string = 'python';
@@ -15,11 +16,18 @@
   // Debounce timer for auto-save
   let saveTimeout: ReturnType<typeof setTimeout>;
 
+  // Subscribe to theme changes
+  let unsubscribeTheme: (() => void) | null = null;
+
+  function getMonacoTheme(currentTheme: string): string {
+    return currentTheme === 'light' ? 'python-light' : 'python-dark';
+  }
+
   onMount(async () => {
     // Dynamic import for Monaco to avoid SSR issues
     monaco = await import('monaco-editor');
 
-    // Configure Monaco
+    // Configure dark theme
     monaco.editor.defineTheme('python-dark', {
       base: 'vs-dark',
       inherit: true,
@@ -40,10 +48,36 @@
       }
     });
 
+    // Configure light theme
+    monaco.editor.defineTheme('python-light', {
+      base: 'vs',
+      inherit: true,
+      rules: [
+        { token: 'comment', foreground: '008000' },
+        { token: 'string', foreground: 'a31515' },
+        { token: 'keyword', foreground: '0000ff' },
+        { token: 'number', foreground: '098658' },
+        { token: 'type', foreground: '267f99' },
+      ],
+      colors: {
+        'editor.background': '#ffffff',
+        'editor.foreground': '#333333',
+        'editorLineNumber.foreground': '#999999',
+        'editorLineNumber.activeForeground': '#333333',
+        'editor.selectionBackground': '#add6ff',
+        'editor.lineHighlightBackground': '#f5f5f5',
+      }
+    });
+
+    // Get initial theme
+    let currentTheme = 'dark';
+    const unsubInit = theme.subscribe(t => { currentTheme = t; });
+    unsubInit();
+
     editor = monaco.editor.create(container, {
       value,
       language,
-      theme: 'python-dark',
+      theme: getMonacoTheme(currentTheme),
       readOnly,
       minimap: { enabled: false },
       fontSize: 14,
@@ -57,6 +91,13 @@
       renderLineHighlight: 'line',
       cursorBlinking: 'smooth',
       smoothScrolling: true,
+    });
+
+    // Subscribe to theme changes and update editor theme
+    unsubscribeTheme = theme.subscribe(t => {
+      if (monaco && editor) {
+        monaco.editor.setTheme(getMonacoTheme(t));
+      }
     });
 
     // Handle content changes
@@ -79,6 +120,7 @@
 
   onDestroy(() => {
     clearTimeout(saveTimeout);
+    unsubscribeTheme?.();
     editor?.dispose();
   });
 

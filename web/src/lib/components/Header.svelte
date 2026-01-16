@@ -4,6 +4,7 @@
   import { totalExercises } from '../stores/exercises';
   import { pyodideReady, pyodideLoading } from '../stores/pyodide';
   import { syncStatus, supabaseConfigured, getShareableLink } from '../stores/supabase';
+  import { theme } from '../stores/theme';
 
   export let sidebarOpen = false;
 
@@ -99,6 +100,26 @@
       </button>
     {/if}
 
+    <button class="theme-toggle" on:click={() => theme.toggle()} aria-label="Toggle theme">
+      {#if $theme === 'dark'}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      {:else}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      {/if}
+    </button>
+
     <div class="pyodide-status" class:ready={$pyodideReady} class:loading={$pyodideLoading}>
       {#if $pyodideLoading}
         <span class="spinner"></span>
@@ -120,8 +141,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 1.5rem;
-    background: #1e1e1e;
-    border-bottom: 1px solid #333;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
     gap: 1rem;
   }
 
@@ -129,7 +150,7 @@
     display: none;
     background: none;
     border: none;
-    color: #ccc;
+    color: var(--text-secondary);
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 4px;
@@ -137,7 +158,7 @@
   }
 
   .menu-toggle:hover {
-    background: #333;
+    background: var(--bg-active);
   }
 
   .logo {
@@ -153,7 +174,7 @@
   .logo h1 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     margin: 0;
   }
 
@@ -167,7 +188,7 @@
 
   .progress-bar {
     height: 8px;
-    background: #333;
+    background: var(--bg-active);
     border-radius: 4px;
     overflow: hidden;
   }
@@ -180,7 +201,7 @@
 
   .progress-text {
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-tertiary);
     text-align: center;
   }
 
@@ -205,7 +226,7 @@
 
   .stat-label {
     font-size: 0.625rem;
-    color: #888;
+    color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -215,17 +236,17 @@
     align-items: center;
     gap: 0.375rem;
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-tertiary);
     padding: 0.25rem 0.75rem;
-    background: #2a2a2a;
-    border: 1px solid #333;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
     border-radius: 999px;
     cursor: pointer;
     transition: all 0.15s;
   }
 
   .sync-status:hover {
-    background: #333;
+    background: var(--bg-active);
   }
 
   .sync-status.synced {
@@ -244,11 +265,29 @@
   }
 
   .sync-status.offline {
-    color: #888;
+    color: var(--text-tertiary);
   }
 
   .sync-text {
     display: inline;
+  }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .theme-toggle:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
   }
 
   .pyodide-status {
@@ -256,9 +295,9 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-tertiary);
     padding: 0.25rem 0.75rem;
-    background: #2a2a2a;
+    background: var(--bg-hover);
     border-radius: 999px;
   }
 
