@@ -62,7 +62,7 @@
     {/if}
 
     {#if result.output && !result.success}
-      <details class="output-details">
+      <details class="output-details" open>
         <summary>Show output</summary>
         <pre class="output">{result.output}</pre>
       </details>
