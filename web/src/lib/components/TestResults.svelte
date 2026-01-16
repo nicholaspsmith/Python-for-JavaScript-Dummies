@@ -1,12 +1,58 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { TestResult } from '../types';
 
   export let result: TestResult | null = null;
   export let isRunning: boolean = false;
   export let jsHabits: string[] = [];
+
+  let containerHeight = 200;
+  let isDragging = false;
+  let startY = 0;
+  let startHeight = 0;
+
+  function handleMouseDown(e: MouseEvent) {
+    isDragging = true;
+    startY = e.clientY;
+    startHeight = containerHeight;
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.body.style.cursor = 'ns-resize';
+    document.body.style.userSelect = 'none';
+  }
+
+  function handleMouseMove(e: MouseEvent) {
+    if (!isDragging) return;
+    const delta = startY - e.clientY;
+    containerHeight = Math.max(80, Math.min(600, startHeight + delta));
+  }
+
+  function handleMouseUp() {
+    isDragging = false;
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  }
+
+  onMount(() => {
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  });
 </script>
 
-<div class="results-container">
+<div class="results-wrapper">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div
+    class="resize-handle"
+    on:mousedown={handleMouseDown}
+    class:dragging={isDragging}
+  >
+    <div class="resize-grip"></div>
+  </div>
+  <div class="results-container" style="height: {containerHeight}px">
   {#if isRunning}
     <div class="status running">
       <span class="spinner"></span>
@@ -73,15 +119,49 @@
       <span>Press <kbd>Cmd</kbd>+<kbd>Enter</kbd> or click "Check Answer" to run tests</span>
     </div>
   {/if}
+  </div>
 </div>
 
 <style>
+  .results-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .resize-handle {
+    height: 8px;
+    cursor: ns-resize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+  }
+
+  .resize-handle:hover,
+  .resize-handle.dragging {
+    background: var(--bg-tertiary);
+  }
+
+  .resize-grip {
+    width: 40px;
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+  }
+
+  .resize-handle:hover .resize-grip,
+  .resize-handle.dragging .resize-grip {
+    background: var(--text-tertiary);
+  }
   .results-container {
     padding: 1rem;
     background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-    max-height: 300px;
     overflow-y: auto;
+    flex: 1;
   }
 
   .status {
