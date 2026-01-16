@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { TestResult } from '../types';
+  import { filterOutput } from '../utils/exerciseParser';
 
   export let result: TestResult | null = null;
   export let isRunning: boolean = false;
   export let jsHabits: string[] = [];
+
+  $: cleanOutput = result?.output ? filterOutput(result.output) : '';
 
   let containerHeight = 200;
   let isDragging = false;
@@ -107,10 +110,10 @@
       </div>
     {/if}
 
-    {#if result.output && !result.success}
+    {#if cleanOutput && !result.success}
       <details class="output-details" open>
         <summary>Show output</summary>
-        <pre class="output">{result.output}</pre>
+        <pre class="output">{cleanOutput}</pre>
       </details>
     {/if}
   {:else}
