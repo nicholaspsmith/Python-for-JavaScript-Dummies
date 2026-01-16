@@ -43,7 +43,6 @@ def _reset_capture():
 ${userCode}
 
 # Run tests
-print("Running tests...")
 ${testCode}
 `;
 
