@@ -103,3 +103,40 @@ export function parseTestOutput(output: string): { passed: string[]; failed: str
 export function allTestsPassed(output: string): boolean {
   return output.includes('All tests passed') || output.includes('🎉');
 }
+
+/**
+ * Filter output to remove traceback and show cleaner results
+ */
+export function filterOutput(output: string): string {
+  const lines = output.split('\n');
+  const filtered: string[] = [];
+  let inTraceback = false;
+
+  for (const line of lines) {
+    // Start of traceback
+    if (line.startsWith('Traceback (most recent call last):')) {
+      inTraceback = true;
+      continue;
+    }
+
+    // End of traceback (AssertionError line) - keep the error message
+    if (inTraceback && line.includes('AssertionError:')) {
+      const match = line.match(/AssertionError:\s*(.+)/);
+      if (match) {
+        filtered.push(`✗ ${match[1]}`);
+      }
+      inTraceback = false;
+      continue;
+    }
+
+    // Skip lines inside traceback
+    if (inTraceback) {
+      continue;
+    }
+
+    // Keep other lines
+    filtered.push(line);
+  }
+
+  return filtered.join('\n').trim();
+}
