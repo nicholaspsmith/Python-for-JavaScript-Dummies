@@ -43,7 +43,7 @@
   });
 </script>
 
-<div class="results-wrapper">
+<div class="results-wrapper" style="height: {containerHeight}px">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     class="resize-handle"
@@ -52,7 +52,7 @@
   >
     <div class="resize-grip"></div>
   </div>
-  <div class="results-container" style="height: {containerHeight}px">
+  <div class="results-container">
   {#if isRunning}
     <div class="status running">
       <span class="spinner"></span>
@@ -128,6 +128,7 @@
     flex-direction: column;
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
   }
 
   .resize-handle {
@@ -162,6 +163,7 @@
     background: var(--bg-secondary);
     overflow-y: auto;
     flex: 1;
+    min-height: 0;
   }
 
   .status {
