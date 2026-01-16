@@ -118,7 +118,7 @@ export function detectJsHabits(code: string): string[] {
   const habits: string[] = [];
 
   const jsPatterns: [RegExp, string][] = [
-    [/===|!==/g, "Triple equals (===) isn't needed in Python - just use == or !="],
+    [/(?<!=)===(?!=)|(?<!=)!==(?!=)/g, "Triple equals (===) isn't needed in Python - just use == or !="],
     [/\btrue\b/g, "That's 'True' with a capital T in Python"],
     [/\bfalse\b/g, "That's 'False' with a capital F in Python"],
     [/\bnull\b/g, "It's 'None' in Python, not 'null'"],
@@ -130,7 +130,7 @@ export function detectJsHabits(code: string): string[] {
     [/=>/g, "Arrow functions? Use 'lambda' or 'def' in Python"],
     [/&&/g, "Use 'and' instead of '&&'"],
     [/\|\|/g, "Use 'or' instead of '||'"],
-    [/!/g, "Use 'not' instead of '!' for negation"],
+    [/!\w/g, "Use 'not' instead of '!' for negation"],
     [/\.length\b/g, "Use len() instead of .length"],
     [/\.push\s*\(/g, "Use .append() instead of .push()"],
     [/\.forEach\s*\(/g, "Use a for loop: 'for item in list:'"],
