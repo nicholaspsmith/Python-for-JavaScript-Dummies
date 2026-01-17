@@ -40,10 +40,14 @@
     dispatch('close');
   }
 
-  function getStatus(exerciseId: string): 'completed' | 'current' | 'not-started' {
-    if ($progress.completed.includes(exerciseId)) return 'completed';
-    if (exerciseId === $currentExerciseId) return 'current';
-    if ($progress.savedCode[exerciseId]) return 'current'; // Has saved progress
+  // Reactive references to progress for proper Svelte reactivity
+  $: completedExercises = $progress.completed;
+  $: savedCodeMap = $progress.savedCode;
+
+  function getStatus(exerciseId: string, completed: string[], savedCode: Record<string, string>, currentId: string): 'completed' | 'current' | 'not-started' {
+    if (completed.includes(exerciseId)) return 'completed';
+    if (exerciseId === currentId) return 'current';
+    if (savedCode[exerciseId]) return 'current'; // Has saved progress
     return 'not-started';
   }
 </script>
@@ -79,7 +83,7 @@
       <!-- Collapsed view: show only exercise IDs -->
       {#each $categories as category}
         {#each category.exercises as exercise}
-          {@const status = getStatus(exercise.id)}
+          {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
           <button
             class="collapsed-item"
             class:completed={status === 'completed'}
@@ -104,14 +108,14 @@
             </span>
             <span class="category-name">{category.name}</span>
             <span class="category-count">
-              {category.exercises.filter(e => $progress.completed.includes(e.id)).length}/{category.exercises.length}
+              {category.exercises.filter(e => completedExercises.includes(e.id)).length}/{category.exercises.length}
             </span>
           </button>
 
           {#if expandedCategories.has(category.folder)}
             <ul class="exercise-list">
               {#each category.exercises as exercise}
-                {@const status = getStatus(exercise.id)}
+                {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
                 <li>
                   <button
                     class="exercise-item"
