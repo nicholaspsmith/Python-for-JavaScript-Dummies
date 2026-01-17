@@ -50,37 +50,82 @@ def group_anagrams(strs: List[str]) -> List[List[str]]:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Normal case
-    result = group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
-    # Sort for comparison
-    result = [sorted(g) for g in result]
-    result.sort()
-    expected = [["ate", "eat", "tea"], ["bat"], ["nat", "tan"]]
-    assert result == expected, f"Got {result}"
-    print("✓ Test 1 passed: Grouped anagrams correctly")
+    try:
+        result = group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+        result = [sorted(g) for g in result]
+        result.sort()
+        expected = [["ate", "eat", "tea"], ["bat"], ["nat", "tan"]]
+        assert result == expected, f"Got {result}"
+        print("✓ Test 1 passed: Normal case")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Empty string
-    result = group_anagrams([""])
-    assert result == [[""]], f"Got {result}"
-    print("✓ Test 2 passed: Empty string")
+    try:
+        result = group_anagrams([""])
+        assert result == [[""]], f"Got {result}"
+        print("✓ Test 2 passed: Empty string")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Single string
-    result = group_anagrams(["a"])
-    assert result == [["a"]], f"Got {result}"
-    print("✓ Test 3 passed: Single string")
+    try:
+        result = group_anagrams(["a"])
+        assert result == [["a"]], f"Got {result}"
+        print("✓ Test 3 passed: Single string")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: No anagrams
-    result = group_anagrams(["abc", "def", "ghi"])
-    result = [sorted(g) for g in result]
-    result.sort()
-    assert result == [["abc"], ["def"], ["ghi"]]
-    print("✓ Test 4 passed: No anagrams")
+    try:
+        result = group_anagrams(["abc", "def", "ghi"])
+        result = [sorted(g) for g in result]
+        result.sort()
+        assert result == [["abc"], ["def"], ["ghi"]]
+        print("✓ Test 4 passed: No anagrams")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: All same word
-    result = group_anagrams(["a", "a", "a"])
-    assert sorted(result[0]) == ["a", "a", "a"]
-    print("✓ Test 5 passed: All same word")
+    try:
+        result = group_anagrams(["a", "a", "a"])
+        assert sorted(result[0]) == ["a", "a", "a"]
+        print("✓ Test 5 passed: All same word")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

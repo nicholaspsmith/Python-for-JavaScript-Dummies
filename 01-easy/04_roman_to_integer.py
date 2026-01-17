@@ -41,30 +41,90 @@ def roman_to_int(s: str) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Simple
-    assert roman_to_int("III") == 3, "III should be 3"
-    print("✓ Test 1 passed: III = 3")
+    try:
+
+        assert roman_to_int("III") == 3, "III should be 3"
+        print("✓ Test 1 passed: Simple")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Subtraction case
-    assert roman_to_int("IV") == 4, "IV should be 4"
-    print("✓ Test 2 passed: IV = 4")
+    try:
+
+        assert roman_to_int("IV") == 4, "IV should be 4"
+        print("✓ Test 2 passed: Subtraction case")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Mixed
-    assert roman_to_int("LVIII") == 58, "LVIII should be 58"
-    print("✓ Test 3 passed: LVIII = 58")
+    try:
+
+        assert roman_to_int("LVIII") == 58, "LVIII should be 58"
+        print("✓ Test 3 passed: Mixed")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Complex
-    assert roman_to_int("MCMXCIV") == 1994, "MCMXCIV should be 1994"
-    print("✓ Test 4 passed: MCMXCIV = 1994")
+    try:
+
+        assert roman_to_int("MCMXCIV") == 1994, "MCMXCIV should be 1994"
+        print("✓ Test 4 passed: Complex")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Nine
-    assert roman_to_int("IX") == 9, "IX should be 9"
-    print("✓ Test 5 passed: IX = 9")
+    try:
+
+        assert roman_to_int("IX") == 9, "IX should be 9"
+        print("✓ Test 5 passed: Nine")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Large number
-    assert roman_to_int("MMMCMXCIX") == 3999, "MMMCMXCIX should be 3999"
-    print("✓ Test 6 passed: MMMCMXCIX = 3999")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert roman_to_int("MMMCMXCIX") == 3999, "MMMCMXCIX should be 3999"
+        print("✓ Test 6 passed: Large number")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

@@ -39,26 +39,64 @@ def two_sum(nums: List[int], target: int) -> List[int]:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Basic case
-    result = two_sum([2, 7, 11, 15], 9)
-    assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
-    print("✓ Test 1 passed: Basic two sum")
+    try:
+        result = two_sum([2, 7, 11, 15], 9)
+        assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
+        print("✓ Test 1 passed: Basic two sum")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Target at end
-    result = two_sum([3, 2, 4], 6)
-    assert sorted(result) == [1, 2], f"Expected [1, 2], got {result}"
-    print("✓ Test 2 passed: Target at end of array")
+    try:
+        result = two_sum([3, 2, 4], 6)
+        assert sorted(result) == [1, 2], f"Expected [1, 2], got {result}"
+        print("✓ Test 2 passed: Target at end of array")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Same numbers
-    result = two_sum([3, 3], 6)
-    assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
-    print("✓ Test 3 passed: Duplicate numbers")
+    try:
+        result = two_sum([3, 3], 6)
+        assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
+        print("✓ Test 3 passed: Duplicate numbers")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Negative numbers
-    result = two_sum([-1, -2, -3, -4, -5], -8)
-    assert sorted(result) == [2, 4], f"Expected [2, 4], got {result}"
-    print("✓ Test 4 passed: Negative numbers")
+    try:
+        result = two_sum([-1, -2, -3, -4, -5], -8)
+        assert sorted(result) == [2, 4], f"Expected [2, 4], got {result}"
+        print("✓ Test 4 passed: Negative numbers")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

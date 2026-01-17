@@ -72,34 +72,72 @@ def linked_to_list(head):
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Basic addition
-    l1 = list_to_linked([2, 4, 3])  # 342
-    l2 = list_to_linked([5, 6, 4])  # 465
-    result = linked_to_list(add_two_numbers(l1, l2))
-    assert result == [7, 0, 8], f"Expected [7,0,8], got {result}"  # 807
-    print("✓ Test 1 passed: 342 + 465 = 807")
+    try:
+        l1 = list_to_linked([2, 4, 3])  # 342
+        l2 = list_to_linked([5, 6, 4])  # 465
+        result = linked_to_list(add_two_numbers(l1, l2))
+        assert result == [7, 0, 8], f"Expected [7,0,8], got {result}"  # 807
+        print("✓ Test 1 passed: Basic addition")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Different lengths
-    l1 = list_to_linked([9, 9, 9, 9])
-    l2 = list_to_linked([9, 9, 9, 9])
-    result = linked_to_list(add_two_numbers(l1, l2))
-    assert result == [8, 9, 9, 9, 0, 1], f"Expected [8,9,9,9,0,1], got {result}"
-    print("✓ Test 2 passed: 9999 + 9999 = 19998")
+    try:
+        l1 = list_to_linked([9, 9, 9, 9])
+        l2 = list_to_linked([9, 9, 9, 9])
+        result = linked_to_list(add_two_numbers(l1, l2))
+        assert result == [8, 9, 9, 9, 0, 1], f"Expected [8,9,9,9,0,1], got {result}"
+        print("✓ Test 2 passed: Different lengths")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Zeros
-    l1 = list_to_linked([0])
-    l2 = list_to_linked([0])
-    result = linked_to_list(add_two_numbers(l1, l2))
-    assert result == [0], f"Expected [0], got {result}"
-    print("✓ Test 3 passed: 0 + 0 = 0")
+    try:
+        l1 = list_to_linked([0])
+        l2 = list_to_linked([0])
+        result = linked_to_list(add_two_numbers(l1, l2))
+        assert result == [0], f"Expected [0], got {result}"
+        print("✓ Test 3 passed: Zeros")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Different lengths
-    l1 = list_to_linked([9, 9])
-    l2 = list_to_linked([1])
-    result = linked_to_list(add_two_numbers(l1, l2))
-    assert result == [0, 0, 1], f"Expected [0,0,1], got {result}"
-    print("✓ Test 4 passed: 99 + 1 = 100")
+    try:
+        l1 = list_to_linked([9, 9])
+        l2 = list_to_linked([1])
+        result = linked_to_list(add_two_numbers(l1, l2))
+        assert result == [0, 0, 1], f"Expected [0,0,1], got {result}"
+        print("✓ Test 4 passed: Different lengths")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

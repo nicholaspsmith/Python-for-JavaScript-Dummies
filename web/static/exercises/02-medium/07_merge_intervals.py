@@ -47,36 +47,90 @@ def merge(intervals: List[List[int]]) -> List[List[int]]:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Some overlap
-    result = merge([[1, 3], [2, 6], [8, 10], [15, 18]])
-    assert result == [[1, 6], [8, 10], [15, 18]], f"Got {result}"
-    print("✓ Test 1 passed: Merged overlapping intervals")
+    try:
+        result = merge([[1, 3], [2, 6], [8, 10], [15, 18]])
+        assert result == [[1, 6], [8, 10], [15, 18]], f"Got {result}"
+        print("✓ Test 1 passed: Some overlap")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Touching intervals
-    result = merge([[1, 4], [4, 5]])
-    assert result == [[1, 5]], f"Got {result}"
-    print("✓ Test 2 passed: Touching intervals merge")
+    try:
+        result = merge([[1, 4], [4, 5]])
+        assert result == [[1, 5]], f"Got {result}"
+        print("✓ Test 2 passed: Touching intervals")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: No overlap
-    result = merge([[1, 2], [3, 4], [5, 6]])
-    assert result == [[1, 2], [3, 4], [5, 6]], f"Got {result}"
-    print("✓ Test 3 passed: No overlap")
+    try:
+        result = merge([[1, 2], [3, 4], [5, 6]])
+        assert result == [[1, 2], [3, 4], [5, 6]], f"Got {result}"
+        print("✓ Test 3 passed: No overlap")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single interval
-    result = merge([[1, 5]])
-    assert result == [[1, 5]], f"Got {result}"
-    print("✓ Test 4 passed: Single interval")
+    try:
+        result = merge([[1, 5]])
+        assert result == [[1, 5]], f"Got {result}"
+        print("✓ Test 4 passed: Single interval")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: All merge into one
-    result = merge([[1, 4], [2, 5], [3, 6]])
-    assert result == [[1, 6]], f"Got {result}"
-    print("✓ Test 5 passed: All merge into one")
+    try:
+        result = merge([[1, 4], [2, 5], [3, 6]])
+        assert result == [[1, 6]], f"Got {result}"
+        print("✓ Test 5 passed: All merge into one")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Unsorted input
-    result = merge([[3, 4], [1, 2], [2, 3]])
-    assert result == [[1, 4]], f"Got {result}"
-    print("✓ Test 6 passed: Handles unsorted input")
+    try:
+        result = merge([[3, 4], [1, 2], [2, 3]])
+        assert result == [[1, 4]], f"Got {result}"
+        print("✓ Test 6 passed: Unsorted input")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

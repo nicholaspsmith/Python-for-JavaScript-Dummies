@@ -87,10 +87,11 @@ export function parseTestOutput(output: string): { passed: string[]; failed: str
       continue;
     }
 
-    // Look for assertion errors
-    const assertMatch = line.match(/AssertionError:\s*(.+)/);
-    if (assertMatch) {
-      failed.push(assertMatch[1]);
+    // Look for "✗ Test N failed: error" or "✗ Test N error: error"
+    const failMatch = line.match(/✗\s*Test\s+(\d+)\s+(?:failed|error):\s*(.+)/i);
+    if (failMatch) {
+      failed.push(`Test ${failMatch[1]} failed: ${failMatch[2]}`);
+      continue;
     }
   }
 

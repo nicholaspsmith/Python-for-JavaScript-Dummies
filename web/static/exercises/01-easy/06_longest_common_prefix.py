@@ -44,30 +44,90 @@ def longest_common_prefix(strs: List[str]) -> str:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Has common prefix
-    assert longest_common_prefix(["flower", "flow", "flight"]) == "fl"
-    print("✓ Test 1 passed: Common prefix 'fl'")
+    try:
+
+        assert longest_common_prefix(["flower", "flow", "flight"]) == "fl"
+        print("✓ Test 1 passed: Has common prefix")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: No common prefix
-    assert longest_common_prefix(["dog", "racecar", "car"]) == ""
-    print("✓ Test 2 passed: No common prefix")
+    try:
+
+        assert longest_common_prefix(["dog", "racecar", "car"]) == ""
+        print("✓ Test 2 passed: No common prefix")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: All same
-    assert longest_common_prefix(["test", "test", "test"]) == "test"
-    print("✓ Test 3 passed: All strings identical")
+    try:
+
+        assert longest_common_prefix(["test", "test", "test"]) == "test"
+        print("✓ Test 3 passed: All same")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single string
-    assert longest_common_prefix(["single"]) == "single"
-    print("✓ Test 4 passed: Single string")
+    try:
+
+        assert longest_common_prefix(["single"]) == "single"
+        print("✓ Test 4 passed: Single string")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Empty string in list
-    assert longest_common_prefix(["", "b"]) == ""
-    print("✓ Test 5 passed: Empty string in list")
+    try:
+
+        assert longest_common_prefix(["", "b"]) == ""
+        print("✓ Test 5 passed: Empty string in list")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Empty list
-    assert longest_common_prefix([]) == ""
-    print("✓ Test 6 passed: Empty list")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert longest_common_prefix([]) == ""
+        print("✓ Test 6 passed: Empty list")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

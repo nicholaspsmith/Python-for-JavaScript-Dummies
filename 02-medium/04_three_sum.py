@@ -49,31 +49,79 @@ def three_sum(nums: List[int]) -> List[List[int]]:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Normal case
-    result = three_sum([-1, 0, 1, 2, -1, -4])
-    expected = [[-1, -1, 2], [-1, 0, 1]]
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
-    print("✓ Test 1 passed: [-1,0,1,2,-1,-4]")
+    try:
+        result = three_sum([-1, 0, 1, 2, -1, -4])
+        expected = [[-1, -1, 2], [-1, 0, 1]]
+        assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+        print("✓ Test 1 passed: Normal case")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: No solution
-    assert three_sum([0, 1, 1]) == []
-    print("✓ Test 2 passed: No triplet sums to 0")
+    try:
+
+        assert three_sum([0, 1, 1]) == []
+        print("✓ Test 2 passed: No solution")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: All zeros
-    assert three_sum([0, 0, 0]) == [[0, 0, 0]]
-    print("✓ Test 3 passed: [0,0,0]")
+    try:
+
+        assert three_sum([0, 0, 0]) == [[0, 0, 0]]
+        print("✓ Test 3 passed: All zeros")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Empty/small input
-    assert three_sum([]) == []
-    assert three_sum([0]) == []
-    print("✓ Test 4 passed: Edge cases")
+    try:
+
+        assert three_sum([0]) == []
+        print("✓ Test 4 passed: Empty/small input")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Multiple triplets
-    result = three_sum([-2, 0, 1, 1, 2])
-    expected = [[-2, 0, 2], [-2, 1, 1]]
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
-    print("✓ Test 5 passed: Multiple triplets")
+    try:
+        result = three_sum([-2, 0, 1, 1, 2])
+        expected = [[-2, 0, 2], [-2, 1, 1]]
+        assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+        print("✓ Test 5 passed: Multiple triplets")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

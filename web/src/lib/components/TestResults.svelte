@@ -74,10 +74,8 @@
       <div class="status error">
         <span class="icon">❌</span>
         <div class="message">
-          <strong>Tests failed</strong>
-          {#if result.error}
-            <span class="error-detail">{result.error}</span>
-          {/if}
+          <strong>{result.passedTests.length}/{result.passedTests.length + result.failedTests.length} tests passed</strong>
+          <span>Fix the failing tests below</span>
         </div>
       </div>
     {/if}

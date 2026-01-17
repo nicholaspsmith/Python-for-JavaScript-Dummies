@@ -41,30 +41,90 @@ def is_palindrome(x: int) -> bool:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Positive palindrome
-    assert is_palindrome(121) == True, "121 should be a palindrome"
-    print("✓ Test 1 passed: 121 is a palindrome")
+    try:
+
+        assert is_palindrome(121) == True, "121 should be a palindrome"
+        print("✓ Test 1 passed: Positive palindrome")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Negative number
-    assert is_palindrome(-121) == False, "-121 should not be a palindrome"
-    print("✓ Test 2 passed: Negative numbers are not palindromes")
+    try:
+
+        assert is_palindrome(-121) == False, "-121 should not be a palindrome"
+        print("✓ Test 2 passed: Negative number")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Ends with zero
-    assert is_palindrome(10) == False, "10 should not be a palindrome"
-    print("✓ Test 3 passed: Numbers ending in 0 (except 0)")
+    try:
+
+        assert is_palindrome(10) == False, "10 should not be a palindrome"
+        print("✓ Test 3 passed: Ends with zero")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single digit
-    assert is_palindrome(7) == True, "Single digits are palindromes"
-    print("✓ Test 4 passed: Single digit palindrome")
+    try:
+
+        assert is_palindrome(7) == True, "Single digits are palindromes"
+        print("✓ Test 4 passed: Single digit")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Zero
-    assert is_palindrome(0) == True, "0 is a palindrome"
-    print("✓ Test 5 passed: Zero is a palindrome")
+    try:
+
+        assert is_palindrome(0) == True, "0 is a palindrome"
+        print("✓ Test 5 passed: Zero")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Large palindrome
-    assert is_palindrome(12321) == True, "12321 is a palindrome"
-    print("✓ Test 6 passed: Large palindrome")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert is_palindrome(12321) == True, "12321 is a palindrome"
+        print("✓ Test 6 passed: Large palindrome")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

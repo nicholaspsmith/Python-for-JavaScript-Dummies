@@ -48,30 +48,90 @@ def majority_element(nums: List[int]) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Simple majority
-    assert majority_element([3, 2, 3]) == 3
-    print("✓ Test 1 passed: [3,2,3] -> 3")
+    try:
+
+        assert majority_element([3, 2, 3]) == 3
+        print("✓ Test 1 passed: Simple majority")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Longer array
-    assert majority_element([2, 2, 1, 1, 1, 2, 2]) == 2
-    print("✓ Test 2 passed: [2,2,1,1,1,2,2] -> 2")
+    try:
+
+        assert majority_element([2, 2, 1, 1, 1, 2, 2]) == 2
+        print("✓ Test 2 passed: Longer array")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Single element
-    assert majority_element([1]) == 1
-    print("✓ Test 3 passed: Single element")
+    try:
+
+        assert majority_element([1]) == 1
+        print("✓ Test 3 passed: Single element")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: All same
-    assert majority_element([5, 5, 5]) == 5
-    print("✓ Test 4 passed: All same elements")
+    try:
+
+        assert majority_element([5, 5, 5]) == 5
+        print("✓ Test 4 passed: All same")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Two elements
-    assert majority_element([1, 1]) == 1
-    print("✓ Test 5 passed: Two same elements")
+    try:
+
+        assert majority_element([1, 1]) == 1
+        print("✓ Test 5 passed: Two elements")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Large majority
-    assert majority_element([1, 1, 1, 1, 2]) == 1
-    print("✓ Test 6 passed: Clear majority")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert majority_element([1, 1, 1, 1, 2]) == 1
+        print("✓ Test 6 passed: Large majority")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

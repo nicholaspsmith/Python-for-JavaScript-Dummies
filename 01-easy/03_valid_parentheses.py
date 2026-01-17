@@ -43,34 +43,103 @@ def is_valid(s: str) -> bool:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Simple valid
-    assert is_valid("()") == True, "() should be valid"
-    print("✓ Test 1 passed: Simple parentheses")
+    try:
+
+        assert is_valid("()") == True, "() should be valid"
+        print("✓ Test 1 passed: Simple valid")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Multiple types
-    assert is_valid("()[]{}") == True, "()[]{} should be valid"
-    print("✓ Test 2 passed: Multiple bracket types")
+    try:
+
+        assert is_valid("()[]{}") == True, "()[]{} should be valid"
+        print("✓ Test 2 passed: Multiple types")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Mismatched
-    assert is_valid("(]") == False, "(] should be invalid"
-    print("✓ Test 3 passed: Mismatched brackets")
+    try:
+
+        assert is_valid("(]") == False, "(] should be invalid"
+        print("✓ Test 3 passed: Mismatched")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Wrong order
-    assert is_valid("([)]") == False, "([)] should be invalid"
-    print("✓ Test 4 passed: Wrong nesting order")
+    try:
+
+        assert is_valid("([)]") == False, "([)] should be invalid"
+        print("✓ Test 4 passed: Wrong order")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Nested valid
-    assert is_valid("{[]}") == True, "{[]} should be valid"
-    print("✓ Test 5 passed: Properly nested")
+    try:
+
+        assert is_valid("{[]}") == True, "{[]} should be valid"
+        print("✓ Test 5 passed: Nested valid")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Empty string
-    assert is_valid("") == True, "Empty string should be valid"
-    print("✓ Test 6 passed: Empty string")
+    try:
+
+        assert is_valid("") == True, "Empty string should be valid"
+        print("✓ Test 6 passed: Empty string")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
     # Test 7: Only closing
-    assert is_valid("]") == False, "Single closing should be invalid"
-    print("✓ Test 7 passed: Unmatched closing bracket")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert is_valid("]") == False, "Single closing should be invalid"
+        print("✓ Test 7 passed: Only closing")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 7 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 7 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

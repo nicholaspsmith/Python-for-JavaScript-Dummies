@@ -48,26 +48,77 @@ def max_area(height: List[int]) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Example case
-    assert max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49
-    print("✓ Test 1 passed: [1,8,6,2,5,4,8,3,7] -> 49")
+    try:
+
+        assert max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49
+        print("✓ Test 1 passed: Example case")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Two elements
-    assert max_area([1, 1]) == 1
-    print("✓ Test 2 passed: [1,1] -> 1")
+    try:
+
+        assert max_area([1, 1]) == 1
+        print("✓ Test 2 passed: Two elements")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Decreasing heights
-    assert max_area([4, 3, 2, 1, 4]) == 16
-    print("✓ Test 3 passed: [4,3,2,1,4] -> 16")
+    try:
+
+        assert max_area([4, 3, 2, 1, 4]) == 16
+        print("✓ Test 3 passed: Decreasing heights")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: All same height
-    assert max_area([5, 5, 5, 5]) == 15
-    print("✓ Test 4 passed: All same height")
+    try:
+
+        assert max_area([5, 5, 5, 5]) == 15
+        print("✓ Test 4 passed: All same height")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Two different heights
-    assert max_area([1, 2]) == 1
-    print("✓ Test 5 passed: [1,2] -> 1")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert max_area([1, 2]) == 1
+        print("✓ Test 5 passed: Two different heights")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

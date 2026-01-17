@@ -59,41 +59,103 @@ def max_sliding_window(nums: List[int], k: int) -> List[int]:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Standard example
-    result = max_sliding_window([1, 3, -1, -3, 5, 3, 6, 7], 3)
-    assert result == [3, 3, 5, 5, 6, 7], f"Got {result}"
-    print("✓ Test 1 passed: Standard sliding window")
+    try:
+        result = max_sliding_window([1, 3, -1, -3, 5, 3, 6, 7], 3)
+        assert result == [3, 3, 5, 5, 6, 7], f"Got {result}"
+        print("✓ Test 1 passed: Standard example")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Single element
-    result = max_sliding_window([1], 1)
-    assert result == [1], f"Got {result}"
-    print("✓ Test 2 passed: Single element")
+    try:
+        result = max_sliding_window([1], 1)
+        assert result == [1], f"Got {result}"
+        print("✓ Test 2 passed: Single element")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Window size equals array
-    result = max_sliding_window([1, 3, 2], 3)
-    assert result == [3], f"Got {result}"
-    print("✓ Test 3 passed: Window equals array size")
+    try:
+        result = max_sliding_window([1, 3, 2], 3)
+        assert result == [3], f"Got {result}"
+        print("✓ Test 3 passed: Window size equals array")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Descending array
-    result = max_sliding_window([9, 8, 7, 6, 5], 2)
-    assert result == [9, 8, 7, 6], f"Got {result}"
-    print("✓ Test 4 passed: Descending array")
+    try:
+        result = max_sliding_window([9, 8, 7, 6, 5], 2)
+        assert result == [9, 8, 7, 6], f"Got {result}"
+        print("✓ Test 4 passed: Descending array")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Ascending array
-    result = max_sliding_window([1, 2, 3, 4, 5], 2)
-    assert result == [2, 3, 4, 5], f"Got {result}"
-    print("✓ Test 5 passed: Ascending array")
+    try:
+        result = max_sliding_window([1, 2, 3, 4, 5], 2)
+        assert result == [2, 3, 4, 5], f"Got {result}"
+        print("✓ Test 5 passed: Ascending array")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: All same
-    result = max_sliding_window([5, 5, 5, 5], 2)
-    assert result == [5, 5, 5], f"Got {result}"
-    print("✓ Test 6 passed: All same values")
+    try:
+        result = max_sliding_window([5, 5, 5, 5], 2)
+        assert result == [5, 5, 5], f"Got {result}"
+        print("✓ Test 6 passed: All same")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
     # Test 7: Negative numbers
-    result = max_sliding_window([-1, -2, -3, -4], 2)
-    assert result == [-1, -2, -3], f"Got {result}"
-    print("✓ Test 7 passed: Negative numbers")
+    try:
+        result = max_sliding_window([-1, -2, -3, -4], 2)
+        assert result == [-1, -2, -3], f"Got {result}"
+        print("✓ Test 7 passed: Negative numbers")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 7 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 7 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

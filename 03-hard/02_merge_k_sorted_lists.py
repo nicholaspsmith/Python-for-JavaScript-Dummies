@@ -83,43 +83,97 @@ def linked_to_list(head):
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Three lists
-    lists = [
+    try:
+        lists = [
         list_to_linked([1, 4, 5]),
         list_to_linked([1, 3, 4]),
         list_to_linked([2, 6])
-    ]
-    result = linked_to_list(merge_k_lists(lists))
-    assert result == [1, 1, 2, 3, 4, 4, 5, 6], f"Got {result}"
-    print("✓ Test 1 passed: Merged 3 lists")
+        ]
+        result = linked_to_list(merge_k_lists(lists))
+        assert result == [1, 1, 2, 3, 4, 4, 5, 6], f"Got {result}"
+        print("✓ Test 1 passed: Three lists")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Empty input
-    result = linked_to_list(merge_k_lists([]))
-    assert result == [], f"Got {result}"
-    print("✓ Test 2 passed: Empty input")
+    try:
+        result = linked_to_list(merge_k_lists([]))
+        assert result == [], f"Got {result}"
+        print("✓ Test 2 passed: Empty input")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Single empty list
-    result = linked_to_list(merge_k_lists([None]))
-    assert result == [], f"Got {result}"
-    print("✓ Test 3 passed: Single empty list")
+    try:
+        result = linked_to_list(merge_k_lists([None]))
+        assert result == [], f"Got {result}"
+        print("✓ Test 3 passed: Single empty list")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single list
-    result = linked_to_list(merge_k_lists([list_to_linked([1, 2, 3])]))
-    assert result == [1, 2, 3], f"Got {result}"
-    print("✓ Test 4 passed: Single list")
+    try:
+        result = linked_to_list(merge_k_lists([list_to_linked([1, 2, 3])]))
+        assert result == [1, 2, 3], f"Got {result}"
+        print("✓ Test 4 passed: Single list")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Two lists
-    lists = [list_to_linked([1, 3, 5]), list_to_linked([2, 4, 6])]
-    result = linked_to_list(merge_k_lists(lists))
-    assert result == [1, 2, 3, 4, 5, 6], f"Got {result}"
-    print("✓ Test 5 passed: Two lists interleaved")
+    try:
+        lists = [list_to_linked([1, 3, 5]), list_to_linked([2, 4, 6])]
+        result = linked_to_list(merge_k_lists(lists))
+        assert result == [1, 2, 3, 4, 5, 6], f"Got {result}"
+        print("✓ Test 5 passed: Two lists")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Some empty lists
-    lists = [None, list_to_linked([1]), None, list_to_linked([2])]
-    result = linked_to_list(merge_k_lists(lists))
-    assert result == [1, 2], f"Got {result}"
-    print("✓ Test 6 passed: Mix of empty and non-empty")
+    try:
+        lists = [None, list_to_linked([1]), None, list_to_linked([2])]
+        result = linked_to_list(merge_k_lists(lists))
+        assert result == [1, 2], f"Got {result}"
+        print("✓ Test 6 passed: Some empty lists")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
-    print("\n🎉 All tests passed!")
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

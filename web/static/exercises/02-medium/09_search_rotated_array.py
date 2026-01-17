@@ -54,34 +54,103 @@ def search(nums: List[int], target: int) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Target in rotated part
-    assert search([4, 5, 6, 7, 0, 1, 2], 0) == 4
-    print("✓ Test 1 passed: Found 0 at index 4")
+    try:
+
+        assert search([4, 5, 6, 7, 0, 1, 2], 0) == 4
+        print("✓ Test 1 passed: Target in rotated part")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Target not found
-    assert search([4, 5, 6, 7, 0, 1, 2], 3) == -1
-    print("✓ Test 2 passed: 3 not found")
+    try:
+
+        assert search([4, 5, 6, 7, 0, 1, 2], 3) == -1
+        print("✓ Test 2 passed: Target not found")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Single element not found
-    assert search([1], 0) == -1
-    print("✓ Test 3 passed: Single element, not found")
+    try:
+
+        assert search([1], 0) == -1
+        print("✓ Test 3 passed: Single element not found")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single element found
-    assert search([1], 1) == 0
-    print("✓ Test 4 passed: Single element, found")
+    try:
+
+        assert search([1], 1) == 0
+        print("✓ Test 4 passed: Single element found")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Target in first half
-    assert search([4, 5, 6, 7, 0, 1, 2], 5) == 1
-    print("✓ Test 5 passed: Found 5 in first half")
+    try:
+
+        assert search([4, 5, 6, 7, 0, 1, 2], 5) == 1
+        print("✓ Test 5 passed: Target in first half")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Not rotated (edge case)
-    assert search([1, 2, 3, 4, 5], 3) == 2
-    print("✓ Test 6 passed: Non-rotated array")
+    try:
+
+        assert search([1, 2, 3, 4, 5], 3) == 2
+        print("✓ Test 6 passed: Not rotated (edge case)")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
     # Test 7: Fully rotated (same as original)
-    assert search([2, 1], 1) == 1
-    print("✓ Test 7 passed: Two elements rotated")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert search([2, 1], 1) == 1
+        print("✓ Test 7 passed: Fully rotated (same as original)")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 7 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 7 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")
