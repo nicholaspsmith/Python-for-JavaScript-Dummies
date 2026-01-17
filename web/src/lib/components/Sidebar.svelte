@@ -347,7 +347,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
     height: 32px;
     margin: 0.125rem auto;
     background: none;
