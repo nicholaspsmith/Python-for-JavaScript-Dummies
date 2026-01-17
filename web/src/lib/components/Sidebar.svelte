@@ -222,6 +222,8 @@
     flex: 1;
     overflow-y: auto;
     padding: 0.5rem;
+    overflow-x: hidden;
+    padding-right: 1rem;
   }
 
   .category {
