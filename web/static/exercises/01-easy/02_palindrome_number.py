@@ -45,26 +45,26 @@ if __name__ == "__main__":
 
     # Test 1: Positive palindrome
     assert is_palindrome(121) == True, "121 should be a palindrome"
-    print("✓ Exercise 1.1 passed: 121 is a palindrome")
+    print("✓ Test 1 passed: 121 is a palindrome")
 
     # Test 2: Negative number
     assert is_palindrome(-121) == False, "-121 should not be a palindrome"
-    print("✓ Exercise 1.2 passed: Negative numbers are not palindromes")
+    print("✓ Test 2 passed: Negative numbers are not palindromes")
 
     # Test 3: Ends with zero
     assert is_palindrome(10) == False, "10 should not be a palindrome"
-    print("✓ Exercise 1.3 passed: Numbers ending in 0 (except 0)")
+    print("✓ Test 3 passed: Numbers ending in 0 (except 0)")
 
     # Test 4: Single digit
     assert is_palindrome(7) == True, "Single digits are palindromes"
-    print("✓ Exercise 1.4 passed: Single digit palindrome")
+    print("✓ Test 4 passed: Single digit palindrome")
 
     # Test 5: Zero
     assert is_palindrome(0) == True, "0 is a palindrome"
-    print("✓ Exercise 1.5 passed: Zero is a palindrome")
+    print("✓ Test 5 passed: Zero is a palindrome")
 
     # Test 6: Large palindrome
     assert is_palindrome(12321) == True, "12321 is a palindrome"
-    print("✓ Exercise 1.6 passed: Large palindrome")
+    print("✓ Test 6 passed: Large palindrome")
 
     print("\n🎉 All tests passed!")

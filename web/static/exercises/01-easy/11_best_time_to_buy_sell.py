@@ -49,26 +49,26 @@ if __name__ == "__main__":
 
     # Test 1: Normal case with profit
     assert max_profit([7, 1, 5, 3, 6, 4]) == 5
-    print("✓ Exercise 1.1 passed: [7,1,5,3,6,4] -> profit 5")
+    print("✓ Test 1 passed: [7,1,5,3,6,4] -> profit 5")
 
     # Test 2: Decreasing prices
     assert max_profit([7, 6, 4, 3, 1]) == 0
-    print("✓ Exercise 1.2 passed: Decreasing prices -> 0")
+    print("✓ Test 2 passed: Decreasing prices -> 0")
 
     # Test 3: Two elements with profit
     assert max_profit([1, 2]) == 1
-    print("✓ Exercise 1.3 passed: [1,2] -> profit 1")
+    print("✓ Test 3 passed: [1,2] -> profit 1")
 
     # Test 4: Two elements no profit
     assert max_profit([2, 1]) == 0
-    print("✓ Exercise 1.4 passed: [2,1] -> no profit")
+    print("✓ Test 4 passed: [2,1] -> no profit")
 
     # Test 5: All same prices
     assert max_profit([3, 3, 3, 3]) == 0
-    print("✓ Exercise 1.5 passed: Same prices -> 0")
+    print("✓ Test 5 passed: Same prices -> 0")
 
     # Test 6: Single element
     assert max_profit([5]) == 0
-    print("✓ Exercise 1.6 passed: Single element -> 0")
+    print("✓ Test 6 passed: Single element -> 0")
 
     print("\n🎉 All tests passed!")

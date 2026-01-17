@@ -54,26 +54,26 @@ if __name__ == "__main__":
 
     # Test 1: Mixed positives and negatives
     assert max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
-    print("✓ Exercise 2.1 passed: [-2,1,-3,4,-1,2,1,-5,4] -> 6")
+    print("✓ Test 1 passed: [-2,1,-3,4,-1,2,1,-5,4] -> 6")
 
     # Test 2: Single element
     assert max_subarray([1]) == 1
-    print("✓ Exercise 2.2 passed: Single element")
+    print("✓ Test 2 passed: Single element")
 
     # Test 3: All positive
     assert max_subarray([5, 4, -1, 7, 8]) == 23
-    print("✓ Exercise 2.3 passed: All positive")
+    print("✓ Test 3 passed: All positive")
 
     # Test 4: All negative
     assert max_subarray([-3, -2, -1, -4]) == -1
-    print("✓ Exercise 2.4 passed: All negative -> pick least negative")
+    print("✓ Test 4 passed: All negative -> pick least negative")
 
     # Test 5: Single negative
     assert max_subarray([-1]) == -1
-    print("✓ Exercise 2.5 passed: Single negative")
+    print("✓ Test 5 passed: Single negative")
 
     # Test 6: Zero included
     assert max_subarray([-2, 0, -1]) == 0
-    print("✓ Exercise 2.6 passed: Zero as best option")
+    print("✓ Test 6 passed: Zero as best option")
 
     print("\n🎉 All tests passed!")

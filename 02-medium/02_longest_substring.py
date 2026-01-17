@@ -49,30 +49,30 @@ if __name__ == "__main__":
 
     # Test 1: Normal case
     assert length_of_longest_substring("abcabcbb") == 3
-    print("✓ Exercise 2.1 passed: 'abcabcbb' -> 3")
+    print("✓ Test 1 passed: 'abcabcbb' -> 3")
 
     # Test 2: All same
     assert length_of_longest_substring("bbbbb") == 1
-    print("✓ Exercise 2.2 passed: 'bbbbb' -> 1")
+    print("✓ Test 2 passed: 'bbbbb' -> 1")
 
     # Test 3: Repeat in middle
     assert length_of_longest_substring("pwwkew") == 3
-    print("✓ Exercise 2.3 passed: 'pwwkew' -> 3")
+    print("✓ Test 3 passed: 'pwwkew' -> 3")
 
     # Test 4: Empty string
     assert length_of_longest_substring("") == 0
-    print("✓ Exercise 2.4 passed: Empty string -> 0")
+    print("✓ Test 4 passed: Empty string -> 0")
 
     # Test 5: Single char
     assert length_of_longest_substring("a") == 1
-    print("✓ Exercise 2.5 passed: Single char -> 1")
+    print("✓ Test 5 passed: Single char -> 1")
 
     # Test 6: All unique
     assert length_of_longest_substring("abcdef") == 6
-    print("✓ Exercise 2.6 passed: All unique -> 6")
+    print("✓ Test 6 passed: All unique -> 6")
 
     # Test 7: Space character
     assert length_of_longest_substring("a b c") == 3
-    print("✓ Exercise 2.7 passed: With spaces")
+    print("✓ Test 7 passed: With spaces")
 
     print("\n🎉 All tests passed!")

@@ -49,26 +49,26 @@ if __name__ == "__main__":
 
     # Test 1: Classic palindrome
     assert is_palindrome("A man, a plan, a canal: Panama") == True
-    print("✓ Exercise 1.1 passed: Panama palindrome")
+    print("✓ Test 1 passed: Panama palindrome")
 
     # Test 2: Not a palindrome
     assert is_palindrome("race a car") == False
-    print("✓ Exercise 1.2 passed: 'race a car' is not a palindrome")
+    print("✓ Test 2 passed: 'race a car' is not a palindrome")
 
     # Test 3: Empty/whitespace
     assert is_palindrome(" ") == True
-    print("✓ Exercise 1.3 passed: Whitespace only")
+    print("✓ Test 3 passed: Whitespace only")
 
     # Test 4: Single character
     assert is_palindrome("a") == True
-    print("✓ Exercise 1.4 passed: Single character")
+    print("✓ Test 4 passed: Single character")
 
     # Test 5: Numbers included
     assert is_palindrome("0P") == False
-    print("✓ Exercise 1.5 passed: Alphanumeric comparison")
+    print("✓ Test 5 passed: Alphanumeric comparison")
 
     # Test 6: Numeric palindrome
     assert is_palindrome("12321") == True
-    print("✓ Exercise 1.6 passed: Numeric palindrome")
+    print("✓ Test 6 passed: Numeric palindrome")
 
     print("\n🎉 All tests passed!")

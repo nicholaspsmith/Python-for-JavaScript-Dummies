@@ -55,25 +55,25 @@ if __name__ == "__main__":
     result = three_sum([-1, 0, 1, 2, -1, -4])
     expected = [[-1, -1, 2], [-1, 0, 1]]
     assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
-    print("✓ Exercise 2.1 passed: [-1,0,1,2,-1,-4]")
+    print("✓ Test 1 passed: [-1,0,1,2,-1,-4]")
 
     # Test 2: No solution
     assert three_sum([0, 1, 1]) == []
-    print("✓ Exercise 2.2 passed: No triplet sums to 0")
+    print("✓ Test 2 passed: No triplet sums to 0")
 
     # Test 3: All zeros
     assert three_sum([0, 0, 0]) == [[0, 0, 0]]
-    print("✓ Exercise 2.3 passed: [0,0,0]")
+    print("✓ Test 3 passed: [0,0,0]")
 
     # Test 4: Empty/small input
     assert three_sum([]) == []
     assert three_sum([0]) == []
-    print("✓ Exercise 2.4 passed: Edge cases")
+    print("✓ Test 4 passed: Edge cases")
 
     # Test 5: Multiple triplets
     result = three_sum([-2, 0, 1, 1, 2])
     expected = [[-2, 0, 2], [-2, 1, 1]]
     assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
-    print("✓ Exercise 2.5 passed: Multiple triplets")
+    print("✓ Test 5 passed: Multiple triplets")
 
     print("\n🎉 All tests passed!")

@@ -54,33 +54,33 @@ if __name__ == "__main__":
     k = remove_duplicates(nums)
     assert k == 2, f"Expected length 2, got {k}"
     assert nums[:k] == [1, 2], f"Expected [1,2], got {nums[:k]}"
-    print("✓ Exercise 1.1 passed: [1,1,2] -> [1,2]")
+    print("✓ Test 1 passed: [1,1,2] -> [1,2]")
 
     # Test 2: Longer array
     nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
     k = remove_duplicates(nums)
     assert k == 5, f"Expected length 5, got {k}"
     assert nums[:k] == [0, 1, 2, 3, 4], f"Expected [0,1,2,3,4], got {nums[:k]}"
-    print("✓ Exercise 1.2 passed: Longer array with multiple duplicates")
+    print("✓ Test 2 passed: Longer array with multiple duplicates")
 
     # Test 3: No duplicates
     nums = [1, 2, 3]
     k = remove_duplicates(nums)
     assert k == 3, f"Expected length 3, got {k}"
     assert nums[:k] == [1, 2, 3], f"Expected [1,2,3], got {nums[:k]}"
-    print("✓ Exercise 1.3 passed: No duplicates")
+    print("✓ Test 3 passed: No duplicates")
 
     # Test 4: All duplicates
     nums = [5, 5, 5, 5]
     k = remove_duplicates(nums)
     assert k == 1, f"Expected length 1, got {k}"
     assert nums[:k] == [5], f"Expected [5], got {nums[:k]}"
-    print("✓ Exercise 1.4 passed: All same values")
+    print("✓ Test 4 passed: All same values")
 
     # Test 5: Empty array
     nums = []
     k = remove_duplicates(nums)
     assert k == 0, f"Expected length 0, got {k}"
-    print("✓ Exercise 1.5 passed: Empty array")
+    print("✓ Test 5 passed: Empty array")
 
     print("\n🎉 All tests passed!")

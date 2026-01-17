@@ -59,28 +59,28 @@ if __name__ == "__main__":
     result.sort()
     expected = [["ate", "eat", "tea"], ["bat"], ["nat", "tan"]]
     assert result == expected, f"Got {result}"
-    print("✓ Exercise 2.1 passed: Grouped anagrams correctly")
+    print("✓ Test 1 passed: Grouped anagrams correctly")
 
     # Test 2: Empty string
     result = group_anagrams([""])
     assert result == [[""]], f"Got {result}"
-    print("✓ Exercise 2.2 passed: Empty string")
+    print("✓ Test 2 passed: Empty string")
 
     # Test 3: Single string
     result = group_anagrams(["a"])
     assert result == [["a"]], f"Got {result}"
-    print("✓ Exercise 2.3 passed: Single string")
+    print("✓ Test 3 passed: Single string")
 
     # Test 4: No anagrams
     result = group_anagrams(["abc", "def", "ghi"])
     result = [sorted(g) for g in result]
     result.sort()
     assert result == [["abc"], ["def"], ["ghi"]]
-    print("✓ Exercise 2.4 passed: No anagrams")
+    print("✓ Test 4 passed: No anagrams")
 
     # Test 5: All same word
     result = group_anagrams(["a", "a", "a"])
     assert sorted(result[0]) == ["a", "a", "a"]
-    print("✓ Exercise 2.5 passed: All same word")
+    print("✓ Test 5 passed: All same word")
 
     print("\n🎉 All tests passed!")

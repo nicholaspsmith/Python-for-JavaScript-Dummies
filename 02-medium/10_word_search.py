@@ -64,26 +64,26 @@ if __name__ == "__main__":
 
     # Test 1: Word exists
     assert exist(board, "ABCCED") == True
-    print("✓ Exercise 2.1 passed: Found 'ABCCED'")
+    print("✓ Test 1 passed: Found 'ABCCED'")
 
     # Test 2: Another valid word
     assert exist(board, "SEE") == True
-    print("✓ Exercise 2.2 passed: Found 'SEE'")
+    print("✓ Test 2 passed: Found 'SEE'")
 
     # Test 3: Can't reuse cell
     assert exist(board, "ABCB") == False
-    print("✓ Exercise 2.3 passed: 'ABCB' fails (can't reuse)")
+    print("✓ Test 3 passed: 'ABCB' fails (can't reuse)")
 
     # Test 4: Single cell
     assert exist([["A"]], "A") == True
-    print("✓ Exercise 2.4 passed: Single cell match")
+    print("✓ Test 4 passed: Single cell match")
 
     # Test 5: Word not in grid
     assert exist(board, "XYZ") == False
-    print("✓ Exercise 2.5 passed: Word not found")
+    print("✓ Test 5 passed: Word not found")
 
     # Test 6: Word longer than grid
     assert exist([["A"]], "AB") == False
-    print("✓ Exercise 2.6 passed: Word too long")
+    print("✓ Test 6 passed: Word too long")
 
     print("\n🎉 All tests passed!")

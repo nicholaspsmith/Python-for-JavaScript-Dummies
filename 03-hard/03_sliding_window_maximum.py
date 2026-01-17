@@ -64,36 +64,36 @@ if __name__ == "__main__":
     # Test 1: Standard example
     result = max_sliding_window([1, 3, -1, -3, 5, 3, 6, 7], 3)
     assert result == [3, 3, 5, 5, 6, 7], f"Got {result}"
-    print("✓ Exercise 3.1 passed: Standard sliding window")
+    print("✓ Test 1 passed: Standard sliding window")
 
     # Test 2: Single element
     result = max_sliding_window([1], 1)
     assert result == [1], f"Got {result}"
-    print("✓ Exercise 3.2 passed: Single element")
+    print("✓ Test 2 passed: Single element")
 
     # Test 3: Window size equals array
     result = max_sliding_window([1, 3, 2], 3)
     assert result == [3], f"Got {result}"
-    print("✓ Exercise 3.3 passed: Window equals array size")
+    print("✓ Test 3 passed: Window equals array size")
 
     # Test 4: Descending array
     result = max_sliding_window([9, 8, 7, 6, 5], 2)
     assert result == [9, 8, 7, 6], f"Got {result}"
-    print("✓ Exercise 3.4 passed: Descending array")
+    print("✓ Test 4 passed: Descending array")
 
     # Test 5: Ascending array
     result = max_sliding_window([1, 2, 3, 4, 5], 2)
     assert result == [2, 3, 4, 5], f"Got {result}"
-    print("✓ Exercise 3.5 passed: Ascending array")
+    print("✓ Test 5 passed: Ascending array")
 
     # Test 6: All same
     result = max_sliding_window([5, 5, 5, 5], 2)
     assert result == [5, 5, 5], f"Got {result}"
-    print("✓ Exercise 3.6 passed: All same values")
+    print("✓ Test 6 passed: All same values")
 
     # Test 7: Negative numbers
     result = max_sliding_window([-1, -2, -3, -4], 2)
     assert result == [-1, -2, -3], f"Got {result}"
-    print("✓ Exercise 3.7 passed: Negative numbers")
+    print("✓ Test 7 passed: Negative numbers")
 
     print("\n🎉 All tests passed!")

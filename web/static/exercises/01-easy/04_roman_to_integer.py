@@ -45,26 +45,26 @@ if __name__ == "__main__":
 
     # Test 1: Simple
     assert roman_to_int("III") == 3, "III should be 3"
-    print("✓ Exercise 1.1 passed: III = 3")
+    print("✓ Test 1 passed: III = 3")
 
     # Test 2: Subtraction case
     assert roman_to_int("IV") == 4, "IV should be 4"
-    print("✓ Exercise 1.2 passed: IV = 4")
+    print("✓ Test 2 passed: IV = 4")
 
     # Test 3: Mixed
     assert roman_to_int("LVIII") == 58, "LVIII should be 58"
-    print("✓ Exercise 1.3 passed: LVIII = 58")
+    print("✓ Test 3 passed: LVIII = 58")
 
     # Test 4: Complex
     assert roman_to_int("MCMXCIV") == 1994, "MCMXCIV should be 1994"
-    print("✓ Exercise 1.4 passed: MCMXCIV = 1994")
+    print("✓ Test 4 passed: MCMXCIV = 1994")
 
     # Test 5: Nine
     assert roman_to_int("IX") == 9, "IX should be 9"
-    print("✓ Exercise 1.5 passed: IX = 9")
+    print("✓ Test 5 passed: IX = 9")
 
     # Test 6: Large number
     assert roman_to_int("MMMCMXCIX") == 3999, "MMMCMXCIX should be 3999"
-    print("✓ Exercise 1.6 passed: MMMCMXCIX = 3999")
+    print("✓ Test 6 passed: MMMCMXCIX = 3999")
 
     print("\n🎉 All tests passed!")

@@ -52,22 +52,22 @@ if __name__ == "__main__":
 
     # Test 1: Basic case
     assert single_number([2, 2, 1]) == 1
-    print("✓ Exercise 1.1 passed: [2,2,1] -> 1")
+    print("✓ Test 1 passed: [2,2,1] -> 1")
 
     # Test 2: Longer array
     assert single_number([4, 1, 2, 1, 2]) == 4
-    print("✓ Exercise 1.2 passed: [4,1,2,1,2] -> 4")
+    print("✓ Test 2 passed: [4,1,2,1,2] -> 4")
 
     # Test 3: Single element
     assert single_number([1]) == 1
-    print("✓ Exercise 1.3 passed: Single element")
+    print("✓ Test 3 passed: Single element")
 
     # Test 4: Negative numbers
     assert single_number([-1, -1, -2]) == -2
-    print("✓ Exercise 1.4 passed: Negative numbers")
+    print("✓ Test 4 passed: Negative numbers")
 
     # Test 5: Mixed positive and negative
     assert single_number([1, -1, 1]) == -1
-    print("✓ Exercise 1.5 passed: Mixed positive/negative")
+    print("✓ Test 5 passed: Mixed positive/negative")
 
     print("\n🎉 All tests passed!")
