@@ -93,33 +93,33 @@ if __name__ == "__main__":
     ]
     result = linked_to_list(merge_k_lists(lists))
     assert result == [1, 1, 2, 3, 4, 4, 5, 6], f"Got {result}"
-    print("✓ Exercise 3.1 passed: Merged 3 lists")
+    print("✓ Test 1 passed: Merged 3 lists")
 
     # Test 2: Empty input
     result = linked_to_list(merge_k_lists([]))
     assert result == [], f"Got {result}"
-    print("✓ Exercise 3.2 passed: Empty input")
+    print("✓ Test 2 passed: Empty input")
 
     # Test 3: Single empty list
     result = linked_to_list(merge_k_lists([None]))
     assert result == [], f"Got {result}"
-    print("✓ Exercise 3.3 passed: Single empty list")
+    print("✓ Test 3 passed: Single empty list")
 
     # Test 4: Single list
     result = linked_to_list(merge_k_lists([list_to_linked([1, 2, 3])]))
     assert result == [1, 2, 3], f"Got {result}"
-    print("✓ Exercise 3.4 passed: Single list")
+    print("✓ Test 4 passed: Single list")
 
     # Test 5: Two lists
     lists = [list_to_linked([1, 3, 5]), list_to_linked([2, 4, 6])]
     result = linked_to_list(merge_k_lists(lists))
     assert result == [1, 2, 3, 4, 5, 6], f"Got {result}"
-    print("✓ Exercise 3.5 passed: Two lists interleaved")
+    print("✓ Test 5 passed: Two lists interleaved")
 
     # Test 6: Some empty lists
     lists = [None, list_to_linked([1]), None, list_to_linked([2])]
     result = linked_to_list(merge_k_lists(lists))
     assert result == [1, 2], f"Got {result}"
-    print("✓ Exercise 3.6 passed: Mix of empty and non-empty")
+    print("✓ Test 6 passed: Mix of empty and non-empty")
 
     print("\n🎉 All tests passed!")

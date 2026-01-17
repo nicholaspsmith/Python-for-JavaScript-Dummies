@@ -52,22 +52,22 @@ if __name__ == "__main__":
 
     # Test 1: Example case
     assert max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49
-    print("✓ Exercise 2.1 passed: [1,8,6,2,5,4,8,3,7] -> 49")
+    print("✓ Test 1 passed: [1,8,6,2,5,4,8,3,7] -> 49")
 
     # Test 2: Two elements
     assert max_area([1, 1]) == 1
-    print("✓ Exercise 2.2 passed: [1,1] -> 1")
+    print("✓ Test 2 passed: [1,1] -> 1")
 
     # Test 3: Decreasing heights
     assert max_area([4, 3, 2, 1, 4]) == 16
-    print("✓ Exercise 2.3 passed: [4,3,2,1,4] -> 16")
+    print("✓ Test 3 passed: [4,3,2,1,4] -> 16")
 
     # Test 4: All same height
     assert max_area([5, 5, 5, 5]) == 15
-    print("✓ Exercise 2.4 passed: All same height")
+    print("✓ Test 4 passed: All same height")
 
     # Test 5: Two different heights
     assert max_area([1, 2]) == 1
-    print("✓ Exercise 2.5 passed: [1,2] -> 1")
+    print("✓ Test 5 passed: [1,2] -> 1")
 
     print("\n🎉 All tests passed!")

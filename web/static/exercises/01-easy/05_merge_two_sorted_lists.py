@@ -76,27 +76,27 @@ if __name__ == "__main__":
     l2 = list_to_linked([1, 3, 4])
     result = linked_to_list(merge_two_lists(l1, l2))
     assert result == [1, 1, 2, 3, 4, 4], f"Expected [1,1,2,3,4,4], got {result}"
-    print("✓ Exercise 1.1 passed: Basic merge")
+    print("✓ Test 1 passed: Basic merge")
 
     # Test 2: Empty first list
     l1 = list_to_linked([])
     l2 = list_to_linked([0])
     result = linked_to_list(merge_two_lists(l1, l2))
     assert result == [0], f"Expected [0], got {result}"
-    print("✓ Exercise 1.2 passed: Empty first list")
+    print("✓ Test 2 passed: Empty first list")
 
     # Test 3: Both empty
     l1 = list_to_linked([])
     l2 = list_to_linked([])
     result = linked_to_list(merge_two_lists(l1, l2))
     assert result == [], f"Expected [], got {result}"
-    print("✓ Exercise 1.3 passed: Both empty")
+    print("✓ Test 3 passed: Both empty")
 
     # Test 4: Different lengths
     l1 = list_to_linked([1, 2, 3, 4, 5])
     l2 = list_to_linked([2, 4])
     result = linked_to_list(merge_two_lists(l1, l2))
     assert result == [1, 2, 2, 3, 4, 4, 5], f"Expected [1,2,2,3,4,4,5], got {result}"
-    print("✓ Exercise 1.4 passed: Different lengths")
+    print("✓ Test 4 passed: Different lengths")
 
     print("\n🎉 All tests passed!")

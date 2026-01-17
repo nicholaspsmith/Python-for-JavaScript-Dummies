@@ -79,27 +79,27 @@ if __name__ == "__main__":
     l2 = list_to_linked([5, 6, 4])  # 465
     result = linked_to_list(add_two_numbers(l1, l2))
     assert result == [7, 0, 8], f"Expected [7,0,8], got {result}"  # 807
-    print("✓ Exercise 2.1 passed: 342 + 465 = 807")
+    print("✓ Test 1 passed: 342 + 465 = 807")
 
     # Test 2: Different lengths
     l1 = list_to_linked([9, 9, 9, 9])
     l2 = list_to_linked([9, 9, 9, 9])
     result = linked_to_list(add_two_numbers(l1, l2))
     assert result == [8, 9, 9, 9, 0, 1], f"Expected [8,9,9,9,0,1], got {result}"
-    print("✓ Exercise 2.2 passed: 9999 + 9999 = 19998")
+    print("✓ Test 2 passed: 9999 + 9999 = 19998")
 
     # Test 3: Zeros
     l1 = list_to_linked([0])
     l2 = list_to_linked([0])
     result = linked_to_list(add_two_numbers(l1, l2))
     assert result == [0], f"Expected [0], got {result}"
-    print("✓ Exercise 2.3 passed: 0 + 0 = 0")
+    print("✓ Test 3 passed: 0 + 0 = 0")
 
     # Test 4: Different lengths
     l1 = list_to_linked([9, 9])
     l2 = list_to_linked([1])
     result = linked_to_list(add_two_numbers(l1, l2))
     assert result == [0, 0, 1], f"Expected [0,0,1], got {result}"
-    print("✓ Exercise 2.4 passed: 99 + 1 = 100")
+    print("✓ Test 4 passed: 99 + 1 = 100")
 
     print("\n🎉 All tests passed!")

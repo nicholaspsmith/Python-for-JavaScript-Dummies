@@ -60,31 +60,31 @@ if __name__ == "__main__":
 
     # Test 1: Standard example
     assert trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6
-    print("✓ Exercise 3.1 passed: [0,1,0,2,1,0,1,3,2,1,2,1] -> 6")
+    print("✓ Test 1 passed: [0,1,0,2,1,0,1,3,2,1,2,1] -> 6")
 
     # Test 2: Another example
     assert trap([4, 2, 0, 3, 2, 5]) == 9
-    print("✓ Exercise 3.2 passed: [4,2,0,3,2,5] -> 9")
+    print("✓ Test 2 passed: [4,2,0,3,2,5] -> 9")
 
     # Test 3: No water (ascending)
     assert trap([1, 2, 3, 4]) == 0
-    print("✓ Exercise 3.3 passed: Ascending -> 0")
+    print("✓ Test 3 passed: Ascending -> 0")
 
     # Test 4: No water (descending)
     assert trap([4, 3, 2, 1]) == 0
-    print("✓ Exercise 3.4 passed: Descending -> 0")
+    print("✓ Test 4 passed: Descending -> 0")
 
     # Test 5: Empty
     assert trap([]) == 0
-    print("✓ Exercise 3.5 passed: Empty -> 0")
+    print("✓ Test 5 passed: Empty -> 0")
 
     # Test 6: Single/double elements
     assert trap([5]) == 0
     assert trap([5, 4]) == 0
-    print("✓ Exercise 3.6 passed: Too few elements")
+    print("✓ Test 6 passed: Too few elements")
 
     # Test 7: Valley
     assert trap([5, 0, 5]) == 5
-    print("✓ Exercise 3.7 passed: Simple valley")
+    print("✓ Test 7 passed: Simple valley")
 
     print("\n🎉 All tests passed!")

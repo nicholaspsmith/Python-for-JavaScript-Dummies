@@ -44,21 +44,21 @@ if __name__ == "__main__":
     # Test 1: Basic case
     result = two_sum([2, 7, 11, 15], 9)
     assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
-    print("✓ Exercise 1.1 passed: Basic two sum")
+    print("✓ Test 1 passed: Basic two sum")
 
     # Test 2: Target at end
     result = two_sum([3, 2, 4], 6)
     assert sorted(result) == [1, 2], f"Expected [1, 2], got {result}"
-    print("✓ Exercise 1.2 passed: Target at end of array")
+    print("✓ Test 2 passed: Target at end of array")
 
     # Test 3: Same numbers
     result = two_sum([3, 3], 6)
     assert sorted(result) == [0, 1], f"Expected [0, 1], got {result}"
-    print("✓ Exercise 1.3 passed: Duplicate numbers")
+    print("✓ Test 3 passed: Duplicate numbers")
 
     # Test 4: Negative numbers
     result = two_sum([-1, -2, -3, -4, -5], -8)
     assert sorted(result) == [2, 4], f"Expected [2, 4], got {result}"
-    print("✓ Exercise 1.4 passed: Negative numbers")
+    print("✓ Test 4 passed: Negative numbers")
 
     print("\n🎉 All tests passed!")

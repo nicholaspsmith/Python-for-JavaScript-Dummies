@@ -48,26 +48,26 @@ if __name__ == "__main__":
 
     # Test 1: Has common prefix
     assert longest_common_prefix(["flower", "flow", "flight"]) == "fl"
-    print("✓ Exercise 1.1 passed: Common prefix 'fl'")
+    print("✓ Test 1 passed: Common prefix 'fl'")
 
     # Test 2: No common prefix
     assert longest_common_prefix(["dog", "racecar", "car"]) == ""
-    print("✓ Exercise 1.2 passed: No common prefix")
+    print("✓ Test 2 passed: No common prefix")
 
     # Test 3: All same
     assert longest_common_prefix(["test", "test", "test"]) == "test"
-    print("✓ Exercise 1.3 passed: All strings identical")
+    print("✓ Test 3 passed: All strings identical")
 
     # Test 4: Single string
     assert longest_common_prefix(["single"]) == "single"
-    print("✓ Exercise 1.4 passed: Single string")
+    print("✓ Test 4 passed: Single string")
 
     # Test 5: Empty string in list
     assert longest_common_prefix(["", "b"]) == ""
-    print("✓ Exercise 1.5 passed: Empty string in list")
+    print("✓ Test 5 passed: Empty string in list")
 
     # Test 6: Empty list
     assert longest_common_prefix([]) == ""
-    print("✓ Exercise 1.6 passed: Empty list")
+    print("✓ Test 6 passed: Empty list")
 
     print("\n🎉 All tests passed!")

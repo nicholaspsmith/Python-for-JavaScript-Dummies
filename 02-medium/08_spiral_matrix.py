@@ -57,31 +57,31 @@ if __name__ == "__main__":
     # Test 1: 3x3 matrix
     result = spiral_order([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     assert result == [1, 2, 3, 6, 9, 8, 7, 4, 5], f"Got {result}"
-    print("✓ Exercise 2.1 passed: 3x3 matrix")
+    print("✓ Test 1 passed: 3x3 matrix")
 
     # Test 2: 3x4 matrix
     result = spiral_order([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
     assert result == [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7], f"Got {result}"
-    print("✓ Exercise 2.2 passed: 3x4 matrix")
+    print("✓ Test 2 passed: 3x4 matrix")
 
     # Test 3: Single row
     result = spiral_order([[1, 2, 3]])
     assert result == [1, 2, 3], f"Got {result}"
-    print("✓ Exercise 2.3 passed: Single row")
+    print("✓ Test 3 passed: Single row")
 
     # Test 4: Single column
     result = spiral_order([[1], [2], [3]])
     assert result == [1, 2, 3], f"Got {result}"
-    print("✓ Exercise 2.4 passed: Single column")
+    print("✓ Test 4 passed: Single column")
 
     # Test 5: Single element
     result = spiral_order([[1]])
     assert result == [1], f"Got {result}"
-    print("✓ Exercise 2.5 passed: Single element")
+    print("✓ Test 5 passed: Single element")
 
     # Test 6: Empty matrix
     result = spiral_order([])
     assert result == [], f"Got {result}"
-    print("✓ Exercise 2.6 passed: Empty matrix")
+    print("✓ Test 6 passed: Empty matrix")
 
     print("\n🎉 All tests passed!")

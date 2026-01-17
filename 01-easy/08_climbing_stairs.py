@@ -53,26 +53,26 @@ if __name__ == "__main__":
 
     # Test 1: Two stairs
     assert climb_stairs(2) == 2, "2 stairs should have 2 ways"
-    print("✓ Exercise 1.1 passed: n=2 -> 2 ways")
+    print("✓ Test 1 passed: n=2 -> 2 ways")
 
     # Test 2: Three stairs
     assert climb_stairs(3) == 3, "3 stairs should have 3 ways"
-    print("✓ Exercise 1.2 passed: n=3 -> 3 ways")
+    print("✓ Test 2 passed: n=3 -> 3 ways")
 
     # Test 3: Four stairs
     assert climb_stairs(4) == 5, "4 stairs should have 5 ways"
-    print("✓ Exercise 1.3 passed: n=4 -> 5 ways")
+    print("✓ Test 3 passed: n=4 -> 5 ways")
 
     # Test 4: One stair
     assert climb_stairs(1) == 1, "1 stair should have 1 way"
-    print("✓ Exercise 1.4 passed: n=1 -> 1 way")
+    print("✓ Test 4 passed: n=1 -> 1 way")
 
     # Test 5: Larger number
     assert climb_stairs(10) == 89, "10 stairs should have 89 ways"
-    print("✓ Exercise 1.5 passed: n=10 -> 89 ways")
+    print("✓ Test 5 passed: n=10 -> 89 ways")
 
     # Test 6: Even larger
     assert climb_stairs(20) == 10946, "20 stairs should have 10946 ways"
-    print("✓ Exercise 1.6 passed: n=20 -> 10946 ways")
+    print("✓ Test 6 passed: n=20 -> 10946 ways")
 
     print("\n🎉 All tests passed!")

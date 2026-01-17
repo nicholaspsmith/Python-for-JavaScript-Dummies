@@ -52,26 +52,26 @@ if __name__ == "__main__":
 
     # Test 1: Simple majority
     assert majority_element([3, 2, 3]) == 3
-    print("✓ Exercise 1.1 passed: [3,2,3] -> 3")
+    print("✓ Test 1 passed: [3,2,3] -> 3")
 
     # Test 2: Longer array
     assert majority_element([2, 2, 1, 1, 1, 2, 2]) == 2
-    print("✓ Exercise 1.2 passed: [2,2,1,1,1,2,2] -> 2")
+    print("✓ Test 2 passed: [2,2,1,1,1,2,2] -> 2")
 
     # Test 3: Single element
     assert majority_element([1]) == 1
-    print("✓ Exercise 1.3 passed: Single element")
+    print("✓ Test 3 passed: Single element")
 
     # Test 4: All same
     assert majority_element([5, 5, 5]) == 5
-    print("✓ Exercise 1.4 passed: All same elements")
+    print("✓ Test 4 passed: All same elements")
 
     # Test 5: Two elements
     assert majority_element([1, 1]) == 1
-    print("✓ Exercise 1.5 passed: Two same elements")
+    print("✓ Test 5 passed: Two same elements")
 
     # Test 6: Large majority
     assert majority_element([1, 1, 1, 1, 2]) == 1
-    print("✓ Exercise 1.6 passed: Clear majority")
+    print("✓ Test 6 passed: Clear majority")
 
     print("\n🎉 All tests passed!")

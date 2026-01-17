@@ -87,7 +87,7 @@
         {#each result.passedTests as test}
           <div class="test-item passed">
             <span class="check">✓</span>
-            Exercise {test} passed
+            Test {test} passed
           </div>
         {/each}
         {#each result.failedTests as test}

@@ -47,30 +47,30 @@ if __name__ == "__main__":
 
     # Test 1: Simple valid
     assert is_valid("()") == True, "() should be valid"
-    print("✓ Exercise 1.1 passed: Simple parentheses")
+    print("✓ Test 1 passed: Simple parentheses")
 
     # Test 2: Multiple types
     assert is_valid("()[]{}") == True, "()[]{} should be valid"
-    print("✓ Exercise 1.2 passed: Multiple bracket types")
+    print("✓ Test 2 passed: Multiple bracket types")
 
     # Test 3: Mismatched
     assert is_valid("(]") == False, "(] should be invalid"
-    print("✓ Exercise 1.3 passed: Mismatched brackets")
+    print("✓ Test 3 passed: Mismatched brackets")
 
     # Test 4: Wrong order
     assert is_valid("([)]") == False, "([)] should be invalid"
-    print("✓ Exercise 1.4 passed: Wrong nesting order")
+    print("✓ Test 4 passed: Wrong nesting order")
 
     # Test 5: Nested valid
     assert is_valid("{[]}") == True, "{[]} should be valid"
-    print("✓ Exercise 1.5 passed: Properly nested")
+    print("✓ Test 5 passed: Properly nested")
 
     # Test 6: Empty string
     assert is_valid("") == True, "Empty string should be valid"
-    print("✓ Exercise 1.6 passed: Empty string")
+    print("✓ Test 6 passed: Empty string")
 
     # Test 7: Only closing
     assert is_valid("]") == False, "Single closing should be invalid"
-    print("✓ Exercise 1.7 passed: Unmatched closing bracket")
+    print("✓ Test 7 passed: Unmatched closing bracket")
 
     print("\n🎉 All tests passed!")

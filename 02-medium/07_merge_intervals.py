@@ -52,31 +52,31 @@ if __name__ == "__main__":
     # Test 1: Some overlap
     result = merge([[1, 3], [2, 6], [8, 10], [15, 18]])
     assert result == [[1, 6], [8, 10], [15, 18]], f"Got {result}"
-    print("✓ Exercise 2.1 passed: Merged overlapping intervals")
+    print("✓ Test 1 passed: Merged overlapping intervals")
 
     # Test 2: Touching intervals
     result = merge([[1, 4], [4, 5]])
     assert result == [[1, 5]], f"Got {result}"
-    print("✓ Exercise 2.2 passed: Touching intervals merge")
+    print("✓ Test 2 passed: Touching intervals merge")
 
     # Test 3: No overlap
     result = merge([[1, 2], [3, 4], [5, 6]])
     assert result == [[1, 2], [3, 4], [5, 6]], f"Got {result}"
-    print("✓ Exercise 2.3 passed: No overlap")
+    print("✓ Test 3 passed: No overlap")
 
     # Test 4: Single interval
     result = merge([[1, 5]])
     assert result == [[1, 5]], f"Got {result}"
-    print("✓ Exercise 2.4 passed: Single interval")
+    print("✓ Test 4 passed: Single interval")
 
     # Test 5: All merge into one
     result = merge([[1, 4], [2, 5], [3, 6]])
     assert result == [[1, 6]], f"Got {result}"
-    print("✓ Exercise 2.5 passed: All merge into one")
+    print("✓ Test 5 passed: All merge into one")
 
     # Test 6: Unsorted input
     result = merge([[3, 4], [1, 2], [2, 3]])
     assert result == [[1, 4]], f"Got {result}"
-    print("✓ Exercise 2.6 passed: Handles unsorted input")
+    print("✓ Test 6 passed: Handles unsorted input")
 
     print("\n🎉 All tests passed!")

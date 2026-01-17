@@ -80,8 +80,8 @@ export function parseTestOutput(output: string): { passed: string[]; failed: str
 
   const lines = output.split('\n');
   for (const line of lines) {
-    // Look for "✓ Exercise X.Y passed"
-    const passMatch = line.match(/✓\s*Exercise\s+([\d.]+)\s+passed/i);
+    // Look for "✓ Test N passed"
+    const passMatch = line.match(/✓\s*Test\s+(\d+)\s+passed/i);
     if (passMatch) {
       passed.push(passMatch[1]);
       continue;
