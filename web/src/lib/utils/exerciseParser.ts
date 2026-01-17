@@ -25,7 +25,9 @@ export function parseExercise(content: string): ParsedExercise {
     const afterDocstring = docstringMatch
       ? content.slice(docstringMatch[0].length)
       : content;
-    const beforeTest = afterDocstring.slice(0, afterDocstring.indexOf(testMarker));
+    let beforeTest = afterDocstring.slice(0, afterDocstring.indexOf(testMarker));
+    // Remove the tests separator comment
+    beforeTest = beforeTest.replace(/^#\s*=+\s*TESTS\s*=+\s*$/gm, '');
     codeTemplate = beforeTest.trim();
 
     // Test code (without the if __name__ line itself, just the body)
