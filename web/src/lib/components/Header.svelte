@@ -45,7 +45,7 @@
   </button>
 
   <div class="logo">
-    <span class="icon">🐍</span>
+    <img src="/logo.png" alt="Python Practice" class="logo-img" />
     <h1>Python Practice</h1>
   </div>
 
@@ -167,8 +167,10 @@
     gap: 0.5rem;
   }
 
-  .logo .icon {
-    font-size: 1.5rem;
+  .logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
   }
 
   .logo h1 {
@@ -371,8 +373,9 @@
       font-size: 1rem;
     }
 
-    .logo .icon {
-      font-size: 1.25rem;
+    .logo-img {
+      width: 28px;
+      height: 28px;
     }
 
     .progress-section {
