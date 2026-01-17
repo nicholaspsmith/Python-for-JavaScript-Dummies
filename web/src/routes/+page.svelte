@@ -4,7 +4,7 @@
   import Sidebar from '$lib/components/Sidebar.svelte';
   import ExerciseView from '$lib/components/ExerciseView.svelte';
   import { progress } from '$lib/stores/progress';
-  import { currentExerciseId, currentExerciseMetadata } from '$lib/stores/exercises';
+  import { currentExerciseId, currentExerciseMetadata, getNextExerciseId } from '$lib/stores/exercises';
   import { initPyodide } from '$lib/stores/pyodide';
   import { initAuth } from '$lib/stores/supabase';
   import { parseExercise } from '$lib/utils/exerciseParser';
@@ -17,6 +17,7 @@
   let isRunning = false;
   let jsHabits: string[] = [];
   let sidebarOpen = false;
+  let sidebarCollapsed = false;
 
   onMount(async () => {
     mounted = true;
@@ -115,6 +116,19 @@
       isRunning = false;
     }
   }
+
+  function handleNext() {
+    if (!$currentExerciseId) return;
+    const nextId = getNextExerciseId($currentExerciseId);
+    if (nextId) {
+      currentExerciseId.set(nextId);
+      progress.setCurrentExercise(nextId);
+    }
+  }
+
+  function handleToggleSidebarCollapse() {
+    sidebarCollapsed = !sidebarCollapsed;
+  }
 </script>
 
 <svelte:head>
@@ -127,8 +141,10 @@
   <main>
     <Sidebar
       isOpen={sidebarOpen}
+      collapsed={sidebarCollapsed}
       on:select={handleExerciseSelect}
       on:close={handleSidebarClose}
+      on:toggleCollapse={handleToggleSidebarCollapse}
     />
     <ExerciseView
       bind:this={exerciseView}
@@ -141,6 +157,7 @@
       on:codeChange={handleCodeChange}
       on:codeSave={handleCodeSave}
       on:run={handleRun}
+      on:next={handleNext}
     />
   </main>
 </div>

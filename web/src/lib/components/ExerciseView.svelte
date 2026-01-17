@@ -31,6 +31,10 @@
     dispatch('run');
   }
 
+  function handleNext() {
+    dispatch('next');
+  }
+
   function handleReset() {
     if (exercise && codeEditor) {
       codeEditor.reset(exercise.codeTemplate);
@@ -86,19 +90,28 @@
         <button class="btn btn-secondary" on:click={handleReset} disabled={!exercise}>
           Reset
         </button>
-        <button
-          class="btn btn-primary"
-          on:click={handleRun}
-          disabled={!$pyodideReady || isRunning || !exercise}
-        >
-          {#if isRunning}
-            Running...
-          {:else if !$pyodideReady}
-            Loading Python...
-          {:else}
-            Check Answer
-          {/if}
-        </button>
+        {#if testResult?.success}
+          <button
+            class="btn btn-success"
+            on:click={handleNext}
+          >
+            Next →
+          </button>
+        {:else}
+          <button
+            class="btn btn-primary"
+            on:click={handleRun}
+            disabled={!$pyodideReady || isRunning || !exercise}
+          >
+            {#if isRunning}
+              Running...
+            {:else if !$pyodideReady}
+              Loading Python...
+            {:else}
+              Check Answer
+            {/if}
+          </button>
+        {/if}
       </div>
     </div>
 
@@ -291,6 +304,15 @@
 
   .btn-primary:hover:not(:disabled) {
     background: #1d4ed8;
+  }
+
+  .btn-success {
+    background: #22c55e;
+    color: #fff;
+  }
+
+  .btn-success:hover {
+    background: #16a34a;
   }
 
   .editor-wrapper {

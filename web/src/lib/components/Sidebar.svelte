@@ -4,6 +4,7 @@
   import { createEventDispatcher } from 'svelte';
 
   export let isOpen = false;
+  export let collapsed = false;
 
   const dispatch = createEventDispatcher();
 
@@ -52,9 +53,20 @@
   <div class="backdrop" on:click={handleBackdropClick} on:keydown={() => {}} role="button" tabindex="-1"></div>
 {/if}
 
-<aside class:open={isOpen}>
+<aside class:open={isOpen} class:collapsed>
   <div class="sidebar-header">
-    <h2>Exercises</h2>
+    {#if !collapsed}
+      <h2>Exercises</h2>
+    {/if}
+    <button class="collapse-btn" on:click={() => dispatch('toggleCollapse')} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        {#if collapsed}
+          <path d="M9 18l6-6-6-6"/>
+        {:else}
+          <path d="M15 18l-6-6 6-6"/>
+        {/if}
+      </svg>
+    </button>
     <button class="close-btn" on:click={() => dispatch('close')} aria-label="Close sidebar">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12"/>
@@ -63,51 +75,69 @@
   </div>
 
   <nav>
-    {#each $categories as category}
-      <div class="category">
-        <button
-          class="category-header"
-          class:expanded={expandedCategories.has(category.folder)}
-          on:click={() => toggleCategory(category.folder)}
-        >
-          <span class="chevron">
-            {expandedCategories.has(category.folder) ? '▼' : '▶'}
-          </span>
-          <span class="category-name">{category.name}</span>
-          <span class="category-count">
-            {category.exercises.filter(e => $progress.completed.includes(e.id)).length}/{category.exercises.length}
-          </span>
-        </button>
+    {#if collapsed}
+      <!-- Collapsed view: show only exercise IDs -->
+      {#each $categories as category}
+        {#each category.exercises as exercise}
+          {@const status = getStatus(exercise.id)}
+          <button
+            class="collapsed-item"
+            class:completed={status === 'completed'}
+            class:current={exercise.id === $currentExerciseId}
+            on:click={() => selectExercise(exercise.id)}
+            title={exercise.name}
+          >
+            <span class="collapsed-id">{exercise.id}</span>
+          </button>
+        {/each}
+      {/each}
+    {:else}
+      {#each $categories as category}
+        <div class="category">
+          <button
+            class="category-header"
+            class:expanded={expandedCategories.has(category.folder)}
+            on:click={() => toggleCategory(category.folder)}
+          >
+            <span class="chevron">
+              {expandedCategories.has(category.folder) ? '▼' : '▶'}
+            </span>
+            <span class="category-name">{category.name}</span>
+            <span class="category-count">
+              {category.exercises.filter(e => $progress.completed.includes(e.id)).length}/{category.exercises.length}
+            </span>
+          </button>
 
-        {#if expandedCategories.has(category.folder)}
-          <ul class="exercise-list">
-            {#each category.exercises as exercise}
-              {@const status = getStatus(exercise.id)}
-              <li>
-                <button
-                  class="exercise-item"
-                  class:completed={status === 'completed'}
-                  class:current={exercise.id === $currentExerciseId}
-                  on:click={() => selectExercise(exercise.id)}
-                >
-                  <span class="status-icon">
-                    {#if status === 'completed'}
-                      ✓
-                    {:else if exercise.id === $currentExerciseId}
-                      →
-                    {:else}
-                      ○
-                    {/if}
-                  </span>
-                  <span class="exercise-id">{exercise.id}</span>
-                  <span class="exercise-name">{exercise.name}</span>
-                </button>
-              </li>
-            {/each}
-          </ul>
-        {/if}
-      </div>
-    {/each}
+          {#if expandedCategories.has(category.folder)}
+            <ul class="exercise-list">
+              {#each category.exercises as exercise}
+                {@const status = getStatus(exercise.id)}
+                <li>
+                  <button
+                    class="exercise-item"
+                    class:completed={status === 'completed'}
+                    class:current={exercise.id === $currentExerciseId}
+                    on:click={() => selectExercise(exercise.id)}
+                  >
+                    <span class="status-icon">
+                      {#if status === 'completed'}
+                        ✓
+                      {:else if exercise.id === $currentExerciseId}
+                        →
+                      {:else}
+                        ○
+                      {/if}
+                    </span>
+                    <span class="exercise-id">{exercise.id}</span>
+                    <span class="exercise-name">{exercise.name}</span>
+                  </button>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+        </div>
+      {/each}
+    {/if}
   </nav>
 </aside>
 
@@ -124,6 +154,12 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: width 0.2s ease, min-width 0.2s ease;
+  }
+
+  aside.collapsed {
+    width: 56px;
+    min-width: 56px;
   }
 
   .sidebar-header {
@@ -141,6 +177,29 @@
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .collapse-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+    margin-left: auto;
+  }
+
+  .collapse-btn:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+  }
+
+  .collapsed .collapse-btn {
+    margin: 0 auto;
   }
 
   .close-btn {
@@ -277,6 +336,42 @@
     text-overflow: ellipsis;
   }
 
+  /* Collapsed view styles */
+  .collapsed-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 32px;
+    margin: 0.125rem auto;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 0.6875rem;
+    font-family: monospace;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .collapsed-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-secondary);
+  }
+
+  .collapsed-item.current {
+    background: var(--selection-bg);
+    color: var(--text-primary);
+  }
+
+  .collapsed-item.completed {
+    color: #4ade80;
+  }
+
+  .collapsed-id {
+    font-weight: 500;
+  }
+
   /* Tablet */
   @media (max-width: 1024px) {
     aside {
@@ -307,8 +402,18 @@
       transition: transform 0.3s ease;
     }
 
+    /* Override collapsed state on mobile */
+    aside.collapsed {
+      width: 280px;
+      min-width: 280px;
+    }
+
     aside.open {
       transform: translateX(0);
+    }
+
+    .collapse-btn {
+      display: none;
     }
 
     .close-btn {
