@@ -25,13 +25,8 @@
     // Initialize Supabase auth (if configured)
     await initAuth();
 
-    // Initialize progress from localStorage/cloud
+    // Initialize progress from localStorage/cloud (restores current exercise)
     await progress.init();
-
-    // Restore current exercise from saved progress
-    if ($progress.currentExercise) {
-      currentExerciseId.set($progress.currentExercise);
-    }
 
     // Start loading Pyodide in background
     initPyodide();
@@ -68,7 +63,6 @@
   }
 
   function handleExerciseSelect(event: CustomEvent<{ id: string }>) {
-    currentExerciseId.set(event.detail.id);
     progress.setCurrentExercise(event.detail.id);
   }
 
@@ -126,7 +120,6 @@
     if (!$currentExerciseId) return;
     const nextId = getNextExerciseId($currentExerciseId);
     if (nextId) {
-      currentExerciseId.set(nextId);
       progress.setCurrentExercise(nextId);
     }
   }
