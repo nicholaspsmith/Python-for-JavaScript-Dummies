@@ -49,30 +49,90 @@ def climb_stairs(n: int) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Two stairs
-    assert climb_stairs(2) == 2, "2 stairs should have 2 ways"
-    print("✓ Test 1 passed: n=2 -> 2 ways")
+    try:
+
+        assert climb_stairs(2) == 2, "2 stairs should have 2 ways"
+        print("✓ Test 1 passed: Two stairs")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Three stairs
-    assert climb_stairs(3) == 3, "3 stairs should have 3 ways"
-    print("✓ Test 2 passed: n=3 -> 3 ways")
+    try:
+
+        assert climb_stairs(3) == 3, "3 stairs should have 3 ways"
+        print("✓ Test 2 passed: Three stairs")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Four stairs
-    assert climb_stairs(4) == 5, "4 stairs should have 5 ways"
-    print("✓ Test 3 passed: n=4 -> 5 ways")
+    try:
+
+        assert climb_stairs(4) == 5, "4 stairs should have 5 ways"
+        print("✓ Test 3 passed: Four stairs")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: One stair
-    assert climb_stairs(1) == 1, "1 stair should have 1 way"
-    print("✓ Test 4 passed: n=1 -> 1 way")
+    try:
+
+        assert climb_stairs(1) == 1, "1 stair should have 1 way"
+        print("✓ Test 4 passed: One stair")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Larger number
-    assert climb_stairs(10) == 89, "10 stairs should have 89 ways"
-    print("✓ Test 5 passed: n=10 -> 89 ways")
+    try:
+
+        assert climb_stairs(10) == 89, "10 stairs should have 89 ways"
+        print("✓ Test 5 passed: Larger number")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Even larger
-    assert climb_stairs(20) == 10946, "20 stairs should have 10946 ways"
-    print("✓ Test 6 passed: n=20 -> 10946 ways")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert climb_stairs(20) == 10946, "20 stairs should have 10946 ways"
+        print("✓ Test 6 passed: Even larger")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

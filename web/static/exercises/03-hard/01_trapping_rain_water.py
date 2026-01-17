@@ -56,35 +56,103 @@ def trap(height: List[int]) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Standard example
-    assert trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6
-    print("✓ Test 1 passed: [0,1,0,2,1,0,1,3,2,1,2,1] -> 6")
+    try:
+
+        assert trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6
+        print("✓ Test 1 passed: Standard example")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Another example
-    assert trap([4, 2, 0, 3, 2, 5]) == 9
-    print("✓ Test 2 passed: [4,2,0,3,2,5] -> 9")
+    try:
+
+        assert trap([4, 2, 0, 3, 2, 5]) == 9
+        print("✓ Test 2 passed: Another example")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: No water (ascending)
-    assert trap([1, 2, 3, 4]) == 0
-    print("✓ Test 3 passed: Ascending -> 0")
+    try:
+
+        assert trap([1, 2, 3, 4]) == 0
+        print("✓ Test 3 passed: No water (ascending)")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: No water (descending)
-    assert trap([4, 3, 2, 1]) == 0
-    print("✓ Test 4 passed: Descending -> 0")
+    try:
+
+        assert trap([4, 3, 2, 1]) == 0
+        print("✓ Test 4 passed: No water (descending)")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Empty
-    assert trap([]) == 0
-    print("✓ Test 5 passed: Empty -> 0")
+    try:
+
+        assert trap([]) == 0
+        print("✓ Test 5 passed: Empty")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Single/double elements
-    assert trap([5]) == 0
-    assert trap([5, 4]) == 0
-    print("✓ Test 6 passed: Too few elements")
+    try:
+
+        assert trap([5, 4]) == 0
+        print("✓ Test 6 passed: Single/double elements")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
 
     # Test 7: Valley
-    assert trap([5, 0, 5]) == 5
-    print("✓ Test 7 passed: Simple valley")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert trap([5, 0, 5]) == 5
+        print("✓ Test 7 passed: Valley")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 7 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 7 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

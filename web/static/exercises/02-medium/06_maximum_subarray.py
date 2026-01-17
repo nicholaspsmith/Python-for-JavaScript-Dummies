@@ -50,30 +50,90 @@ def max_subarray(nums: List[int]) -> int:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Mixed positives and negatives
-    assert max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
-    print("✓ Test 1 passed: [-2,1,-3,4,-1,2,1,-5,4] -> 6")
+    try:
+
+        assert max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
+        print("✓ Test 1 passed: Mixed positives and negatives")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Single element
-    assert max_subarray([1]) == 1
-    print("✓ Test 2 passed: Single element")
+    try:
+
+        assert max_subarray([1]) == 1
+        print("✓ Test 2 passed: Single element")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: All positive
-    assert max_subarray([5, 4, -1, 7, 8]) == 23
-    print("✓ Test 3 passed: All positive")
+    try:
+
+        assert max_subarray([5, 4, -1, 7, 8]) == 23
+        print("✓ Test 3 passed: All positive")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: All negative
-    assert max_subarray([-3, -2, -1, -4]) == -1
-    print("✓ Test 4 passed: All negative -> pick least negative")
+    try:
+
+        assert max_subarray([-3, -2, -1, -4]) == -1
+        print("✓ Test 4 passed: All negative")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Single negative
-    assert max_subarray([-1]) == -1
-    print("✓ Test 5 passed: Single negative")
+    try:
+
+        assert max_subarray([-1]) == -1
+        print("✓ Test 5 passed: Single negative")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Zero included
-    assert max_subarray([-2, 0, -1]) == 0
-    print("✓ Test 6 passed: Zero as best option")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert max_subarray([-2, 0, -1]) == 0
+        print("✓ Test 6 passed: Zero included")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")

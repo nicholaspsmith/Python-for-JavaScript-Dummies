@@ -54,36 +54,90 @@ def exist(board: List[List[str]], word: str) -> bool:
 
 # ============= TESTS =============
 if __name__ == "__main__":
-    print("Running tests...")
-
-    board = [
-        ["A", "B", "C", "E"],
-        ["S", "F", "C", "S"],
-        ["A", "D", "E", "E"]
-    ]
+    _tests_passed = 0
+    _tests_failed = 0
 
     # Test 1: Word exists
-    assert exist(board, "ABCCED") == True
-    print("✓ Test 1 passed: Found 'ABCCED'")
+    try:
+
+        assert exist(board, "ABCCED") == True
+        print("✓ Test 1 passed: Word exists")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 1 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 1 error: {e}")
+        _tests_failed += 1
 
     # Test 2: Another valid word
-    assert exist(board, "SEE") == True
-    print("✓ Test 2 passed: Found 'SEE'")
+    try:
+
+        assert exist(board, "SEE") == True
+        print("✓ Test 2 passed: Another valid word")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 2 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 2 error: {e}")
+        _tests_failed += 1
 
     # Test 3: Can't reuse cell
-    assert exist(board, "ABCB") == False
-    print("✓ Test 3 passed: 'ABCB' fails (can't reuse)")
+    try:
+
+        assert exist(board, "ABCB") == False
+        print("✓ Test 3 passed: Can't reuse cell")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 3 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 3 error: {e}")
+        _tests_failed += 1
 
     # Test 4: Single cell
-    assert exist([["A"]], "A") == True
-    print("✓ Test 4 passed: Single cell match")
+    try:
+
+        assert exist([["A"]], "A") == True
+        print("✓ Test 4 passed: Single cell")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 4 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 4 error: {e}")
+        _tests_failed += 1
 
     # Test 5: Word not in grid
-    assert exist(board, "XYZ") == False
-    print("✓ Test 5 passed: Word not found")
+    try:
+
+        assert exist(board, "XYZ") == False
+        print("✓ Test 5 passed: Word not in grid")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 5 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 5 error: {e}")
+        _tests_failed += 1
 
     # Test 6: Word longer than grid
-    assert exist([["A"]], "AB") == False
-    print("✓ Test 6 passed: Word too long")
+    try:
 
-    print("\n🎉 All tests passed!")
+        assert exist([["A"]], "AB") == False
+        print("✓ Test 6 passed: Word longer than grid")
+        _tests_passed += 1
+    except AssertionError as e:
+        print(f"✗ Test 6 failed: {e}")
+        _tests_failed += 1
+    except Exception as e:
+        print(f"✗ Test 6 error: {e}")
+        _tests_failed += 1
+
+    # Summary
+    print()
+    if _tests_failed == 0:
+        print(f"🎉 All {_tests_passed} tests passed!")
+    else:
+        print(f"❌ {_tests_passed}/{_tests_passed + _tests_failed} tests passed")
