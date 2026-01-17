@@ -46,15 +46,33 @@
     if (!metadata) return;
 
     try {
-      // metadata.path is like "exercises/01-basics/01_variables_and_types.py"
+      // metadata.path is like "exercises/01-easy/01_two_sum.py"
       const response = await fetch(`/${metadata.path}`);
       const content = await response.text();
       currentExercise = parseExercise(content);
       testResult = null;
       jsHabits = [];
+
+      // Check for stale saved code from old exercise format
+      const savedCode = $progress.savedCode[id];
+      if (savedCode && isStaleCode(savedCode, currentExercise.codeTemplate)) {
+        progress.saveCode(id, currentExercise.codeTemplate);
+      }
     } catch (error) {
       console.error('Failed to load exercise:', error);
     }
+  }
+
+  // Detect if saved code is from old exercise format
+  function isStaleCode(savedCode: string, template: string): boolean {
+    // Old exercises started with "# Exercise" comments
+    if (savedCode.trimStart().startsWith('# Exercise')) return true;
+    // Old exercises had "# ===" separators at the start
+    if (savedCode.trimStart().startsWith('# ===')) return true;
+    // Check if the template's function definition exists in saved code
+    const funcMatch = template.match(/^def\s+(\w+)/m);
+    if (funcMatch && !savedCode.includes(`def ${funcMatch[1]}`)) return true;
+    return false;
   }
 
   // Reactively load exercise when currentExerciseId changes (only after mount)
