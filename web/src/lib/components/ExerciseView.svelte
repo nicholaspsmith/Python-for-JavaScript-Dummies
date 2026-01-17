@@ -11,11 +11,12 @@
   export let testResult: TestResult | null = null;
   export let isRunning: boolean = false;
   export let jsHabits: string[] = [];
+  export let instructionsCollapsed: boolean = false;
 
   const dispatch = createEventDispatcher();
 
   let codeEditor: CodeEditor;
-  let instructionsExpanded = false;
+  let instructionsExpanded = false; // For mobile expand/collapse
 
   $: currentCode = savedCode ?? exercise?.codeTemplate ?? '';
 
@@ -47,6 +48,10 @@
     instructionsExpanded = !instructionsExpanded;
   }
 
+  function toggleInstructionsCollapsed() {
+    dispatch('toggleInstructionsCollapsed');
+  }
+
   export function getCode(): string {
     return codeEditor?.getValue() || currentCode;
   }
@@ -54,29 +59,46 @@
 
 <div class="exercise-view">
   <!-- Instructions Panel -->
-  <div class="instructions-panel" class:expanded={instructionsExpanded}>
+  <div class="instructions-panel" class:expanded={instructionsExpanded} class:collapsed={instructionsCollapsed}>
     {#if metadata}
-      <button class="exercise-header" on:click={toggleInstructions}>
-        <div class="header-left">
-          <span class="exercise-number">{metadata.id}</span>
-          <h2>{metadata.name}</h2>
-        </div>
-        <div class="header-right">
-          <span class="category-badge">{metadata.category}</span>
-          <span class="expand-icon">
-            {instructionsExpanded ? '▼' : '▶'}
-          </span>
-        </div>
-      </button>
+      <div class="exercise-header">
+        <button class="header-content" on:click={toggleInstructions}>
+          <div class="header-left">
+            <span class="exercise-number">{metadata.id}</span>
+            {#if !instructionsCollapsed}
+              <h2>{metadata.name}</h2>
+            {/if}
+          </div>
+          {#if !instructionsCollapsed}
+            <div class="header-right">
+              <span class="category-badge">{metadata.category}</span>
+              <span class="expand-icon">
+                {instructionsExpanded ? '▼' : '▶'}
+              </span>
+            </div>
+          {/if}
+        </button>
+        <button class="collapse-btn" on:click={toggleInstructionsCollapsed} aria-label={instructionsCollapsed ? 'Expand instructions' : 'Collapse instructions'}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            {#if instructionsCollapsed}
+              <path d="M9 18l6-6-6-6"/>
+            {:else}
+              <path d="M15 18l-6-6 6-6"/>
+            {/if}
+          </svg>
+        </button>
+      </div>
     {/if}
 
-    <div class="instructions-content">
-      {#if exercise}
-        <pre class="instructions">{exercise.instructions}</pre>
-      {:else}
-        <div class="loading">Loading exercise...</div>
-      {/if}
-    </div>
+    {#if !instructionsCollapsed}
+      <div class="instructions-content">
+        {#if exercise}
+          <pre class="instructions">{exercise.instructions}</pre>
+        {:else}
+          <div class="loading">Loading exercise...</div>
+        {/if}
+      </div>
+    {/if}
   </div>
 
   <!-- Editor Panel -->
@@ -145,20 +167,71 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: width 0.2s ease, min-width 0.2s ease, max-width 0.2s ease;
+  }
+
+  .instructions-panel.collapsed {
+    width: 56px;
+    min-width: 56px;
+    max-width: 56px;
   }
 
   .exercise-header {
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem;
     border: none;
     border-bottom: 1px solid var(--border-color);
     background: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
     cursor: default;
     text-align: left;
+    padding: 0;
+    gap: 0.75rem;
+  }
+
+  .collapse-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .collapse-btn:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+  }
+
+  .collapsed .exercise-header {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .collapsed .header-content {
+    justify-content: center;
+  }
+
+  .collapsed .collapse-btn {
+    margin-top: 0.5rem;
   }
 
   .header-left {

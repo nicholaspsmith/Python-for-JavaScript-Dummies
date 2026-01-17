@@ -18,12 +18,14 @@
   let jsHabits: string[] = [];
   let sidebarOpen = false;
   let sidebarCollapsed = false;
+  let instructionsCollapsed = false;
 
   onMount(async () => {
     mounted = true;
 
-    // Restore sidebar collapsed state
+    // Restore collapsed states
     sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    instructionsCollapsed = localStorage.getItem('instructionsCollapsed') === 'true';
 
     // Initialize Supabase auth (if configured)
     await initAuth();
@@ -149,6 +151,11 @@
     sidebarCollapsed = !sidebarCollapsed;
     localStorage.setItem('sidebarCollapsed', String(sidebarCollapsed));
   }
+
+  function handleToggleInstructionsCollapsed() {
+    instructionsCollapsed = !instructionsCollapsed;
+    localStorage.setItem('instructionsCollapsed', String(instructionsCollapsed));
+  }
 </script>
 
 <svelte:head>
@@ -174,10 +181,12 @@
       {testResult}
       {isRunning}
       {jsHabits}
+      {instructionsCollapsed}
       on:codeChange={handleCodeChange}
       on:codeSave={handleCodeSave}
       on:run={handleRun}
       on:next={handleNext}
+      on:toggleInstructionsCollapsed={handleToggleInstructionsCollapsed}
     />
   </main>
 </div>
