@@ -3,7 +3,7 @@
  * Run with: node scripts/build-exercises.js
  */
 
-import { readdir, readFile, writeFile, mkdir, copyFile } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir, copyFile, rm } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -90,10 +90,11 @@ async function main() {
     return;
   }
 
-  // Ensure output directory exists
-  if (!existsSync(OUTPUT_DIR)) {
-    await mkdir(OUTPUT_DIR, { recursive: true });
+  // Clean and recreate output directory
+  if (existsSync(OUTPUT_DIR)) {
+    await rm(OUTPUT_DIR, { recursive: true });
   }
+  await mkdir(OUTPUT_DIR, { recursive: true });
 
   for (const folder of folders) {
     const folderNum = folder.match(FOLDER_PATTERN)[1];
