@@ -28,6 +28,11 @@
     // Initialize progress from localStorage/cloud
     await progress.init();
 
+    // Restore current exercise from saved progress
+    if ($progress.currentExercise) {
+      currentExerciseId.set($progress.currentExercise);
+    }
+
     // Start loading Pyodide in background
     initPyodide();
 
