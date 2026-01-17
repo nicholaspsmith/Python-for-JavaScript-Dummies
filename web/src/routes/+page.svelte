@@ -22,6 +22,9 @@
   onMount(async () => {
     mounted = true;
 
+    // Restore sidebar collapsed state
+    sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+
     // Initialize Supabase auth (if configured)
     await initAuth();
 
@@ -144,6 +147,7 @@
 
   function handleToggleSidebarCollapse() {
     sidebarCollapsed = !sidebarCollapsed;
+    localStorage.setItem('sidebarCollapsed', String(sidebarCollapsed));
   }
 </script>
 
