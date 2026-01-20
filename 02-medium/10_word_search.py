@@ -57,9 +57,15 @@ if __name__ == "__main__":
     _tests_passed = 0
     _tests_failed = 0
 
+    # Shared test board
+    board = [
+        ["A", "B", "C", "E"],
+        ["S", "F", "C", "S"],
+        ["A", "D", "E", "E"]
+    ]
+
     # Test 1: Word exists
     try:
-
         assert exist(board, "ABCCED") == True
         print("✓ Test 1 passed: Word exists")
         _tests_passed += 1
@@ -72,7 +78,6 @@ if __name__ == "__main__":
 
     # Test 2: Another valid word
     try:
-
         assert exist(board, "SEE") == True
         print("✓ Test 2 passed: Another valid word")
         _tests_passed += 1
@@ -85,7 +90,6 @@ if __name__ == "__main__":
 
     # Test 3: Can't reuse cell
     try:
-
         assert exist(board, "ABCB") == False
         print("✓ Test 3 passed: Can't reuse cell")
         _tests_passed += 1
@@ -98,7 +102,6 @@ if __name__ == "__main__":
 
     # Test 4: Single cell
     try:
-
         assert exist([["A"]], "A") == True
         print("✓ Test 4 passed: Single cell")
         _tests_passed += 1
@@ -111,7 +114,6 @@ if __name__ == "__main__":
 
     # Test 5: Word not in grid
     try:
-
         assert exist(board, "XYZ") == False
         print("✓ Test 5 passed: Word not in grid")
         _tests_passed += 1
@@ -124,7 +126,6 @@ if __name__ == "__main__":
 
     # Test 6: Word longer than grid
     try:
-
         assert exist([["A"]], "AB") == False
         print("✓ Test 6 passed: Word longer than grid")
         _tests_passed += 1
