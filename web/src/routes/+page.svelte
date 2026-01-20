@@ -74,6 +74,8 @@
     if (savedCode.trimStart().startsWith('# Exercise')) return true;
     // Old exercises had "# ===" separators at the start
     if (savedCode.trimStart().startsWith('# ===')) return true;
+    // Saved code contains TESTS separator (should have been stripped)
+    if (savedCode.includes('# ============= TESTS =============')) return true;
     // Check if the template's function definition exists in saved code
     const funcMatch = template.match(/^def\s+(\w+)/m);
     if (funcMatch && !savedCode.includes(`def ${funcMatch[1]}`)) return true;
