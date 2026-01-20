@@ -12,7 +12,7 @@ Example:
     Explanation: 342 + 465 = 807 (stored in reverse)
 
     Input: l1 = [9,9,9,9], l2 = [9,9,9,9]
-    Output: [8,9,9,9,0,1]
+    Output: [8,9,9,9,1]
     Explanation: 9999 + 9999 = 19998
 
 JS to Python Tips:
@@ -90,13 +90,13 @@ if __name__ == "__main__":
         print(f"✗ Test 1 error: {e}")
         _tests_failed += 1
 
-    # Test 2: Different lengths
+    # Test 2: Large numbers with carry
     try:
-        l1 = list_to_linked([9, 9, 9, 9])
-        l2 = list_to_linked([9, 9, 9, 9])
+        l1 = list_to_linked([9, 9, 9, 9])  # 9999
+        l2 = list_to_linked([9, 9, 9, 9])  # 9999
         result = linked_to_list(add_two_numbers(l1, l2))
-        assert result == [8, 9, 9, 9, 0, 1], f"Expected [8,9,9,9,0,1], got {result}"
-        print("✓ Test 2 passed: Different lengths")
+        assert result == [8, 9, 9, 9, 1], f"Expected [8,9,9,9,1], got {result}"  # 19998
+        print("✓ Test 2 passed: Large numbers with carry")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
