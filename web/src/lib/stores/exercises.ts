@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store';
-import type { ExerciseMetadata, ExerciseManifest, Category } from '../types';
+import type { ExerciseMetadata, ExerciseManifest, Category, Section, RuntimeType } from '../types';
 import { currentExerciseId } from './progress';
 import manifest from '../exercises-manifest.json';
 
@@ -31,6 +31,39 @@ export const categories = derived(exercises, ($exercises): Category[] => {
   return Array.from(categoryMap.values()).sort((a, b) =>
     a.folder.localeCompare(b.folder)
   );
+});
+
+// Section configurations
+const sectionConfig: Record<RuntimeType, { name: string; icon: string }> = {
+  python: { name: 'Leetcode (Python)', icon: '🐍' },
+  react: { name: 'React', icon: '⚛️' },
+  sql: { name: 'SQL', icon: '🗄️' }
+};
+
+// Group categories into sections by runtime
+export const sections = derived(categories, ($categories): Section[] => {
+  const sectionMap = new Map<RuntimeType, Category[]>();
+
+  for (const category of $categories) {
+    // Determine runtime from first exercise in category
+    const runtime = category.exercises[0]?.runtime ?? 'python';
+
+    if (!sectionMap.has(runtime)) {
+      sectionMap.set(runtime, []);
+    }
+    sectionMap.get(runtime)!.push(category);
+  }
+
+  // Convert to Section array with proper ordering
+  const orderedRuntimes: RuntimeType[] = ['python', 'react', 'sql'];
+
+  return orderedRuntimes
+    .filter(runtime => sectionMap.has(runtime))
+    .map(runtime => ({
+      name: sectionConfig[runtime].name,
+      runtime,
+      categories: sectionMap.get(runtime)!
+    }));
 });
 
 // Get current exercise metadata
