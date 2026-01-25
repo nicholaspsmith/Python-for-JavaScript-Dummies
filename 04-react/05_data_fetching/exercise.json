@@ -1,0 +1,5 @@
+{
+  "title": "Data Fetching with useEffect",
+  "instructions": "Create a component that fetches and displays user data.\n\nRequirements:\n1. Fetch user data from the provided mock API\n2. Show 'Loading...' while fetching\n3. Display user name and email when loaded\n4. Handle and display errors gracefully\n5. Add a 'Refresh' button to refetch data\n\nThis exercise practices async operations with useEffect, including handling loading and error states.",
+  "dependencies": {}
+}

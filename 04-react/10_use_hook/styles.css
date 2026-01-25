@@ -1,0 +1,56 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.profile h2 {
+  margin: 0 0 8px 0;
+  color: #1f2937;
+}
+
+.profile p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Skeleton loading styles */
+.skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.skeleton-text {
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  margin: 8px auto;
+  width: 60%;
+}
+
+.skeleton-text.short {
+  width: 40%;
+  height: 16px;
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Toggle Visibility",
+  "instructions": "Create a component that toggles the visibility of content.\n\nRequirements:\n1. Create a button that toggles between 'Show' and 'Hide'\n2. Conditionally render a message based on state\n3. The button text should reflect the current state\n\nThis exercise practices conditional rendering in React using boolean state.",
+  "dependencies": {}
+}

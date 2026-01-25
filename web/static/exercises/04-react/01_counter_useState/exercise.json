@@ -1,0 +1,5 @@
+{
+  "title": "Counter with useState",
+  "instructions": "Create a simple counter component using the useState hook.\n\nRequirements:\n1. Display the current count (starting at 0)\n2. Add an 'Increment' button that increases count by 1\n3. Add a 'Decrement' button that decreases count by 1\n4. Add a 'Reset' button that sets count back to 0\n\nThis exercise introduces React's most fundamental hook: useState.\nuseState returns a pair: the current state value and a function to update it.",
+  "dependencies": {}
+}

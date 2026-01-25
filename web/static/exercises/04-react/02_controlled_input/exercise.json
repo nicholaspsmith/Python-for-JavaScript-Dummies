@@ -1,0 +1,5 @@
+{
+  "title": "Controlled Input",
+  "instructions": "Create a controlled input component that displays what the user types.\n\nRequirements:\n1. Create a text input field\n2. Display the input value below the field in real-time\n3. Show the character count\n4. Add a 'Clear' button to reset the input\n\nA controlled input stores its value in React state. The input's value always reflects the state, and onChange updates the state.",
+  "dependencies": {}
+}
