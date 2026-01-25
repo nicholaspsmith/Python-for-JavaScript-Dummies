@@ -1,9 +1,10 @@
 /**
  * Build script to generate exercise manifest and copy exercise files
+ * Supports multiple runtimes: Python, React, and SQL
  * Run with: node scripts/build-exercises.js
  */
 
-import { readdir, readFile, writeFile, mkdir, copyFile, rm } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir, copyFile, rm, cp } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -15,8 +16,24 @@ const MANIFEST_PATH = join(__dirname, '..', 'src', 'lib', 'exercises-manifest.js
 
 // Exercise folder pattern: NN-category-name
 const FOLDER_PATTERN = /^(\d{2})-(.+)$/;
-// Exercise file pattern: NN_exercise_name.py
-const FILE_PATTERN = /^(\d{2})_(.+)\.py$/;
+// Python exercise file pattern: NN_exercise_name.py
+const PYTHON_FILE_PATTERN = /^(\d{2})_(.+)\.py$/;
+// SQL exercise file pattern: NN_exercise_name.sql
+const SQL_FILE_PATTERN = /^(\d{2})_(.+)\.sql$/;
+// React exercise folder pattern: NN_exercise_name (folder with exercise.json)
+const REACT_FOLDER_PATTERN = /^(\d{2})_(.+)$/;
+
+/**
+ * Detect runtime type from folder name
+ */
+function detectRuntime(folderName) {
+  if (folderName.includes('code-master')) return 'python';
+  if (folderName.includes('react')) return 'react';
+  if (folderName.includes('sql')) return 'sql';
+  // Legacy support for old folder names
+  if (folderName.match(/^\d{2}-(easy|medium|hard)$/)) return 'python';
+  return 'python'; // Default
+}
 
 async function getExerciseFolders() {
   const entries = await readdir(ROOT_DIR, { withFileTypes: true });
@@ -26,18 +43,45 @@ async function getExerciseFolders() {
     .sort();
 }
 
-async function getExerciseFiles(folder) {
+async function getPythonExerciseFiles(folder) {
   const folderPath = join(ROOT_DIR, folder);
   const entries = await readdir(folderPath, { withFileTypes: true });
   return entries
-    .filter(entry => entry.isFile() && FILE_PATTERN.test(entry.name))
+    .filter(entry => entry.isFile() && PYTHON_FILE_PATTERN.test(entry.name))
     .map(entry => entry.name)
     .sort();
 }
 
-function parseExerciseName(filename) {
+async function getSQLExerciseFiles(folder) {
+  const folderPath = join(ROOT_DIR, folder);
+  const entries = await readdir(folderPath, { withFileTypes: true });
+  return entries
+    .filter(entry => entry.isFile() && SQL_FILE_PATTERN.test(entry.name))
+    .map(entry => entry.name)
+    .sort();
+}
+
+async function getReactExerciseFolders(folder) {
+  const folderPath = join(ROOT_DIR, folder);
+  const entries = await readdir(folderPath, { withFileTypes: true });
+  const exerciseFolders = [];
+
+  for (const entry of entries) {
+    if (entry.isDirectory() && REACT_FOLDER_PATTERN.test(entry.name)) {
+      // Check if it has an exercise.json
+      const exerciseJsonPath = join(folderPath, entry.name, 'exercise.json');
+      if (existsSync(exerciseJsonPath)) {
+        exerciseFolders.push(entry.name);
+      }
+    }
+  }
+
+  return exerciseFolders.sort();
+}
+
+function parseExerciseName(filename, pattern) {
   // Convert 01_variables_and_types.py -> Variables And Types
-  const match = filename.match(FILE_PATTERN);
+  const match = filename.match(pattern);
   if (!match) return filename;
   return match[2]
     .split('_')
@@ -46,16 +90,20 @@ function parseExerciseName(filename) {
 }
 
 function parseCategoryName(folder) {
-  // Convert 01-basics -> Basics
+  // Convert 01-code-master-easy -> Leetcode Easy
   const match = folder.match(FOLDER_PATTERN);
   if (!match) return folder;
-  return match[2]
+  let name = match[2]
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+
+  // Replace "Code Master" with "Leetcode"
+  name = name.replace('Code Master', 'Leetcode');
+  return name;
 }
 
-async function extractDescription(filePath) {
+async function extractPythonDescription(filePath) {
   try {
     const content = await readFile(filePath, 'utf-8');
     // Extract first line of docstring as description
@@ -74,6 +122,135 @@ async function extractDescription(filePath) {
     // Ignore errors
   }
   return '';
+}
+
+async function extractSQLDescription(filePath) {
+  try {
+    const content = await readFile(filePath, 'utf-8');
+    // Extract title from first comment block
+    const commentMatch = content.match(/^\/\*[\s\S]*?\*\//);
+    if (commentMatch) {
+      const lines = commentMatch[0].split('\n');
+      // Get first non-empty line after opening comment
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].replace(/^\/\*/, '').replace(/\*\/$/, '').trim();
+        if (line && !line.startsWith('=') && !line.startsWith('-')) {
+          return line;
+        }
+      }
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+  return '';
+}
+
+async function extractReactDescription(exerciseJsonPath) {
+  try {
+    const content = await readFile(exerciseJsonPath, 'utf-8');
+    const config = JSON.parse(content);
+    return config.title || '';
+  } catch (e) {
+    // Ignore errors
+  }
+  return '';
+}
+
+async function processPythonExercises(folder, folderNum, categoryName, categoryOutputDir) {
+  const exercises = [];
+  const files = await getPythonExerciseFiles(folder);
+
+  for (const file of files) {
+    const fileNum = file.match(PYTHON_FILE_PATTERN)[1];
+    const exerciseId = `${parseInt(folderNum)}.${parseInt(fileNum)}`;
+    const exerciseName = parseExerciseName(file, PYTHON_FILE_PATTERN);
+    const sourcePath = join(ROOT_DIR, folder, file);
+    const destPath = join(categoryOutputDir, file);
+    const description = await extractPythonDescription(sourcePath);
+
+    // Copy file to static folder
+    await copyFile(sourcePath, destPath);
+
+    exercises.push({
+      id: exerciseId,
+      name: exerciseName,
+      runtime: 'python',
+      category: categoryName,
+      categoryFolder: folder,
+      filename: file,
+      path: `exercises/${folder}/${file}`,
+      description
+    });
+
+    console.log(`  ${exerciseId} - [Python] ${exerciseName}`);
+  }
+
+  return exercises;
+}
+
+async function processSQLExercises(folder, folderNum, categoryName, categoryOutputDir) {
+  const exercises = [];
+  const files = await getSQLExerciseFiles(folder);
+
+  for (const file of files) {
+    const fileNum = file.match(SQL_FILE_PATTERN)[1];
+    const exerciseId = `${parseInt(folderNum)}.${parseInt(fileNum)}`;
+    const exerciseName = parseExerciseName(file, SQL_FILE_PATTERN);
+    const sourcePath = join(ROOT_DIR, folder, file);
+    const destPath = join(categoryOutputDir, file);
+    const description = await extractSQLDescription(sourcePath);
+
+    // Copy file to static folder
+    await copyFile(sourcePath, destPath);
+
+    exercises.push({
+      id: exerciseId,
+      name: exerciseName,
+      runtime: 'sql',
+      category: categoryName,
+      categoryFolder: folder,
+      filename: file,
+      path: `exercises/${folder}/${file}`,
+      description
+    });
+
+    console.log(`  ${exerciseId} - [SQL] ${exerciseName}`);
+  }
+
+  return exercises;
+}
+
+async function processReactExercises(folder, folderNum, categoryName, categoryOutputDir) {
+  const exercises = [];
+  const exerciseFolders = await getReactExerciseFolders(folder);
+
+  for (const exerciseFolder of exerciseFolders) {
+    const fileNum = exerciseFolder.match(REACT_FOLDER_PATTERN)[1];
+    const exerciseId = `${parseInt(folderNum)}.${parseInt(fileNum)}`;
+    const exerciseName = parseExerciseName(exerciseFolder, REACT_FOLDER_PATTERN);
+    const sourcePath = join(ROOT_DIR, folder, exerciseFolder);
+    const destPath = join(categoryOutputDir, exerciseFolder);
+    const exerciseJsonPath = join(sourcePath, 'exercise.json');
+    const description = await extractReactDescription(exerciseJsonPath);
+
+    // Copy entire folder to static folder
+    await cp(sourcePath, destPath, { recursive: true });
+
+    exercises.push({
+      id: exerciseId,
+      name: exerciseName,
+      runtime: 'react',
+      category: categoryName,
+      categoryFolder: folder,
+      filename: exerciseFolder,
+      path: `exercises/${folder}/${exerciseFolder}`,
+      description
+    });
+
+    console.log(`  ${exerciseId} - [React] ${exerciseName}`);
+  }
+
+  return exercises;
 }
 
 async function main() {
@@ -99,7 +276,7 @@ async function main() {
   for (const folder of folders) {
     const folderNum = folder.match(FOLDER_PATTERN)[1];
     const categoryName = parseCategoryName(folder);
-    const files = await getExerciseFiles(folder);
+    const runtime = detectRuntime(folder);
 
     // Create category folder in output
     const categoryOutputDir = join(OUTPUT_DIR, folder);
@@ -107,29 +284,23 @@ async function main() {
       await mkdir(categoryOutputDir, { recursive: true });
     }
 
-    for (const file of files) {
-      const fileNum = file.match(FILE_PATTERN)[1];
-      const exerciseId = `${parseInt(folderNum)}.${parseInt(fileNum)}`;
-      const exerciseName = parseExerciseName(file);
-      const sourcePath = join(ROOT_DIR, folder, file);
-      const destPath = join(categoryOutputDir, file);
-      const description = await extractDescription(sourcePath);
+    console.log(`\n${folder} (${runtime}):`);
 
-      // Copy file to static folder
-      await copyFile(sourcePath, destPath);
+    let folderExercises = [];
 
-      exercises.push({
-        id: exerciseId,
-        name: exerciseName,
-        category: categoryName,
-        categoryFolder: folder,
-        filename: file,
-        path: `exercises/${folder}/${file}`,
-        description
-      });
-
-      console.log(`  ${exerciseId} - ${exerciseName}`);
+    switch (runtime) {
+      case 'python':
+        folderExercises = await processPythonExercises(folder, folderNum, categoryName, categoryOutputDir);
+        break;
+      case 'sql':
+        folderExercises = await processSQLExercises(folder, folderNum, categoryName, categoryOutputDir);
+        break;
+      case 'react':
+        folderExercises = await processReactExercises(folder, folderNum, categoryName, categoryOutputDir);
+        break;
     }
+
+    exercises.push(...folderExercises);
   }
 
   // Sort exercises by ID

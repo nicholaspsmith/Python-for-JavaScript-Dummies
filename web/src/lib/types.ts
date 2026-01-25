@@ -1,8 +1,11 @@
 // Exercise types
 
+export type RuntimeType = 'python' | 'react' | 'sql';
+
 export interface ExerciseMetadata {
   id: string;
   name: string;
+  runtime: RuntimeType;
   category: string;
   categoryFolder: string;
   filename: string;
@@ -44,4 +47,50 @@ export interface Category {
   name: string;
   folder: string;
   exercises: ExerciseMetadata[];
+}
+
+// Section grouping for sidebar
+export interface Section {
+  name: string;
+  runtime: RuntimeType;
+  categories: Category[];
+}
+
+// SQL-specific types
+export interface ParsedSQLExercise {
+  instructions: string;
+  schema: string;
+  seedData: string;
+  solutionTemplate: string;
+  tests: SQLTestConfig;
+  fullContent: string;
+}
+
+export interface SQLTestConfig {
+  type: 'query_result' | 'row_count' | 'column_check';
+  expected: unknown;
+  ignoreOrder?: boolean;
+}
+
+export interface SQLTestResult {
+  success: boolean;
+  output: string;
+  error?: string;
+  actualResult?: unknown[];
+  expectedResult?: unknown[];
+}
+
+// React-specific types
+export interface ParsedReactExercise {
+  title: string;
+  instructions: string;
+  starterCode: Record<string, string>;
+  testCode: string;
+  dependencies?: Record<string, string>;
+}
+
+export interface ReactExerciseConfig {
+  title: string;
+  instructions: string;
+  dependencies?: Record<string, string>;
 }

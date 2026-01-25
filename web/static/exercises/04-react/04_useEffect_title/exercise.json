@@ -1,0 +1,5 @@
+{
+  "title": "useEffect for Document Title",
+  "instructions": "Create a component that updates the document title based on a counter.\n\nRequirements:\n1. Display a counter (starting at 0)\n2. Add increment/decrement buttons\n3. Use useEffect to update document.title to show the count\n4. The title should be 'Count: X' where X is the current count\n\nuseEffect runs side effects after render. By specifying dependencies, you control when the effect runs.",
+  "dependencies": {}
+}

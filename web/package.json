@@ -16,14 +16,21 @@
 		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"@types/babel__traverse": "^7.28.0",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",
 		"typescript": "^5.9.3",
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
+		"@babel/parser": "^7.28.6",
+		"@babel/traverse": "^7.28.6",
+		"@codesandbox/sandpack-client": "^2.19.8",
 		"@supabase/supabase-js": "^2.90.1",
 		"monaco-editor": "^0.55.1",
-		"pyodide": "^0.29.1"
+		"monaco-jsx-highlighter": "^2.77.77",
+		"monaco-jsx-syntax-highlight": "^1.2.2",
+		"pyodide": "^0.29.1",
+		"sql.js": "^1.13.0"
 	}
 }

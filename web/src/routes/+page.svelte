@@ -2,23 +2,18 @@
   import { onMount } from 'svelte';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
-  import ExerciseView from '$lib/components/ExerciseView.svelte';
+  import ExerciseRouter from '$lib/components/exercise/ExerciseRouter.svelte';
   import { progress } from '$lib/stores/progress';
   import { currentExerciseId, currentExerciseMetadata, getNextExerciseId } from '$lib/stores/exercises';
   import { initPyodide } from '$lib/stores/pyodide';
+  import { initSqlJs } from '$lib/stores/sqljs';
+  import { initSandpack } from '$lib/stores/sandpack';
   import { initAuth } from '$lib/stores/supabase';
-  import { parseExercise } from '$lib/utils/exerciseParser';
-  import { runTests, detectJsHabits } from '$lib/utils/pyodideRunner';
-  import type { ParsedExercise, TestResult } from '$lib/types';
 
-  let exerciseView: ExerciseView;
-  let currentExercise: ParsedExercise | null = null;
-  let testResult: TestResult | null = null;
-  let isRunning = false;
-  let jsHabits: string[] = [];
   let sidebarOpen = false;
   let sidebarCollapsed = false;
   let instructionsCollapsed = false;
+  let mounted = false;
 
   onMount(async () => {
     mounted = true;
@@ -33,58 +28,27 @@
     // Initialize progress from localStorage/cloud (restores current exercise)
     await progress.init();
 
-    // Start loading Pyodide in background
-    initPyodide();
-
-    // Load current exercise
-    if ($currentExerciseId) {
-      await loadExercise($currentExerciseId);
-    }
+    // Start loading runtimes in background based on current exercise
+    initializeRuntimes();
   });
 
-  let mounted = false;
+  // Initialize appropriate runtime based on current exercise
+  function initializeRuntimes() {
+    const runtime = $currentExerciseMetadata?.runtime ?? 'python';
 
-  async function loadExercise(id: string) {
-    if (!mounted) return;
-
-    const metadata = $currentExerciseMetadata;
-    if (!metadata) return;
-
-    try {
-      // metadata.path is like "exercises/01-easy/01_two_sum.py"
-      const response = await fetch(`/${metadata.path}`);
-      const content = await response.text();
-      currentExercise = parseExercise(content);
-      testResult = null;
-      jsHabits = [];
-
-      // Check for stale saved code from old exercise format
-      const savedCode = $progress.savedCode[id];
-      if (savedCode && isStaleCode(savedCode, currentExercise.codeTemplate)) {
-        progress.saveCode(id, currentExercise.codeTemplate);
-      }
-    } catch (error) {
-      console.error('Failed to load exercise:', error);
+    // Always initialize Python for Code Master exercises
+    if (runtime === 'python') {
+      initPyodide();
+    } else if (runtime === 'sql') {
+      initSqlJs();
+    } else if (runtime === 'react') {
+      initSandpack();
     }
   }
 
-  // Detect if saved code is from old exercise format
-  function isStaleCode(savedCode: string, template: string): boolean {
-    // Old exercises started with "# Exercise" comments
-    if (savedCode.trimStart().startsWith('# Exercise')) return true;
-    // Old exercises had "# ===" separators at the start
-    if (savedCode.trimStart().startsWith('# ===')) return true;
-    // Saved code contains TESTS separator (should have been stripped)
-    if (savedCode.includes('# ============= TESTS =============')) return true;
-    // Check if the template's function definition exists in saved code
-    const funcMatch = template.match(/^def\s+(\w+)/m);
-    if (funcMatch && !savedCode.includes(`def ${funcMatch[1]}`)) return true;
-    return false;
-  }
-
-  // Reactively load exercise when currentExerciseId changes (only after mount)
-  $: if (mounted && $currentExerciseId) {
-    loadExercise($currentExerciseId);
+  // Re-initialize runtime when exercise changes
+  $: if (mounted && $currentExerciseMetadata) {
+    initializeRuntimes();
   }
 
   function handleExerciseSelect(event: CustomEvent<{ id: string }>) {
@@ -100,7 +64,7 @@
   }
 
   function handleCodeChange(event: CustomEvent<{ value: string }>) {
-    // Just track in memory for now
+    // Track code changes
   }
 
   function handleCodeSave(event: CustomEvent<{ value: string }>) {
@@ -109,35 +73,17 @@
     }
   }
 
-  async function handleRun() {
-    if (!currentExercise || !$currentExerciseId) return;
+  function handleRun() {
+    // Python exercises handle this internally and dispatch 'run' on success
+    if ($currentExerciseId) {
+      progress.markCompleted($currentExerciseId);
+    }
+  }
 
-    isRunning = true;
-    testResult = null;
-
-    try {
-      const userCode = exerciseView.getCode();
-
-      // Check for JS habits
-      jsHabits = detectJsHabits(userCode);
-
-      // Run the tests
-      testResult = await runTests(userCode, currentExercise.testCode);
-
-      // Update progress if successful
-      if (testResult.success) {
-        progress.markCompleted($currentExerciseId);
-      }
-    } catch (error) {
-      testResult = {
-        success: false,
-        output: '',
-        error: error instanceof Error ? error.message : 'Unknown error',
-        passedTests: [],
-        failedTests: []
-      };
-    } finally {
-      isRunning = false;
+  function handleComplete(event: CustomEvent<{ success: boolean }>) {
+    // SQL and React exercises dispatch 'complete' event
+    if (event.detail.success && $currentExerciseId) {
+      progress.markCompleted($currentExerciseId);
     }
   }
 
@@ -175,18 +121,14 @@
       on:close={handleSidebarClose}
       on:toggleCollapse={handleToggleSidebarCollapse}
     />
-    <ExerciseView
-      bind:this={exerciseView}
-      exercise={currentExercise}
+    <ExerciseRouter
       metadata={$currentExerciseMetadata}
       savedCode={$progress.savedCode[$currentExerciseId ?? '']}
-      {testResult}
-      {isRunning}
-      {jsHabits}
       {instructionsCollapsed}
       on:codeChange={handleCodeChange}
       on:codeSave={handleCodeSave}
       on:run={handleRun}
+      on:complete={handleComplete}
       on:next={handleNext}
       on:toggleInstructionsCollapsed={handleToggleInstructionsCollapsed}
     />

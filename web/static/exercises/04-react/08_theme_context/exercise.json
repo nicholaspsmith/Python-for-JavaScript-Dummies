@@ -1,0 +1,5 @@
+{
+  "title": "Theme Context Provider",
+  "instructions": "Create a theme context that provides dark/light mode to the app.\n\nRequirements:\n1. Create a ThemeContext using createContext\n2. Create a ThemeProvider component that manages theme state\n3. Provide a toggleTheme function through context\n4. Create a useTheme hook for easy access\n5. Style components based on the current theme\n\nContext provides a way to pass data through the component tree without prop drilling.",
+  "dependencies": {}
+}

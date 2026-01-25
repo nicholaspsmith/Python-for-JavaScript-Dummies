@@ -1,0 +1,8 @@
+{
+  "title": "Form with Actions and useActionState (React 19)",
+  "instructions": "Create a form using React 19's form actions and useActionState.\n\nRequirements:\n1. Create a contact form with name and email fields\n2. Use form action instead of onSubmit\n3. Use useActionState to track pending state and result\n4. Show loading state while submitting\n5. Display success/error messages\n\nReact 19 introduces form actions that work with the action attribute and useActionState for managing form state.\n\nNote: This is a React 19 feature!",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

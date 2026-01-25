@@ -1,0 +1,5 @@
+{
+  "title": "Debounced Search",
+  "instructions": "Create a search component that debounces input to avoid excessive API calls.\n\nRequirements:\n1. Create a search input field\n2. Debounce the search - only 'search' after 500ms of no typing\n3. Display 'Searching...' while the debounce timer is active\n4. Show the search results (mocked) after debounce\n5. Clear results when input is empty\n\nDebouncing prevents a function from being called too frequently - essential for search inputs.",
+  "dependencies": {}
+}

@@ -1,24 +1,59 @@
 <script lang="ts">
-  import { categories, currentExerciseId } from '../stores/exercises';
+  import { sections, currentExerciseId } from '../stores/exercises';
   import { progress } from '../stores/progress';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { browser } from '$app/environment';
+  import type { RuntimeType } from '../types';
 
   export let isOpen = false;
   export let collapsed = false;
 
   const dispatch = createEventDispatcher();
 
+  let expandedSections: Set<RuntimeType> = new Set();
   let expandedCategories: Set<string> = new Set();
+  let initialExpansionDone = false;
 
-  // Expand the category of the current exercise by default
-  $: {
-    const currentMeta = $categories
-      .flatMap(c => c.exercises)
-      .find(e => e.id === $currentExerciseId);
-    if (currentMeta) {
-      expandedCategories.add(currentMeta.categoryFolder);
-      expandedCategories = expandedCategories;
+  // Section icons and colors
+  const sectionStyles: Record<RuntimeType, { icon: string; color: string; bgColor: string }> = {
+    python: { icon: '🐍', color: '#60a5fa', bgColor: '#1e3a5f' },
+    react: { icon: '⚛️', color: '#61dafb', bgColor: '#1a2733' },
+    sql: { icon: '🗄️', color: '#f59e0b', bgColor: '#451a03' }
+  };
+
+  // Expand the section and category of the current exercise only on initial load
+  // Use onMount to ensure localStorage has been read
+  onMount(() => {
+    // Small delay to ensure stores are hydrated from localStorage
+    setTimeout(() => {
+      if (initialExpansionDone) return;
+
+      const sectionList = $sections;
+      const currentId = $currentExerciseId;
+
+      if (sectionList.length > 0 && currentId) {
+        const currentMeta = sectionList
+          .flatMap(s => s.categories)
+          .flatMap(c => c.exercises)
+          .find(e => e.id === currentId);
+        if (currentMeta) {
+          expandedSections.add(currentMeta.runtime);
+          expandedSections = expandedSections;
+          expandedCategories.add(currentMeta.categoryFolder);
+          expandedCategories = expandedCategories;
+        }
+      }
+      initialExpansionDone = true;
+    }, 50);
+  });
+
+  function toggleSection(runtime: RuntimeType) {
+    if (expandedSections.has(runtime)) {
+      expandedSections.delete(runtime);
+    } else {
+      expandedSections.add(runtime);
     }
+    expandedSections = expandedSections;
   }
 
   function toggleCategory(folder: string) {
@@ -80,64 +115,95 @@
 
   <nav>
     {#if collapsed}
-      <!-- Collapsed view: show only exercise IDs -->
-      {#each $categories as category}
-        {#each category.exercises as exercise}
-          {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
-          <button
-            class="collapsed-item"
-            class:completed={status === 'completed'}
-            class:current={exercise.id === $currentExerciseId}
-            on:click={() => selectExercise(exercise.id)}
-            title={exercise.name}
-          >
-            <span class="collapsed-id">{exercise.id}</span>
-          </button>
+      <!-- Collapsed view: show only exercise IDs with section colors -->
+      {#each $sections as section}
+        {#each section.categories as category}
+          {#each category.exercises as exercise}
+            {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
+            {@const style = sectionStyles[section.runtime]}
+            <button
+              class="collapsed-item"
+              class:completed={status === 'completed'}
+              class:current={exercise.id === $currentExerciseId}
+              on:click={() => selectExercise(exercise.id)}
+              title={exercise.name}
+              style="--section-color: {style.color}"
+            >
+              <span class="collapsed-id">{exercise.id}</span>
+            </button>
+          {/each}
         {/each}
       {/each}
     {:else}
-      {#each $categories as category}
-        <div class="category">
+      {#each $sections as section}
+        {@const style = sectionStyles[section.runtime]}
+        {@const sectionExercises = section.categories.flatMap(c => c.exercises)}
+        {@const sectionCompleted = sectionExercises.filter(e => completedExercises.includes(e.id)).length}
+        <div class="section">
           <button
-            class="category-header"
-            class:expanded={expandedCategories.has(category.folder)}
-            on:click={() => toggleCategory(category.folder)}
+            class="section-header"
+            class:expanded={expandedSections.has(section.runtime)}
+            on:click={() => toggleSection(section.runtime)}
+            style="--section-color: {style.color}; --section-bg: {style.bgColor}"
           >
-            <span class="chevron">
-              {expandedCategories.has(category.folder) ? '▼' : '▶'}
+            <span class="section-icon">{style.icon}</span>
+            <span class="section-name">{section.name}</span>
+            <span class="section-count">
+              {sectionCompleted}/{sectionExercises.length}
             </span>
-            <span class="category-name">{category.name}</span>
-            <span class="category-count">
-              {category.exercises.filter(e => completedExercises.includes(e.id)).length}/{category.exercises.length}
+            <span class="section-chevron">
+              {expandedSections.has(section.runtime) ? '▼' : '▶'}
             </span>
           </button>
 
-          {#if expandedCategories.has(category.folder)}
-            <ul class="exercise-list">
-              {#each category.exercises as exercise}
-                {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
-                <li>
-                  <button
-                    class="exercise-item"
-                    class:completed={status === 'completed'}
-                    class:current={exercise.id === $currentExerciseId}
-                    on:click={() => selectExercise(exercise.id)}
-                  >
-                    <span class="status-icon">
-                      {#if status === 'completed'}
-                        ✓
-                      {:else if exercise.id === $currentExerciseId}
-                        →
-                      {:else}
-                        ○
-                      {/if}
-                    </span>
-                    <span class="exercise-id">{exercise.id}</span>
-                    <span class="exercise-name">{exercise.name}</span>
-                  </button>
-                </li>
-              {/each}
-            </ul>
+          {#if expandedSections.has(section.runtime)}
+            {#each section.categories as category}
+              <div class="category">
+                <button
+                  class="category-header"
+                  class:expanded={expandedCategories.has(category.folder)}
+                  on:click={() => toggleCategory(category.folder)}
+                  style="--section-color: {style.color}"
+                >
+                  <span class="chevron">
+                    {expandedCategories.has(category.folder) ? '▼' : '▶'}
+                  </span>
+                  <span class="category-name">{category.name}</span>
+                  <span class="category-count">
+                    {category.exercises.filter(e => completedExercises.includes(e.id)).length}/{category.exercises.length}
+                  </span>
+                </button>
+
+                {#if expandedCategories.has(category.folder)}
+                  <ul class="exercise-list">
+                    {#each category.exercises as exercise}
+                      {@const status = getStatus(exercise.id, completedExercises, savedCodeMap, $currentExerciseId)}
+                      <li>
+                        <button
+                          class="exercise-item"
+                          class:completed={status === 'completed'}
+                          class:current={exercise.id === $currentExerciseId}
+                          on:click={() => selectExercise(exercise.id)}
+                          style="--section-color: {style.color}"
+                        >
+                          <span class="status-icon">
+                            {#if status === 'completed'}
+                              ✓
+                            {:else if exercise.id === $currentExerciseId}
+                              →
+                            {:else}
+                              ○
+                            {/if}
+                          </span>
+                          <span class="exercise-id">{exercise.id}</span>
+                          <span class="exercise-name">{exercise.name}</span>
+                        </button>
+                      </li>
+                    {/each}
+                  </ul>
+                {/if}
+              </div>
+            {/each}
           {/if}
         </div>
       {/each}
@@ -230,8 +296,54 @@
     padding-right: 1rem;
   }
 
-  .category {
+  .section {
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    background: var(--section-bg, var(--bg-active));
+    border: none;
+    color: var(--section-color, var(--text-primary));
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s;
     margin-bottom: 0.25rem;
+  }
+
+  .section-header:hover {
+    filter: brightness(1.1);
+  }
+
+  .section-icon {
+    font-size: 1rem;
+  }
+
+  .section-name {
+    flex: 1;
+    text-align: left;
+  }
+
+  .section-count {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
+  .section-chevron {
+    font-size: 0.625rem;
+    opacity: 0.7;
+  }
+
+  .category {
+    margin-bottom: 0.125rem;
+    margin-left: 0.5rem;
   }
 
   .category-header {
@@ -303,11 +415,11 @@
   }
 
   .exercise-item.completed {
-    color: #4ade80;
+    color: var(--section-color, #4ade80);
   }
 
   .exercise-item.completed:hover {
-    color: #4ade80;
+    color: var(--section-color, #4ade80);
   }
 
   .status-icon {

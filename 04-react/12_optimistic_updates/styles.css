@@ -1,0 +1,105 @@
+.post {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+  margin: 0 0 12px 0;
+  color: #1f2937;
+}
+
+.content p {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.actions {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.like-button:hover:not(:disabled) {
+  background: #fee2e2;
+  transform: scale(1.05);
+}
+
+.like-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.like-button.pending {
+  background: #fecaca;
+}
+
+.heart {
+  font-size: 1.25rem;
+  transition: transform 0.2s;
+}
+
+.like-button:hover .heart {
+  transform: scale(1.2);
+}
+
+.count {
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fecaca;
+  border-top-color: #dc2626;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.hint {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}

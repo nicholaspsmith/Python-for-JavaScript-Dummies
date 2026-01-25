@@ -1,0 +1,5 @@
+{
+  "title": "Expensive Calculation with useMemo",
+  "instructions": "Create a component that demonstrates useMemo for expensive calculations.\n\nRequirements:\n1. Create an input for a number\n2. Calculate the factorial of that number\n3. Use useMemo to memoize the calculation\n4. Add a counter that changes frequently (every click)\n5. Show that the factorial doesn't recalculate when only the counter changes\n\nuseMemo caches computation results, only recalculating when dependencies change.",
+  "dependencies": {}
+}

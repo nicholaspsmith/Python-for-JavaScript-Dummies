@@ -1,0 +1,8 @@
+{
+  "title": "Optimistic Updates with useOptimistic (React 19)",
+  "instructions": "Create a like button with optimistic updates using useOptimistic.\n\nRequirements:\n1. Display a post with a like count\n2. Use useOptimistic to immediately show the like\n3. Simulate a server request (may succeed or fail)\n4. Revert the optimistic update if the request fails\n5. Show visual feedback for the pending state\n\nuseOptimistic lets you show an optimistic state while an async action is happening, providing instant feedback to users.\n\nNote: This is a React 19 feature!",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

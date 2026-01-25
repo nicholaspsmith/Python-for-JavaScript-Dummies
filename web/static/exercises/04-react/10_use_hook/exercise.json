@@ -1,0 +1,8 @@
+{
+  "title": "Async Data with use() Hook (React 19)",
+  "instructions": "Use React 19's use() hook to handle async data.\n\nRequirements:\n1. Create a promise that fetches user data\n2. Use the use() hook to read the promise\n3. Wrap with Suspense for loading state\n4. Handle the resolved data\n\nThe use() hook is new in React 19. It can read promises during render, integrating with Suspense for loading states.\n\nNote: This is a React 19 feature!",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
