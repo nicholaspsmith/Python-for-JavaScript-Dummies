@@ -249,26 +249,30 @@
           </div>
         {/if}
 
-        {#if testResult.actualResult && testResult.actualResult.length > 0}
+        {#if testResult.actualResult}
           <div class="result-table">
             <h4>Your Result:</h4>
-            <div class="table-wrapper">
-              <table>
-                <tbody>
-                  {#each testResult.actualResult as row}
-                    <tr>
-                      {#if Array.isArray(row)}
-                        {#each row as cell}
-                          <td>{cell}</td>
-                        {/each}
-                      {:else}
-                        <td>{row}</td>
-                      {/if}
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
-            </div>
+            {#if testResult.actualResult.length > 0}
+              <div class="table-wrapper">
+                <table>
+                  <tbody>
+                    {#each testResult.actualResult as row}
+                      <tr>
+                        {#if Array.isArray(row)}
+                          {#each row as cell}
+                            <td>{cell}</td>
+                          {/each}
+                        {:else}
+                          <td>{row}</td>
+                        {/if}
+                      </tr>
+                    {/each}
+                  </tbody>
+                </table>
+              </div>
+            {:else}
+              <p class="empty">Your query returned 0 rows</p>
+            {/if}
           </div>
         {/if}
 
