@@ -1,0 +1,5 @@
+{
+  "title": "useDeferredValue for Deferred Rendering",
+  "instructions": "Create a search component using useDeferredValue to defer expensive renders.\n\nRequirements:\n1. Create a search input that controls displayed results\n2. Use useDeferredValue to defer the search results rendering\n3. Show visual feedback when results are stale (deferred value !== current value)\n4. Compare with and without useDeferredValue\n5. Display a large list that's expensive to render\n\nuseDeferredValue lets you defer updating a part of the UI. It's similar to useTransition but works with values instead of state updates.",
+  "dependencies": {}
+}

@@ -1,6 +1,6 @@
 {
-  "generated": "2026-01-26T18:44:56.824Z",
-  "total": 67,
+  "generated": "2026-01-26T20:11:43.842Z",
+  "total": 75,
   "exercises": [
     {
       "id": "1.1",
@@ -371,6 +371,86 @@
       "filename": "12_optimistic_updates",
       "path": "exercises/04-react/12_optimistic_updates",
       "description": "Optimistic Updates with useOptimistic (React 19)"
+    },
+    {
+      "id": "4.13",
+      "name": "UseRef",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "13_useRef",
+      "path": "exercises/04-react/13_useRef",
+      "description": "useRef for DOM Access"
+    },
+    {
+      "id": "4.14",
+      "name": "UseCallback",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "14_useCallback",
+      "path": "exercises/04-react/14_useCallback",
+      "description": "useCallback for Memoized Functions"
+    },
+    {
+      "id": "4.15",
+      "name": "UseReducer",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "15_useReducer",
+      "path": "exercises/04-react/15_useReducer",
+      "description": "useReducer for Complex State"
+    },
+    {
+      "id": "4.16",
+      "name": "UseId",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "16_useId",
+      "path": "exercises/04-react/16_useId",
+      "description": "useId for Accessible Forms"
+    },
+    {
+      "id": "4.17",
+      "name": "UseLayoutEffect",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "17_useLayoutEffect",
+      "path": "exercises/04-react/17_useLayoutEffect",
+      "description": "useLayoutEffect for DOM Measurements"
+    },
+    {
+      "id": "4.18",
+      "name": "UseImperativeHandle",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "18_useImperativeHandle",
+      "path": "exercises/04-react/18_useImperativeHandle",
+      "description": "useImperativeHandle for Custom Refs"
+    },
+    {
+      "id": "4.19",
+      "name": "UseTransition",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "19_useTransition",
+      "path": "exercises/04-react/19_useTransition",
+      "description": "useTransition for Responsive Updates"
+    },
+    {
+      "id": "4.20",
+      "name": "UseDeferredValue",
+      "runtime": "react",
+      "category": "React",
+      "categoryFolder": "04-react",
+      "filename": "20_useDeferredValue",
+      "path": "exercises/04-react/20_useDeferredValue",
+      "description": "useDeferredValue for Deferred Rendering"
     },
     {
       "id": "5.1",

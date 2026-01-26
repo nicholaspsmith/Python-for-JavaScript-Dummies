@@ -1,0 +1,5 @@
+{
+  "title": "useId for Accessible Forms",
+  "instructions": "Create an accessible form using useId for unique IDs.\n\nRequirements:\n1. Create a reusable FormField component that accepts label and type props\n2. Use useId to generate unique IDs for input-label associations\n3. Create a form with multiple instances of FormField\n4. Ensure each input has a unique ID and proper aria attributes\n5. Test that clicking labels focuses the correct inputs\n\nuseId generates unique IDs that are stable across server and client renders. This is essential for accessibility (label htmlFor) and avoiding ID collisions.",
+  "dependencies": {}
+}

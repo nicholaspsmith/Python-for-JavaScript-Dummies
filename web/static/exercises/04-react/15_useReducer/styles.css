@@ -1,0 +1,151 @@
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.products {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.product:last-child {
+  border-bottom: none;
+}
+
+.product button {
+  padding: 6px 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.product button:hover {
+  background: #059669;
+}
+
+.cart {
+  padding: 16px;
+  background: #fef3c7;
+  border-radius: 8px;
+  border: 2px solid #f59e0b;
+}
+
+.empty {
+  color: #92400e;
+  font-style: italic;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #fcd34d;
+}
+
+.cart-item:last-of-type {
+  border-bottom: none;
+}
+
+.item-name {
+  flex: 1;
+  font-weight: 500;
+  color: #92400e;
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-controls button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: #f59e0b;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.item-controls button:hover {
+  background: #d97706;
+}
+
+.item-controls .remove {
+  width: auto;
+  padding: 4px 8px;
+  background: #ef4444;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.item-controls .remove:hover {
+  background: #dc2626;
+}
+
+.quantity {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.item-total {
+  font-weight: 600;
+  color: #92400e;
+  min-width: 60px;
+  text-align: right;
+}
+
+.total {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #f59e0b;
+  text-align: right;
+  font-size: 18px;
+  color: #92400e;
+}
+
+.clear-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.clear-btn:hover {
+  background: #dc2626;
+}
