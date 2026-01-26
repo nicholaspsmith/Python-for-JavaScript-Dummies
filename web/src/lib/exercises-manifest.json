@@ -1,6 +1,6 @@
 {
-  "generated": "2026-01-25T21:58:13.550Z",
-  "total": 55,
+  "generated": "2026-01-26T18:44:56.824Z",
+  "total": 67,
   "exercises": [
     {
       "id": "1.1",
@@ -551,6 +551,126 @@
       "filename": "05_window_function.sql",
       "path": "exercises/07-sql-hard/05_window_function.sql",
       "description": "Window Functions"
+    },
+    {
+      "id": "8.1",
+      "name": "Classes Inheritance",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "01_classes_inheritance",
+      "path": "exercises/08-typescript-oop/01_classes_inheritance",
+      "description": "Classes and Inheritance"
+    },
+    {
+      "id": "8.2",
+      "name": "Interfaces Abstract",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "02_interfaces_abstract",
+      "path": "exercises/08-typescript-oop/02_interfaces_abstract",
+      "description": "Interfaces vs Abstract Classes"
+    },
+    {
+      "id": "8.3",
+      "name": "Encapsulation",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "03_encapsulation",
+      "path": "exercises/08-typescript-oop/03_encapsulation",
+      "description": "Encapsulation"
+    },
+    {
+      "id": "8.4",
+      "name": "Polymorphism",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "04_polymorphism",
+      "path": "exercises/08-typescript-oop/04_polymorphism",
+      "description": "Polymorphism"
+    },
+    {
+      "id": "8.5",
+      "name": "Composition",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "05_composition",
+      "path": "exercises/08-typescript-oop/05_composition",
+      "description": "Composition Over Inheritance"
+    },
+    {
+      "id": "8.6",
+      "name": "Srp",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "06_srp",
+      "path": "exercises/08-typescript-oop/06_srp",
+      "description": "Single Responsibility Principle"
+    },
+    {
+      "id": "8.7",
+      "name": "Ocp",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "07_ocp",
+      "path": "exercises/08-typescript-oop/07_ocp",
+      "description": "Open/Closed Principle"
+    },
+    {
+      "id": "8.8",
+      "name": "Lsp",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "08_lsp",
+      "path": "exercises/08-typescript-oop/08_lsp",
+      "description": "Liskov Substitution Principle"
+    },
+    {
+      "id": "8.9",
+      "name": "Isp",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "09_isp",
+      "path": "exercises/08-typescript-oop/09_isp",
+      "description": "Interface Segregation Principle"
+    },
+    {
+      "id": "8.10",
+      "name": "Dip",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "10_dip",
+      "path": "exercises/08-typescript-oop/10_dip",
+      "description": "Dependency Inversion Principle"
+    },
+    {
+      "id": "8.11",
+      "name": "Strategy Pattern",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "11_strategy_pattern",
+      "path": "exercises/08-typescript-oop/11_strategy_pattern",
+      "description": "Strategy Pattern"
+    },
+    {
+      "id": "8.12",
+      "name": "Repository Pattern",
+      "runtime": "typescript",
+      "category": "Typescript Oop",
+      "categoryFolder": "08-typescript-oop",
+      "filename": "12_repository_pattern",
+      "path": "exercises/08-typescript-oop/12_repository_pattern",
+      "description": "Repository Pattern"
     }
   ]
 }

@@ -1,0 +1,4 @@
+{
+  "title": "Classes and Inheritance",
+  "instructions": "Learn the fundamentals of TypeScript classes and inheritance.\n\nRequirements:\n1. Create an Animal class with:\n   - A protected 'name' property\n   - A constructor that sets the name\n   - A public 'makeSound()' method that returns 'Some sound'\n   - A public 'getName()' method that returns the name\n\n2. Create a Dog class that extends Animal:\n   - Add a private 'breed' property\n   - Override 'makeSound()' to return 'Woof!'\n   - Add a 'getBreed()' method\n   - Use super() to call the parent constructor\n\n3. Create a Cat class that extends Animal:\n   - Override 'makeSound()' to return 'Meow!'\n\nThis exercise covers: class syntax, inheritance with extends, super(), access modifiers (public, protected, private), method overriding."
+}
