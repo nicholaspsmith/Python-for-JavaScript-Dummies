@@ -1,0 +1,5 @@
+{
+  "title": "useTransition for Responsive Updates",
+  "instructions": "Create a filterable list using useTransition to keep the UI responsive.\n\nRequirements:\n1. Create a large list of items (1000+ items)\n2. Add a search input that filters the list\n3. Use useTransition to mark the filtering as a non-urgent update\n4. Show a visual indicator while the transition is pending\n5. The input should remain responsive even during heavy filtering\n\nuseTransition lets you mark state updates as non-urgent transitions. The UI stays responsive because React can interrupt the transition to handle urgent updates (like typing).",
+  "dependencies": {}
+}

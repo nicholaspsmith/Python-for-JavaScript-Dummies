@@ -1,0 +1,5 @@
+{
+  "title": "useLayoutEffect for DOM Measurements",
+  "instructions": "Create a tooltip component that uses useLayoutEffect for positioning.\n\nRequirements:\n1. Create a button that shows a tooltip on hover\n2. Use useLayoutEffect to measure the button's position\n3. Position the tooltip above the button, centered horizontally\n4. The tooltip should not cause visual flicker (hence useLayoutEffect)\n5. Handle window resize to reposition tooltip\n\nuseLayoutEffect runs synchronously after DOM mutations but before the browser paints. Use it when you need to measure/modify the DOM before the user sees changes.",
+  "dependencies": {}
+}

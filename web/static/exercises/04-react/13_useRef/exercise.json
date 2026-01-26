@@ -1,0 +1,5 @@
+{
+  "title": "useRef for DOM Access",
+  "instructions": "Create a component that uses useRef to interact with DOM elements.\n\nRequirements:\n1. Create a text input with a ref attached\n2. Add a 'Focus Input' button that focuses the input when clicked\n3. Add a 'Select All' button that selects all text in the input\n4. Display a render count that persists across renders (using useRef)\n\nuseRef returns a mutable ref object whose .current property can hold any value. Unlike state, changing a ref doesn't trigger a re-render.",
+  "dependencies": {}
+}

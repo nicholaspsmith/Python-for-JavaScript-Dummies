@@ -1,0 +1,5 @@
+{
+  "title": "useReducer for Complex State",
+  "instructions": "Create a shopping cart using useReducer for complex state management.\n\nRequirements:\n1. Create a reducer function that handles: ADD_ITEM, REMOVE_ITEM, UPDATE_QUANTITY, CLEAR_CART\n2. Display a list of products that can be added to cart\n3. Show the cart with quantities and ability to modify\n4. Display the total price\n5. Add a 'Clear Cart' button\n\nuseReducer is an alternative to useState for complex state logic. It uses a reducer function that takes (state, action) and returns new state.",
+  "dependencies": {}
+}

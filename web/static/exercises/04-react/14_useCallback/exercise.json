@@ -1,0 +1,5 @@
+{
+  "title": "useCallback for Memoized Functions",
+  "instructions": "Create a component that demonstrates useCallback to prevent unnecessary re-renders.\n\nRequirements:\n1. Create a parent component with a counter\n2. Create a child component that receives a callback prop\n3. Wrap the child in React.memo to prevent unnecessary re-renders\n4. Use useCallback to memoize the callback function\n5. Show render counts for both parent and child\n\nuseCallback returns a memoized version of the callback that only changes if dependencies change. Combined with React.memo, it prevents child components from re-rendering unnecessarily.",
+  "dependencies": {}
+}

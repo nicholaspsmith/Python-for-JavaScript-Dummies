@@ -1,0 +1,5 @@
+{
+  "title": "useImperativeHandle for Custom Refs",
+  "instructions": "Create a custom input component that exposes specific methods to parent.\n\nRequirements:\n1. Create a FancyInput component using forwardRef\n2. Use useImperativeHandle to expose: focus(), clear(), and getValue()\n3. Do NOT expose the full DOM node - only these specific methods\n4. Parent component should control the input using these exposed methods\n5. Add buttons in parent to test each method\n\nuseImperativeHandle customizes the ref value exposed to parent components. Use it with forwardRef to expose specific methods instead of the raw DOM node.",
+  "dependencies": {}
+}
