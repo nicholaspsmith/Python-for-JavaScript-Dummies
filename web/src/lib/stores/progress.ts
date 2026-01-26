@@ -40,6 +40,16 @@ function saveToStorage(progress: Progress) {
 // Debounce cloud sync to avoid too many requests
 let syncTimeout: ReturnType<typeof setTimeout> | null = null;
 
+/**
+ * Cancel any pending sync timeout
+ */
+export function cancelPendingSync(): void {
+  if (syncTimeout) {
+    clearTimeout(syncTimeout);
+    syncTimeout = null;
+  }
+}
+
 async function syncToCloud(progress: Progress) {
   const client = getSupabase();
   const userId = getUserId();
