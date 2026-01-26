@@ -43,6 +43,9 @@
       initSqlJs();
     } else if (runtime === 'react') {
       initSandpack();
+    } else if (runtime === 'typescript') {
+      // TypeScript uses Sandpack with TypeScript preset
+      initSandpack();
     }
   }
 

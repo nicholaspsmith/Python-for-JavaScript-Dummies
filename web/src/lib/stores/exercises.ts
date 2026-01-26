@@ -37,7 +37,8 @@ export const categories = derived(exercises, ($exercises): Category[] => {
 const sectionConfig: Record<RuntimeType, { name: string; icon: string }> = {
   python: { name: 'Leetcode (Python)', icon: '🐍' },
   react: { name: 'React', icon: '⚛️' },
-  sql: { name: 'SQL', icon: '🗄️' }
+  sql: { name: 'SQL', icon: '🗄️' },
+  typescript: { name: 'OOP Patterns (TypeScript)', icon: '📐' }
 };
 
 // Group categories into sections by runtime
@@ -55,7 +56,7 @@ export const sections = derived(categories, ($categories): Section[] => {
   }
 
   // Convert to Section array with proper ordering
-  const orderedRuntimes: RuntimeType[] = ['python', 'react', 'sql'];
+  const orderedRuntimes: RuntimeType[] = ['python', 'react', 'sql', 'typescript'];
 
   return orderedRuntimes
     .filter(runtime => sectionMap.has(runtime))

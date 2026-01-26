@@ -18,7 +18,8 @@
   const sectionStyles: Record<RuntimeType, { icon: string; color: string; bgColor: string }> = {
     python: { icon: '🐍', color: '#60a5fa', bgColor: '#1e3a5f' },
     react: { icon: '⚛️', color: '#61dafb', bgColor: '#1a2733' },
-    sql: { icon: '🗄️', color: '#f59e0b', bgColor: '#451a03' }
+    sql: { icon: '🗄️', color: '#f59e0b', bgColor: '#451a03' },
+    typescript: { icon: '📐', color: '#3178c6', bgColor: '#1a2940' }
   };
 
   // Expand the section and category of the current exercise only on initial load
