@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher, onMount, onDestroy, tick } from 'svelte';
-  import type { ExerciseMetadata, ReactExerciseConfig } from '../../types';
+  import type { ExerciseMetadata, TypeScriptExerciseConfig } from '../../types';
   import CodeEditor from '../CodeEditor.svelte';
   import { sandpackReady, initSandpack, loadSandpackClient } from '../../stores/sandpack';
-  import { createSandpackFiles, getDefaultDependencies, mergeDependencies } from '../../utils/reactExerciseParser';
+  import { createTypeScriptSandpackFiles, getTypeScriptDependencies } from '../../utils/typescriptExerciseParser';
 
   export let metadata: ExerciseMetadata | null = null;
   export let savedCode: string | undefined = undefined;
@@ -14,7 +14,7 @@
   let codeEditor: CodeEditor;
   let iframeElement: HTMLIFrameElement;
   let sandpackClient: any = null;
-  let exerciseConfig: ReactExerciseConfig | null = null;
+  let exerciseConfig: TypeScriptExerciseConfig | null = null;
   let starterCode: string = '';
   let isLoading = true;
   let previewError: string | null = null;
@@ -55,8 +55,8 @@
       const configResponse = await fetch(`/${metadata.path}/exercise.json`);
       exerciseConfig = await configResponse.json();
 
-      // Fetch App.jsx
-      const codeResponse = await fetch(`/${metadata.path}/App.jsx`);
+      // Fetch App.ts
+      const codeResponse = await fetch(`/${metadata.path}/App.ts`);
       starterCode = await codeResponse.text();
 
       // Wait for DOM to update (iframe to be available)
@@ -65,7 +65,7 @@
       // Initialize Sandpack preview
       await initSandpackPreview();
     } catch (error) {
-      console.error('Failed to load React exercise:', error);
+      console.error('Failed to load TypeScript exercise:', error);
       previewError = error instanceof Error ? error.message : 'Failed to load exercise';
     } finally {
       isLoading = false;
@@ -88,10 +88,7 @@
         sandpackClient.destroy?.();
       }
 
-      const rawFiles = createSandpackFiles(
-        { '/App.jsx': currentCode || starterCode },
-        exerciseConfig?.dependencies
-      );
+      const rawFiles = createTypeScriptSandpackFiles(currentCode || starterCode);
 
       // Convert files to Sandpack format (with code property)
       const files: Record<string, { code: string }> = {};
@@ -99,19 +96,19 @@
         files[path] = { code };
       }
 
-      console.log('Sandpack: initializing with files:', Object.keys(files));
+      console.log('Sandpack TypeScript: initializing with files:', Object.keys(files));
 
       sandpackClient = await loadSandpackClient(
         iframeElement,
         {
           files,
-          entry: '/index.js',
-          dependencies: mergeDependencies(exerciseConfig?.dependencies)
+          entry: '/index.ts',
+          dependencies: getTypeScriptDependencies()
         },
         { showOpenInCodeSandbox: false }
       );
 
-      console.log('Sandpack: client initialized successfully');
+      console.log('Sandpack TypeScript: client initialized successfully');
     } catch (error) {
       console.error('Failed to initialize Sandpack:', error);
       previewError = error instanceof Error ? error.message : 'Failed to initialize preview';
@@ -128,10 +125,7 @@
 
     debounceTimer = setTimeout(() => {
       if (sandpackClient) {
-        const rawFiles = createSandpackFiles(
-          { '/App.jsx': event.detail.value },
-          exerciseConfig?.dependencies
-        );
+        const rawFiles = createTypeScriptSandpackFiles(event.detail.value);
 
         // Convert files to Sandpack format (with code property)
         const files: Record<string, { code: string }> = {};
@@ -183,14 +177,14 @@
       <div class="exercise-header">
         <button class="header-content" on:click={toggleInstructions}>
           <div class="header-left">
-            <span class="exercise-number react">{metadata.id}</span>
+            <span class="exercise-number typescript">{metadata.id}</span>
             {#if !instructionsCollapsed}
               <h2>{metadata.name}</h2>
             {/if}
           </div>
           {#if !instructionsCollapsed}
             <div class="header-right">
-              <span class="category-badge react">{metadata.category}</span>
+              <span class="category-badge typescript">{metadata.category}</span>
               <span class="expand-icon">
                 {instructionsExpanded ? '▼' : '▶'}
               </span>
@@ -226,8 +220,8 @@
     <div class="editor-panel">
       <div class="editor-toolbar">
         <div class="toolbar-left">
-          <span class="file-icon">⚛️</span>
-          <span class="file-name">App.jsx</span>
+          <span class="file-icon">📐</span>
+          <span class="file-name">App.ts</span>
         </div>
         <div class="toolbar-right">
           <button class="btn btn-secondary" on:click={handleReset} disabled={!starterCode}>
@@ -236,7 +230,7 @@
           <button class="btn btn-success" on:click={handleComplete}>
             Mark Complete
           </button>
-          <button class="btn btn-primary react" on:click={handleNext}>
+          <button class="btn btn-primary typescript" on:click={handleNext}>
             Next →
           </button>
         </div>
@@ -246,8 +240,7 @@
         <CodeEditor
           bind:this={codeEditor}
           value={currentCode}
-          language="javascript"
-          isJsx={true}
+          language="typescript"
           on:change={handleCodeChange}
           on:save={handleCodeSave}
         />
@@ -256,7 +249,7 @@
 
     <div class="preview-panel">
       <div class="preview-toolbar">
-        <span class="preview-title">Preview</span>
+        <span class="preview-title">Console Output</span>
         {#if isLoading}
           <span class="loading-indicator">Loading...</span>
         {/if}
@@ -268,12 +261,12 @@
           </div>
         {:else if !$sandpackReady}
           <div class="preview-loading">
-            <p>Initializing React preview...</p>
+            <p>Initializing TypeScript runtime...</p>
           </div>
         {:else}
           <iframe
             bind:this={iframeElement}
-            title="React Preview"
+            title="TypeScript Console Output"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
           ></iframe>
         {/if}
@@ -394,9 +387,9 @@
     flex-shrink: 0;
   }
 
-  .exercise-number.react {
-    color: #61dafb;
-    background: #1a2733;
+  .exercise-number.typescript {
+    color: #3178c6;
+    background: #1a2940;
   }
 
   .exercise-header h2 {
@@ -420,9 +413,9 @@
     flex-shrink: 0;
   }
 
-  .category-badge.react {
-    color: #61dafb;
-    background: #1a2733;
+  .category-badge.typescript {
+    color: #3178c6;
+    background: #1a2940;
   }
 
   .instructions-content {
@@ -522,12 +515,12 @@
     color: #fff;
   }
 
-  .btn-primary.react {
-    background: #0ea5e9;
+  .btn-primary.typescript {
+    background: #3178c6;
   }
 
-  .btn-primary.react:hover:not(:disabled) {
-    background: #0284c7;
+  .btn-primary.typescript:hover:not(:disabled) {
+    background: #265ba0;
   }
 
   .btn-primary:hover:not(:disabled) {
@@ -578,23 +571,14 @@
 
   .preview-wrapper {
     flex: 1;
-    background: #fff;
-    overflow: hidden;
-  }
-
-  :global([data-theme="dark"]) .preview-wrapper {
     background: #1e1e1e;
+    overflow: hidden;
   }
 
   .preview-wrapper iframe {
     width: 100%;
     height: 100%;
     border: none;
-  }
-
-  /* Invert preview colors in dark mode */
-  :global([data-theme="dark"]) .preview-wrapper iframe {
-    filter: invert(1) hue-rotate(180deg);
   }
 
   .preview-error, .preview-loading {

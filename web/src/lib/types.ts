@@ -1,6 +1,6 @@
 // Exercise types
 
-export type RuntimeType = 'python' | 'react' | 'sql';
+export type RuntimeType = 'python' | 'react' | 'sql' | 'typescript';
 
 export interface ExerciseMetadata {
   id: string;
@@ -93,4 +93,17 @@ export interface ReactExerciseConfig {
   title: string;
   instructions: string;
   dependencies?: Record<string, string>;
+}
+
+// TypeScript OOP exercise types
+export interface ParsedTypeScriptExercise {
+  title: string;
+  instructions: string;
+  starterCode: string;
+  testCode: string;
+}
+
+export interface TypeScriptExerciseConfig {
+  title: string;
+  instructions: string;
 }

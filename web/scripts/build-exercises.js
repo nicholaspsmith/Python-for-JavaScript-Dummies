@@ -30,6 +30,7 @@ function detectRuntime(folderName) {
   if (folderName.includes('code-master')) return 'python';
   if (folderName.includes('react')) return 'react';
   if (folderName.includes('sql')) return 'sql';
+  if (folderName.includes('typescript')) return 'typescript';
   // Legacy support for old folder names
   if (folderName.match(/^\d{2}-(easy|medium|hard)$/)) return 'python';
   return 'python'; // Default
@@ -156,6 +157,38 @@ async function extractReactDescription(exerciseJsonPath) {
   return '';
 }
 
+// TypeScript exercise folder pattern: NN_exercise_name (folder with exercise.json and App.ts)
+const TYPESCRIPT_FOLDER_PATTERN = /^(\d{2})_(.+)$/;
+
+async function getTypeScriptExerciseFolders(folder) {
+  const folderPath = join(ROOT_DIR, folder);
+  const entries = await readdir(folderPath, { withFileTypes: true });
+  const exerciseFolders = [];
+
+  for (const entry of entries) {
+    if (entry.isDirectory() && TYPESCRIPT_FOLDER_PATTERN.test(entry.name)) {
+      // Check if it has an exercise.json
+      const exerciseJsonPath = join(folderPath, entry.name, 'exercise.json');
+      if (existsSync(exerciseJsonPath)) {
+        exerciseFolders.push(entry.name);
+      }
+    }
+  }
+
+  return exerciseFolders.sort();
+}
+
+async function extractTypeScriptDescription(exerciseJsonPath) {
+  try {
+    const content = await readFile(exerciseJsonPath, 'utf-8');
+    const config = JSON.parse(content);
+    return config.title || '';
+  } catch (e) {
+    // Ignore errors
+  }
+  return '';
+}
+
 async function processPythonExercises(folder, folderNum, categoryName, categoryOutputDir) {
   const exercises = [];
   const files = await getPythonExerciseFiles(folder);
@@ -253,6 +286,39 @@ async function processReactExercises(folder, folderNum, categoryName, categoryOu
   return exercises;
 }
 
+async function processTypeScriptExercises(folder, folderNum, categoryName, categoryOutputDir) {
+  const exercises = [];
+  const exerciseFolders = await getTypeScriptExerciseFolders(folder);
+
+  for (const exerciseFolder of exerciseFolders) {
+    const fileNum = exerciseFolder.match(TYPESCRIPT_FOLDER_PATTERN)[1];
+    const exerciseId = `${parseInt(folderNum)}.${parseInt(fileNum)}`;
+    const exerciseName = parseExerciseName(exerciseFolder, TYPESCRIPT_FOLDER_PATTERN);
+    const sourcePath = join(ROOT_DIR, folder, exerciseFolder);
+    const destPath = join(categoryOutputDir, exerciseFolder);
+    const exerciseJsonPath = join(sourcePath, 'exercise.json');
+    const description = await extractTypeScriptDescription(exerciseJsonPath);
+
+    // Copy entire folder to static folder
+    await cp(sourcePath, destPath, { recursive: true });
+
+    exercises.push({
+      id: exerciseId,
+      name: exerciseName,
+      runtime: 'typescript',
+      category: categoryName,
+      categoryFolder: folder,
+      filename: exerciseFolder,
+      path: `exercises/${folder}/${exerciseFolder}`,
+      description
+    });
+
+    console.log(`  ${exerciseId} - [TypeScript] ${exerciseName}`);
+  }
+
+  return exercises;
+}
+
 async function main() {
   console.log('Building exercise manifest...\n');
 
@@ -297,6 +363,9 @@ async function main() {
         break;
       case 'react':
         folderExercises = await processReactExercises(folder, folderNum, categoryName, categoryOutputDir);
+        break;
+      case 'typescript':
+        folderExercises = await processTypeScriptExercises(folder, folderNum, categoryName, categoryOutputDir);
         break;
     }
 

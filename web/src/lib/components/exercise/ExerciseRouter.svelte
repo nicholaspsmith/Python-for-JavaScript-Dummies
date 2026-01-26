@@ -4,6 +4,7 @@
   import PythonExerciseView from './PythonExerciseView.svelte';
   import SqlExerciseView from './SqlExerciseView.svelte';
   import ReactExerciseView from './ReactExerciseView.svelte';
+  import TypeScriptExerciseView from './TypeScriptExerciseView.svelte';
 
   export let metadata: ExerciseMetadata | null = null;
   export let savedCode: string | undefined = undefined;
@@ -68,6 +69,17 @@
   />
 {:else if runtime === 'react'}
   <ReactExerciseView
+    {metadata}
+    {savedCode}
+    {instructionsCollapsed}
+    on:codeChange={handleCodeChange}
+    on:codeSave={handleCodeSave}
+    on:complete={handleComplete}
+    on:next={handleNext}
+    on:toggleInstructionsCollapsed={handleToggleInstructionsCollapsed}
+  />
+{:else if runtime === 'typescript'}
+  <TypeScriptExerciseView
     {metadata}
     {savedCode}
     {instructionsCollapsed}
