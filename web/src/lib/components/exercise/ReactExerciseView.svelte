@@ -20,6 +20,7 @@
   let previewError: string | null = null;
   let instructionsExpanded = false;
   let mounted = false;
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   $: currentCode = savedCode ?? starterCode;
 
@@ -30,6 +31,9 @@
   });
 
   onDestroy(() => {
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
     if (sandpackClient) {
       sandpackClient.destroy?.();
     }
@@ -117,21 +121,27 @@
   function handleCodeChange(event: CustomEvent<{ value: string }>) {
     dispatch('codeChange', { value: event.detail.value });
 
-    // Update Sandpack preview
-    if (sandpackClient) {
-      const rawFiles = createSandpackFiles(
-        { '/App.jsx': event.detail.value },
-        exerciseConfig?.dependencies
-      );
-
-      // Convert files to Sandpack format (with code property)
-      const files: Record<string, { code: string }> = {};
-      for (const [path, code] of Object.entries(rawFiles)) {
-        files[path] = { code };
-      }
-
-      sandpackClient.updateSandbox({ files });
+    // Debounce Sandpack preview update (500ms)
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
     }
+
+    debounceTimer = setTimeout(() => {
+      if (sandpackClient) {
+        const rawFiles = createSandpackFiles(
+          { '/App.jsx': event.detail.value },
+          exerciseConfig?.dependencies
+        );
+
+        // Convert files to Sandpack format (with code property)
+        const files: Record<string, { code: string }> = {};
+        for (const [path, code] of Object.entries(rawFiles)) {
+          files[path] = { code };
+        }
+
+        sandpackClient.updateSandbox({ files });
+      }
+    }, 500);
   }
 
   function handleCodeSave(event: CustomEvent<{ value: string }>) {
