@@ -23,6 +23,11 @@
   // Subscribe to theme changes
   let unsubscribeTheme: (() => void) | null = null;
 
+  // Track workers and blob URLs for cleanup
+  let monacoWorker: Worker | null = null;
+  let monacoWorkerBlobUrl: string | null = null;
+  let jsxWorker: Worker | null = null;
+
   function getMonacoTheme(currentTheme: string): string {
     return currentTheme === 'light' ? 'vs' : 'vs-dark';
   }
@@ -50,11 +55,21 @@
     // We only need syntax highlighting, not IntelliSense or diagnostics
     (window as any).MonacoEnvironment = {
       getWorker: function () {
+        // Clean up previous worker if exists
+        if (monacoWorker) {
+          monacoWorker.terminate();
+        }
+        if (monacoWorkerBlobUrl) {
+          URL.revokeObjectURL(monacoWorkerBlobUrl);
+        }
+
         // Return a minimal no-op worker to prevent errors
         const blob = new Blob([
           'self.onmessage = function() {}'
         ], { type: 'application/javascript' });
-        return new Worker(URL.createObjectURL(blob));
+        monacoWorkerBlobUrl = URL.createObjectURL(blob);
+        monacoWorker = new Worker(monacoWorkerBlobUrl);
+        return monacoWorker;
       }
     };
 
@@ -159,7 +174,9 @@
     try {
       const { MonacoJsxSyntaxHighlight, getWorker } = await import('monaco-jsx-syntax-highlight');
 
-      const monacoJsxSyntaxHighlight = new MonacoJsxSyntaxHighlight(getWorker(), monaco);
+      // Get the worker and store reference for cleanup
+      jsxWorker = getWorker();
+      const monacoJsxSyntaxHighlight = new MonacoJsxSyntaxHighlight(jsxWorker, monaco);
 
       const { highlighter, dispose } = monacoJsxSyntaxHighlight.highlighterBuilder({
         editor: editor
@@ -186,10 +203,28 @@
     isMounted = false;
     clearTimeout(saveTimeout);
     unsubscribeTheme?.();
+
+    // Clean up JSX highlighter and worker
     jsxHighlighter?.dispose?.();
+    if (jsxWorker) {
+      jsxWorker.terminate();
+      jsxWorker = null;
+    }
+
+    // Clean up Monaco editor
     const model = editor?.getModel();
     editor?.dispose();
     model?.dispose();
+
+    // Clean up Monaco worker and blob URL
+    if (monacoWorker) {
+      monacoWorker.terminate();
+      monacoWorker = null;
+    }
+    if (monacoWorkerBlobUrl) {
+      URL.revokeObjectURL(monacoWorkerBlobUrl);
+      monacoWorkerBlobUrl = null;
+    }
   });
 
   // Update editor value when prop changes

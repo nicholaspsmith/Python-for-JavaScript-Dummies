@@ -1,7 +1,7 @@
 <script lang="ts">
   import { sections, currentExerciseId } from '../stores/exercises';
   import { progress } from '../stores/progress';
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import type { RuntimeType } from '../types';
 
@@ -13,6 +13,7 @@
   let expandedSections: Set<RuntimeType> = new Set();
   let expandedCategories: Set<string> = new Set();
   let initialExpansionDone = false;
+  let initTimeout: ReturnType<typeof setTimeout> | null = null;
 
   // Section icons and colors
   const sectionStyles: Record<RuntimeType, { icon: string; color: string; bgColor: string }> = {
@@ -26,7 +27,7 @@
   // Use onMount to ensure localStorage has been read
   onMount(() => {
     // Small delay to ensure stores are hydrated from localStorage
-    setTimeout(() => {
+    initTimeout = setTimeout(() => {
       if (initialExpansionDone) return;
 
       const sectionList = $sections;
@@ -46,6 +47,13 @@
       }
       initialExpansionDone = true;
     }, 50);
+  });
+
+  onDestroy(() => {
+    if (initTimeout) {
+      clearTimeout(initTimeout);
+      initTimeout = null;
+    }
   });
 
   function toggleSection(runtime: RuntimeType) {

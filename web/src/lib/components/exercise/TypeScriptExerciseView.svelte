@@ -31,11 +31,21 @@
   });
 
   onDestroy(() => {
+    mounted = false;
+
     if (debounceTimer) {
       clearTimeout(debounceTimer);
+      debounceTimer = null;
     }
+
     if (sandpackClient) {
       sandpackClient.destroy?.();
+      sandpackClient = null;
+    }
+
+    // Clear iframe reference to help garbage collection
+    if (iframeElement) {
+      iframeElement.src = 'about:blank';
     }
   });
 
