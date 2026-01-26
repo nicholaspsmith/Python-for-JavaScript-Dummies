@@ -1,6 +1,6 @@
 {
-  "generated": "2026-01-26T20:11:43.842Z",
-  "total": 75,
+  "generated": "2026-01-26T23:48:37.454Z",
+  "total": 85,
   "exercises": [
     {
       "id": "1.1",
@@ -513,6 +513,46 @@
       "description": "Limit Results"
     },
     {
+      "id": "5.7",
+      "name": "Distinct",
+      "runtime": "sql",
+      "category": "Sql Easy",
+      "categoryFolder": "05-sql-easy",
+      "filename": "07_distinct.sql",
+      "path": "exercises/05-sql-easy/07_distinct.sql",
+      "description": "Select Distinct"
+    },
+    {
+      "id": "5.8",
+      "name": "In Operator",
+      "runtime": "sql",
+      "category": "Sql Easy",
+      "categoryFolder": "05-sql-easy",
+      "filename": "08_in_operator.sql",
+      "path": "exercises/05-sql-easy/08_in_operator.sql",
+      "description": "IN Operator"
+    },
+    {
+      "id": "5.9",
+      "name": "Between",
+      "runtime": "sql",
+      "category": "Sql Easy",
+      "categoryFolder": "05-sql-easy",
+      "filename": "09_between.sql",
+      "path": "exercises/05-sql-easy/09_between.sql",
+      "description": "BETWEEN Operator"
+    },
+    {
+      "id": "5.10",
+      "name": "Like",
+      "runtime": "sql",
+      "category": "Sql Easy",
+      "categoryFolder": "05-sql-easy",
+      "filename": "10_like.sql",
+      "path": "exercises/05-sql-easy/10_like.sql",
+      "description": "LIKE Pattern Matching"
+    },
+    {
       "id": "6.1",
       "name": "Inner Join",
       "runtime": "sql",
@@ -583,6 +623,46 @@
       "description": "Subquery in WHERE"
     },
     {
+      "id": "6.8",
+      "name": "Union",
+      "runtime": "sql",
+      "category": "Sql Medium",
+      "categoryFolder": "06-sql-medium",
+      "filename": "08_union.sql",
+      "path": "exercises/06-sql-medium/08_union.sql",
+      "description": "UNION and UNION ALL"
+    },
+    {
+      "id": "6.9",
+      "name": "Null Handling",
+      "runtime": "sql",
+      "category": "Sql Medium",
+      "categoryFolder": "06-sql-medium",
+      "filename": "09_null_handling.sql",
+      "path": "exercises/06-sql-medium/09_null_handling.sql",
+      "description": "NULL Handling"
+    },
+    {
+      "id": "6.10",
+      "name": "Case When",
+      "runtime": "sql",
+      "category": "Sql Medium",
+      "categoryFolder": "06-sql-medium",
+      "filename": "10_case_when.sql",
+      "path": "exercises/06-sql-medium/10_case_when.sql",
+      "description": "CASE WHEN"
+    },
+    {
+      "id": "6.11",
+      "name": "Exists",
+      "runtime": "sql",
+      "category": "Sql Medium",
+      "categoryFolder": "06-sql-medium",
+      "filename": "11_exists.sql",
+      "path": "exercises/06-sql-medium/11_exists.sql",
+      "description": "EXISTS Subquery"
+    },
+    {
       "id": "7.1",
       "name": "Correlated Subquery",
       "runtime": "sql",
@@ -631,6 +711,26 @@
       "filename": "05_window_function.sql",
       "path": "exercises/07-sql-hard/05_window_function.sql",
       "description": "Window Functions"
+    },
+    {
+      "id": "7.6",
+      "name": "Row Number",
+      "runtime": "sql",
+      "category": "Sql Hard",
+      "categoryFolder": "07-sql-hard",
+      "filename": "06_row_number.sql",
+      "path": "exercises/07-sql-hard/06_row_number.sql",
+      "description": "ROW_NUMBER Window Function"
+    },
+    {
+      "id": "7.7",
+      "name": "Dense Rank",
+      "runtime": "sql",
+      "category": "Sql Hard",
+      "categoryFolder": "07-sql-hard",
+      "filename": "07_dense_rank.sql",
+      "path": "exercises/07-sql-hard/07_dense_rank.sql",
+      "description": "DENSE_RANK Window Function"
     },
     {
       "id": "8.1",
