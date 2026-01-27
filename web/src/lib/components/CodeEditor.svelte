@@ -173,6 +173,7 @@
 
     for (const lang of languages) {
       monacoInstance.languages.registerCompletionItemProvider(lang, {
+        triggerCharacters: ['.', '"', "'", '`', '/', '@', '<', ' '],
         provideCompletionItems: (model, position) => {
           const word = model.getWordUntilPosition(position);
           const range = {
@@ -214,7 +215,7 @@
             });
           }
 
-          return { suggestions };
+          return { suggestions, incomplete: true };
         }
       });
     }
@@ -365,12 +366,17 @@
       return;
     }
 
-    // Disable TypeScript/JavaScript diagnostics (we only need syntax highlighting)
+    // Disable TypeScript/JavaScript diagnostics and suggestions (we use our own)
     const ts = (monaco.languages as any).typescript;
     if (ts?.javascriptDefaults) {
       ts.javascriptDefaults.setDiagnosticsOptions({
         noSemanticValidation: true,
         noSyntaxValidation: true
+      });
+      // Disable built-in completions by setting empty extra libs
+      ts.javascriptDefaults.setCompilerOptions({
+        noLib: true,
+        allowNonTsExtensions: true
       });
     }
     if (ts?.typescriptDefaults) {
@@ -378,6 +384,19 @@
         noSemanticValidation: true,
         noSyntaxValidation: true
       });
+      ts.typescriptDefaults.setCompilerOptions({
+        noLib: true,
+        allowNonTsExtensions: true
+      });
+    }
+
+    // Register completion providers BEFORE creating editor
+    if (language === 'python') {
+      registerPythonCompletions(monaco);
+    } else if (language === 'javascript' || language === 'typescript' || language === 'javascriptreact' || language === 'typescriptreact') {
+      registerTypeScriptCompletions(monaco);
+    } else if (language === 'sql') {
+      registerSqlCompletions(monaco);
     }
 
     // Get initial theme
@@ -424,15 +443,6 @@
       suggestOnTriggerCharacters: true,
       wordBasedSuggestions: 'currentDocument',
     });
-
-    // Register autocomplete providers based on language
-    if (language === 'python') {
-      registerPythonCompletions(monaco);
-    } else if (language === 'javascript' || language === 'typescript' || language === 'javascriptreact' || language === 'typescriptreact') {
-      registerTypeScriptCompletions(monaco);
-    } else if (language === 'sql') {
-      registerSqlCompletions(monaco);
-    }
 
     // Subscribe to theme changes and update editor theme
     unsubscribeTheme = theme.subscribe(t => {
