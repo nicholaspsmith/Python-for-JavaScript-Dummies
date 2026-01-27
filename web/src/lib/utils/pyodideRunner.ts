@@ -2,6 +2,94 @@ import { getPyodide } from '../stores/pyodide';
 import { parseTestOutput, allTestsPassed } from './exerciseParser';
 import type { TestResult } from '../types';
 
+interface ErrorInfo {
+  type: string;
+  message: string;
+  line?: number;
+  details?: string;
+}
+
+/**
+ * Parse a Python error message to extract useful information
+ */
+function parseErrorMessage(errorMessage: string): ErrorInfo {
+  const lines = errorMessage.split('\n');
+
+  // Try to find the error type and message
+  let errorType = 'Error';
+  let message = errorMessage;
+  let lineNum: number | undefined;
+  let details: string | undefined;
+
+  // Look for common Python errors
+  const errorPatterns = [
+    { pattern: /SyntaxError:\s*(.+)/, type: 'SyntaxError' },
+    { pattern: /IndentationError:\s*(.+)/, type: 'IndentationError' },
+    { pattern: /NameError:\s*(.+)/, type: 'NameError' },
+    { pattern: /TypeError:\s*(.+)/, type: 'TypeError' },
+    { pattern: /ValueError:\s*(.+)/, type: 'ValueError' },
+    { pattern: /AttributeError:\s*(.+)/, type: 'AttributeError' },
+    { pattern: /IndexError:\s*(.+)/, type: 'IndexError' },
+    { pattern: /KeyError:\s*(.+)/, type: 'KeyError' },
+    { pattern: /ZeroDivisionError:\s*(.+)/, type: 'ZeroDivisionError' },
+  ];
+
+  for (const line of lines) {
+    for (const { pattern, type } of errorPatterns) {
+      const match = line.match(pattern);
+      if (match) {
+        errorType = type;
+        message = match[1] || line;
+        break;
+      }
+    }
+  }
+
+  // Try to find line number - look for "line X" in the traceback
+  const lineMatch = errorMessage.match(/line (\d+)/);
+  if (lineMatch) {
+    lineNum = parseInt(lineMatch[1], 10);
+  }
+
+  // For syntax errors, try to extract the problematic code
+  // Look for the caret (^) indicator
+  const caretIndex = lines.findIndex(l => l.trim().startsWith('^'));
+  if (caretIndex > 0) {
+    details = lines[caretIndex - 1]?.trim();
+  }
+
+  // Create user-friendly messages for common errors
+  if (errorType === 'SyntaxError') {
+    if (message.includes('expected')) {
+      // Already descriptive
+    } else if (message.includes('invalid syntax')) {
+      message = 'Invalid syntax - check for missing colons, parentheses, or quotes';
+    } else if (message.includes('EOL while scanning string')) {
+      message = 'Unclosed string - missing closing quote';
+    } else if (message.includes('unexpected EOF')) {
+      message = 'Unexpected end of code - missing closing bracket or parenthesis';
+    }
+  } else if (errorType === 'IndentationError') {
+    if (message.includes('expected an indented block')) {
+      message = 'Expected an indented block after colon (:)';
+    } else if (message.includes('unexpected indent')) {
+      message = 'Unexpected indentation - check your spacing';
+    }
+  } else if (errorType === 'NameError') {
+    const nameMatch = message.match(/name '(\w+)' is not defined/);
+    if (nameMatch) {
+      message = `'${nameMatch[1]}' is not defined - check spelling or define it first`;
+    }
+  }
+
+  return {
+    type: errorType,
+    message,
+    line: lineNum,
+    details
+  };
+}
+
 /**
  * Run Python code with tests and capture output
  */
@@ -70,27 +158,8 @@ ${testCode}
 
     const errorMessage = error instanceof Error ? error.message : String(error);
 
-    // Try to extract useful error info
-    let cleanError = errorMessage;
-
-    // Parse Python traceback to find the actual error
-    const lines = errorMessage.split('\n');
-    const assertionLine = lines.find(l => l.includes('AssertionError'));
-    if (assertionLine) {
-      cleanError = assertionLine;
-    }
-
-    // Check for syntax errors
-    const syntaxLine = lines.find(l => l.includes('SyntaxError'));
-    if (syntaxLine) {
-      cleanError = syntaxLine;
-    }
-
-    // Check for name errors (undefined variables)
-    const nameLine = lines.find(l => l.includes('NameError'));
-    if (nameLine) {
-      cleanError = nameLine;
-    }
+    // Parse the error to extract useful information
+    const errorInfo = parseErrorMessage(errorMessage);
 
     const output = stdout + (stderr ? '\n' + stderr : '');
     const { passed, failed, failedDetails } = parseTestOutput(output);
@@ -98,9 +167,12 @@ ${testCode}
     return {
       success: false,
       output,
-      error: cleanError,
+      error: errorInfo.message,
+      errorType: errorInfo.type,
+      errorLine: errorInfo.line,
+      errorDetails: errorInfo.details,
       passedTests: passed,
-      failedTests: [...failed, cleanError],
+      failedTests: failed,
       failedTestDetails: failedDetails
     };
   } finally {

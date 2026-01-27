@@ -72,6 +72,14 @@
           <span>Great job! Keep up the streak!</span>
         </div>
       </div>
+    {:else if result.error && result.errorType}
+      <div class="status syntax-error">
+        <span class="icon">⚠️</span>
+        <div class="message">
+          <strong>{result.errorType}</strong>
+          <span>Your code has an error that prevented it from running</span>
+        </div>
+      </div>
     {:else}
       <div class="status error">
         <span class="icon">❌</span>
@@ -79,6 +87,24 @@
           <strong>{result.passedTests.length}/{result.passedTests.length + result.failedTests.length} tests passed</strong>
           <span>Fix the failing tests below</span>
         </div>
+      </div>
+    {/if}
+
+    {#if result.error && result.errorType}
+      <div class="error-box">
+        <div class="error-message">
+          <code>{result.error}</code>
+        </div>
+        {#if result.errorLine}
+          <div class="error-location">
+            Line {result.errorLine}
+          </div>
+        {/if}
+        {#if result.errorDetails}
+          <div class="error-code">
+            <code>{result.errorDetails}</code>
+          </div>
+        {/if}
       </div>
     {/if}
 
@@ -214,6 +240,49 @@
     color: #f87171;
   }
 
+  .status.syntax-error {
+    background: #422006;
+    color: #fbbf24;
+  }
+
+  .error-box {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: #1c1917;
+    border: 1px solid #422006;
+    border-left: 3px solid #f59e0b;
+    border-radius: 6px;
+  }
+
+  .error-message {
+    font-size: 0.875rem;
+    color: #fbbf24;
+  }
+
+  .error-message code {
+    font-family: 'JetBrains Mono', monospace;
+    background: none;
+  }
+
+  .error-location {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  .error-code {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-primary);
+    border-radius: 4px;
+  }
+
+  .error-code code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
   .status.idle {
     background: var(--bg-tertiary);
     color: var(--text-tertiary);
@@ -236,11 +305,6 @@
   .message span {
     font-size: 0.8125rem;
     opacity: 0.8;
-  }
-
-  .error-detail {
-    font-family: monospace;
-    font-size: 0.75rem !important;
   }
 
   .spinner {
