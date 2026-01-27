@@ -32,6 +32,95 @@
     return currentTheme === 'light' ? 'vs' : 'vs-dark';
   }
 
+  // Track if we've already registered the Python completion provider
+  let pythonCompletionsRegistered = false;
+
+  function registerPythonCompletions(monacoInstance: typeof Monaco) {
+    if (pythonCompletionsRegistered) return;
+    pythonCompletionsRegistered = true;
+
+    const pythonKeywords = [
+      'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await',
+      'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except',
+      'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is',
+      'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try',
+      'while', 'with', 'yield'
+    ];
+
+    const pythonBuiltins = [
+      'abs', 'all', 'any', 'bin', 'bool', 'bytes', 'callable', 'chr',
+      'dict', 'dir', 'divmod', 'enumerate', 'eval', 'filter', 'float',
+      'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash',
+      'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass',
+      'iter', 'len', 'list', 'locals', 'map', 'max', 'min', 'next',
+      'object', 'oct', 'open', 'ord', 'pow', 'print', 'range', 'repr',
+      'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'str',
+      'sum', 'super', 'tuple', 'type', 'vars', 'zip'
+    ];
+
+    const pythonSnippets = [
+      { label: 'def', insertText: 'def ${1:function_name}(${2:params}):\n    ${3:pass}', documentation: 'Define a function' },
+      { label: 'class', insertText: 'class ${1:ClassName}:\n    def __init__(self${2:, params}):\n        ${3:pass}', documentation: 'Define a class' },
+      { label: 'if', insertText: 'if ${1:condition}:\n    ${2:pass}', documentation: 'If statement' },
+      { label: 'for', insertText: 'for ${1:item} in ${2:iterable}:\n    ${3:pass}', documentation: 'For loop' },
+      { label: 'while', insertText: 'while ${1:condition}:\n    ${2:pass}', documentation: 'While loop' },
+      { label: 'try', insertText: 'try:\n    ${1:pass}\nexcept ${2:Exception} as ${3:e}:\n    ${4:pass}', documentation: 'Try/except block' },
+      { label: 'with', insertText: 'with ${1:expression} as ${2:variable}:\n    ${3:pass}', documentation: 'With statement' },
+      { label: 'lambda', insertText: 'lambda ${1:x}: ${2:x}', documentation: 'Lambda function' },
+      { label: 'list comprehension', insertText: '[${1:x} for ${2:x} in ${3:iterable}]', documentation: 'List comprehension' },
+      { label: 'dict comprehension', insertText: '{${1:k}: ${2:v} for ${3:k}, ${4:v} in ${5:iterable}}', documentation: 'Dictionary comprehension' },
+    ];
+
+    monacoInstance.languages.registerCompletionItemProvider('python', {
+      provideCompletionItems: (model, position) => {
+        const word = model.getWordUntilPosition(position);
+        const range = {
+          startLineNumber: position.lineNumber,
+          endLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endColumn: word.endColumn
+        };
+
+        const suggestions: Monaco.languages.CompletionItem[] = [];
+
+        // Add keywords
+        for (const keyword of pythonKeywords) {
+          suggestions.push({
+            label: keyword,
+            kind: monacoInstance.languages.CompletionItemKind.Keyword,
+            insertText: keyword,
+            range
+          });
+        }
+
+        // Add builtins
+        for (const builtin of pythonBuiltins) {
+          suggestions.push({
+            label: builtin,
+            kind: monacoInstance.languages.CompletionItemKind.Function,
+            insertText: builtin,
+            detail: 'Built-in function',
+            range
+          });
+        }
+
+        // Add snippets
+        for (const snippet of pythonSnippets) {
+          suggestions.push({
+            label: snippet.label,
+            kind: monacoInstance.languages.CompletionItemKind.Snippet,
+            insertText: snippet.insertText,
+            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            documentation: snippet.documentation,
+            range
+          });
+        }
+
+        return { suggestions };
+      }
+    });
+  }
+
   onMount(async () => {
     if (!browser) return;
 
@@ -136,7 +225,16 @@
       renderLineHighlight: 'line',
       cursorBlinking: 'smooth',
       smoothScrolling: true,
+      // Enable autocomplete
+      quickSuggestions: true,
+      suggestOnTriggerCharacters: true,
+      wordBasedSuggestions: 'currentDocument',
     });
+
+    // Register Python autocomplete provider
+    if (language === 'python') {
+      registerPythonCompletions(monaco);
+    }
 
     // Subscribe to theme changes and update editor theme
     unsubscribeTheme = theme.subscribe(t => {
