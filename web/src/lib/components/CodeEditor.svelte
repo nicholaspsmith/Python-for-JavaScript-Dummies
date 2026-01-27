@@ -60,19 +60,6 @@
       'sum', 'super', 'tuple', 'type', 'vars', 'zip'
     ];
 
-    const pythonSnippets = [
-      { label: 'def', insertText: 'def ${1:function_name}(${2:params}):\n    ${3:pass}', documentation: 'Define a function' },
-      { label: 'class', insertText: 'class ${1:ClassName}:\n    def __init__(self${2:, params}):\n        ${3:pass}', documentation: 'Define a class' },
-      { label: 'if', insertText: 'if ${1:condition}:\n    ${2:pass}', documentation: 'If statement' },
-      { label: 'for', insertText: 'for ${1:item} in ${2:iterable}:\n    ${3:pass}', documentation: 'For loop' },
-      { label: 'while', insertText: 'while ${1:condition}:\n    ${2:pass}', documentation: 'While loop' },
-      { label: 'try', insertText: 'try:\n    ${1:pass}\nexcept ${2:Exception} as ${3:e}:\n    ${4:pass}', documentation: 'Try/except block' },
-      { label: 'with', insertText: 'with ${1:expression} as ${2:variable}:\n    ${3:pass}', documentation: 'With statement' },
-      { label: 'lambda', insertText: 'lambda ${1:x}: ${2:x}', documentation: 'Lambda function' },
-      { label: 'list comprehension', insertText: '[${1:x} for ${2:x} in ${3:iterable}]', documentation: 'List comprehension' },
-      { label: 'dict comprehension', insertText: '{${1:k}: ${2:v} for ${3:k}, ${4:v} in ${5:iterable}}', documentation: 'Dictionary comprehension' },
-    ];
-
     monacoInstance.languages.registerCompletionItemProvider('python', {
       provideCompletionItems: (model, position) => {
         const word = model.getWordUntilPosition(position);
@@ -106,18 +93,6 @@
           });
         }
 
-        // Add snippets
-        for (const snippet of pythonSnippets) {
-          suggestions.push({
-            label: snippet.label,
-            kind: monacoInstance.languages.CompletionItemKind.Snippet,
-            insertText: snippet.insertText,
-            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: snippet.documentation,
-            range
-          });
-        }
-
         return { suggestions };
       }
     });
@@ -147,25 +122,16 @@
       'clearTimeout', 'clearInterval', 'fetch', 'Response', 'Request'
     ];
 
-    const tsSnippets = [
-      { label: 'function', insertText: 'function ${1:name}(${2:params}) {\n  ${3}\n}', documentation: 'Function declaration' },
-      { label: 'arrow function', insertText: 'const ${1:name} = (${2:params}) => {\n  ${3}\n};', documentation: 'Arrow function' },
-      { label: 'async function', insertText: 'async function ${1:name}(${2:params}) {\n  ${3}\n}', documentation: 'Async function' },
-      { label: 'class', insertText: 'class ${1:Name} {\n  constructor(${2:params}) {\n    ${3}\n  }\n}', documentation: 'Class declaration' },
-      { label: 'interface', insertText: 'interface ${1:Name} {\n  ${2:property}: ${3:type};\n}', documentation: 'Interface declaration' },
-      { label: 'type', insertText: 'type ${1:Name} = ${2:type};', documentation: 'Type alias' },
-      { label: 'if', insertText: 'if (${1:condition}) {\n  ${2}\n}', documentation: 'If statement' },
-      { label: 'for', insertText: 'for (let ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++) {\n  ${3}\n}', documentation: 'For loop' },
-      { label: 'for...of', insertText: 'for (const ${1:item} of ${2:iterable}) {\n  ${3}\n}', documentation: 'For...of loop' },
-      { label: 'forEach', insertText: '${1:array}.forEach((${2:item}) => {\n  ${3}\n});', documentation: 'forEach loop' },
-      { label: 'map', insertText: '${1:array}.map((${2:item}) => ${3});', documentation: 'Array map' },
-      { label: 'filter', insertText: '${1:array}.filter((${2:item}) => ${3});', documentation: 'Array filter' },
-      { label: 'reduce', insertText: '${1:array}.reduce((${2:acc}, ${3:item}) => {\n  ${4}\n}, ${5:initial});', documentation: 'Array reduce' },
-      { label: 'try/catch', insertText: 'try {\n  ${1}\n} catch (${2:error}) {\n  ${3}\n}', documentation: 'Try/catch block' },
-      { label: 'promise', insertText: 'new Promise((resolve, reject) => {\n  ${1}\n});', documentation: 'New Promise' },
-      { label: 'console.log', insertText: 'console.log(${1});', documentation: 'Console log' },
-      { label: 'useState', insertText: 'const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initial});', documentation: 'React useState hook' },
-      { label: 'useEffect', insertText: 'useEffect(() => {\n  ${1}\n}, [${2}]);', documentation: 'React useEffect hook' },
+    // Common method names for autocomplete
+    const commonMethods = [
+      'forEach', 'map', 'filter', 'reduce', 'find', 'findIndex', 'some', 'every',
+      'includes', 'indexOf', 'slice', 'splice', 'push', 'pop', 'shift', 'unshift',
+      'concat', 'join', 'split', 'replace', 'trim', 'toLowerCase', 'toUpperCase',
+      'toString', 'valueOf', 'keys', 'values', 'entries', 'hasOwnProperty',
+      'addEventListener', 'removeEventListener', 'querySelector', 'querySelectorAll',
+      'getElementById', 'getElementsByClassName', 'createElement', 'appendChild',
+      'useState', 'useEffect', 'useCallback', 'useMemo', 'useRef', 'useContext',
+      'useReducer', 'useLayoutEffect', 'useImperativeHandle', 'useDebugValue'
     ];
 
     // Register for both JavaScript and TypeScript
@@ -204,13 +170,11 @@
             });
           }
 
-          for (const snippet of tsSnippets) {
+          for (const method of commonMethods) {
             suggestions.push({
-              label: snippet.label,
-              kind: monacoInstance.languages.CompletionItemKind.Snippet,
-              insertText: snippet.insertText,
-              insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-              documentation: snippet.documentation,
+              label: method,
+              kind: monacoInstance.languages.CompletionItemKind.Method,
+              insertText: method,
               range
             });
           }
@@ -247,20 +211,6 @@
       'IFNULL', 'IIF', 'TYPEOF', 'PRINTF', 'RANDOM', 'GROUP_CONCAT'
     ];
 
-    const sqlSnippets = [
-      { label: 'SELECT', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nWHERE ${3:condition};', documentation: 'Basic SELECT query' },
-      { label: 'SELECT JOIN', insertText: 'SELECT ${1:columns}\nFROM ${2:table1}\nJOIN ${3:table2} ON ${4:condition}\nWHERE ${5:condition};', documentation: 'SELECT with JOIN' },
-      { label: 'INSERT', insertText: 'INSERT INTO ${1:table} (${2:columns})\nVALUES (${3:values});', documentation: 'INSERT statement' },
-      { label: 'UPDATE', insertText: 'UPDATE ${1:table}\nSET ${2:column} = ${3:value}\nWHERE ${4:condition};', documentation: 'UPDATE statement' },
-      { label: 'DELETE', insertText: 'DELETE FROM ${1:table}\nWHERE ${2:condition};', documentation: 'DELETE statement' },
-      { label: 'CREATE TABLE', insertText: 'CREATE TABLE ${1:table_name} (\n  ${2:id} INTEGER PRIMARY KEY,\n  ${3:column} ${4:TEXT}\n);', documentation: 'CREATE TABLE statement' },
-      { label: 'GROUP BY', insertText: 'SELECT ${1:column}, COUNT(*)\nFROM ${2:table}\nGROUP BY ${1:column};', documentation: 'GROUP BY query' },
-      { label: 'ORDER BY', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nORDER BY ${3:column} ${4|ASC,DESC|};', documentation: 'ORDER BY clause' },
-      { label: 'CASE', insertText: 'CASE\n  WHEN ${1:condition} THEN ${2:result}\n  ELSE ${3:default}\nEND', documentation: 'CASE expression' },
-      { label: 'CTE', insertText: 'WITH ${1:cte_name} AS (\n  ${2:query}\n)\nSELECT * FROM ${1:cte_name};', documentation: 'Common Table Expression' },
-      { label: 'subquery', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nWHERE ${3:column} IN (\n  SELECT ${4:column}\n  FROM ${5:table2}\n);', documentation: 'Subquery in WHERE' },
-    ];
-
     monacoInstance.languages.registerCompletionItemProvider('sql', {
       provideCompletionItems: (model, position) => {
         const word = model.getWordUntilPosition(position);
@@ -293,20 +243,8 @@
           suggestions.push({
             label: func,
             kind: monacoInstance.languages.CompletionItemKind.Function,
-            insertText: func + '(${1})',
-            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            insertText: func,
             detail: 'SQL function',
-            range
-          });
-        }
-
-        for (const snippet of sqlSnippets) {
-          suggestions.push({
-            label: snippet.label,
-            kind: monacoInstance.languages.CompletionItemKind.Snippet,
-            insertText: snippet.insertText,
-            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: snippet.documentation,
             range
           });
         }
