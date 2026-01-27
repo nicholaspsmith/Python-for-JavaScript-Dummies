@@ -19,11 +19,18 @@ export interface ExerciseManifest {
   exercises: ExerciseMetadata[];
 }
 
+export interface ExerciseHints {
+  hint1: string;  // 1-2 lines of starter code
+  hint2: string;  // Pseudocode
+  solution: string;  // Full solution
+}
+
 export interface ParsedExercise {
   instructions: string;
   codeTemplate: string;
   testCode: string;
   fullContent: string;
+  hints?: ExerciseHints;
 }
 
 export interface FailedTestDetail {
@@ -37,6 +44,9 @@ export interface TestResult {
   success: boolean;
   output: string;
   error?: string;
+  errorType?: string;
+  errorLine?: number;
+  errorDetails?: string;
   passedTests: string[];
   failedTests: string[];
   failedTestDetails?: FailedTestDetail[];

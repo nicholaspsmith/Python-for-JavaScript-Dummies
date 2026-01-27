@@ -4,6 +4,7 @@
   import CodeEditor from '../CodeEditor.svelte';
   import TestResults from '../TestResults.svelte';
   import { pyodideReady } from '../../stores/pyodide';
+  import { hintsEnabled } from '../../stores/hints';
   import { parseExercise } from '../../utils/exerciseParser';
   import { runTests, detectJsHabits } from '../../utils/pyodideRunner';
 
@@ -20,12 +21,15 @@
   let jsHabits: string[] = [];
   let instructionsExpanded = false;
   let mounted = false;
+  let hintLevel = 0; // 0 = no hints, 1 = starter code, 2 = pseudocode, 3 = solution
 
   onMount(() => {
     mounted = true;
   });
 
   $: currentCode = savedCode ?? currentExercise?.codeTemplate ?? '';
+  $: hasHints = !!currentExercise?.hints;
+  $: hintsRemaining = 3 - hintLevel;
 
   // Load exercise when metadata changes (only on client)
   $: if (mounted && metadata) {
@@ -41,6 +45,7 @@
       currentExercise = parseExercise(content);
       testResult = null;
       jsHabits = [];
+      hintLevel = 0; // Reset hints when loading new exercise
     } catch (error) {
       console.error('Failed to load Python exercise:', error);
     }
@@ -90,7 +95,31 @@
       codeEditor.reset(currentExercise.codeTemplate);
       dispatch('codeChange', { value: currentExercise.codeTemplate });
       dispatch('codeSave', { value: currentExercise.codeTemplate });
+      hintLevel = 0; // Reset hints when resetting code
     }
+  }
+
+  function handleHint() {
+    if (!currentExercise?.hints || !codeEditor || hintLevel >= 3) return;
+
+    const hints = currentExercise.hints;
+    hintLevel++;
+
+    let newCode: string;
+    if (hintLevel === 1) {
+      // Add 1-2 lines of starter code
+      newCode = hints.hint1;
+    } else if (hintLevel === 2) {
+      // Show pseudocode
+      newCode = hints.hint2;
+    } else {
+      // Show full solution
+      newCode = hints.solution;
+    }
+
+    codeEditor.reset(newCode);
+    dispatch('codeChange', { value: newCode });
+    dispatch('codeSave', { value: newCode });
   }
 
   function toggleInstructions() {
@@ -159,6 +188,16 @@
         <button class="btn btn-secondary" on:click={handleReset} disabled={!currentExercise}>
           Reset
         </button>
+        {#if $hintsEnabled && hasHints && hintsRemaining > 0}
+          <button
+            class="btn btn-hint"
+            on:click={handleHint}
+            disabled={!currentExercise}
+            title={hintLevel === 0 ? 'Get starter code' : hintLevel === 1 ? 'Get pseudocode' : 'Get solution'}
+          >
+            💡 Hint ({hintsRemaining})
+          </button>
+        {/if}
         {#if testResult?.success}
           <button class="btn btn-success" on:click={handleNext}>
             Next →
@@ -431,6 +470,15 @@
 
   .btn-success:hover {
     background: #16a34a;
+  }
+
+  .btn-hint {
+    background: #f59e0b;
+    color: #fff;
+  }
+
+  .btn-hint:hover:not(:disabled) {
+    background: #d97706;
   }
 
   .editor-wrapper {

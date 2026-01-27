@@ -1,9 +1,32 @@
-import type { ParsedExercise } from '../types';
+import type { ParsedExercise, ExerciseHints } from '../types';
+
+/**
+ * Extract hints from a Python exercise file
+ * Format: '''HINTS { JSON } HINTS'''
+ */
+function parseHints(content: string): ExerciseHints | undefined {
+  const hintsMatch = content.match(/'''HINTS\s*([\s\S]*?)\s*HINTS'''/);
+  if (!hintsMatch) return undefined;
+
+  try {
+    const hintsJson = hintsMatch[1].trim();
+    const hints = JSON.parse(hintsJson);
+    if (hints.hint1 && hints.hint2 && hints.solution) {
+      return hints as ExerciseHints;
+    }
+  } catch (e) {
+    console.warn('Failed to parse hints:', e);
+  }
+  return undefined;
+}
 
 /**
  * Parse a Python exercise file into its components
  */
 export function parseExercise(content: string): ParsedExercise {
+  // Extract hints first (before removing from content for template)
+  const hints = parseHints(content);
+
   // Extract docstring (instructions)
   const docstringMatch = content.match(/^("""[\s\S]*?""")/m);
   const instructions = docstringMatch
@@ -28,6 +51,8 @@ export function parseExercise(content: string): ParsedExercise {
     let beforeTest = afterDocstring.slice(0, afterDocstring.indexOf(testMarker));
     // Remove the tests separator comment
     beforeTest = beforeTest.replace(/^#\s*=+\s*TESTS\s*=+\s*$/gm, '');
+    // Remove the HINTS block from the template
+    beforeTest = beforeTest.replace(/'''HINTS[\s\S]*?HINTS'''\n?/g, '');
     codeTemplate = beforeTest.trim();
 
     // Test code (without the if __name__ line itself, just the body)
@@ -69,7 +94,8 @@ export function parseExercise(content: string): ParsedExercise {
     instructions,
     codeTemplate: cleanedTemplate,
     testCode,
-    fullContent: content
+    fullContent: content,
+    hints
   };
 }
 
