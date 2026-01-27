@@ -34,6 +34,15 @@ class ListNode:
         self.next = next
 
 
+'''HINTS
+{
+  "hint1": "def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:\\n    # Create a dummy node to simplify list building\\n    dummy = ListNode()\\n    current = dummy\\n    # Your code here: compare and link nodes\\n    ...",
+  "hint2": "def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:\\n    # 1. Create dummy node and current pointer\\n    # 2. While both list1 and list2 have nodes:\\n    #    - Compare list1.val and list2.val\\n    #    - Link current.next to the smaller node\\n    #    - Advance that list's pointer\\n    #    - Advance current pointer\\n    # 3. Link remaining nodes (one list may have leftovers)\\n    # 4. Return dummy.next (skip the dummy head)\\n    ...",
+  "solution": "def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:\\n    dummy = ListNode()\\n    current = dummy\\n    \\n    while list1 and list2:\\n        if list1.val <= list2.val:\\n            current.next = list1\\n            list1 = list1.next\\n        else:\\n            current.next = list2\\n            list2 = list2.next\\n        current = current.next\\n    \\n    # Append remaining nodes\\n    current.next = list1 if list1 else list2\\n    \\n    return dummy.next"
+}
+HINTS'''
+
+
 def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:
     """
     Merge two sorted linked lists and return the merged list's head.

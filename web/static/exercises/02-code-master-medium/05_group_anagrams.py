@@ -37,6 +37,15 @@ from typing import List
 from collections import defaultdict
 
 
+'''HINTS
+{
+  "hint1": "def group_anagrams(strs: List[str]) -> List[List[str]]\\n\\nUse the sorted string as a key in a dictionary. All anagrams will have the same sorted key.",
+  "hint2": "Pseudocode:\\n1) Create a defaultdict(list) to store groups\\n2) For each string in strs, sort it to get the key\\n3) Append the original string to groups[key]\\n4) Return list(groups.values())",
+  "solution": "def group_anagrams(strs: List[str]) -> List[List[str]]:\\n    groups = defaultdict(list)\\n    for s in strs:\\n        key = ''.join(sorted(s))\\n        groups[key].append(s)\\n    return list(groups.values())"
+}
+HINTS'''
+
+
 def group_anagrams(strs: List[str]) -> List[List[str]]:
     """
     Group anagrams together.

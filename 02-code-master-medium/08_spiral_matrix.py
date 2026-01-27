@@ -38,6 +38,15 @@ Approach:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def spiral_order(matrix: List[List[int]]) -> List[int]:\\n    # Track four boundaries: top, bottom, left, right\\n    # Initialize: top=0, bottom=len(matrix)-1, left=0, right=len(matrix[0])-1\\n    # Result list to collect elements",
+  "hint2": "# Pseudocode:\\n# 1) Handle empty matrix edge case\\n# 2) Initialize boundaries: top=0, bottom=rows-1, left=0, right=cols-1\\n# 3) While top <= bottom and left <= right:\\n#    a) Go RIGHT: iterate col from left to right, add matrix[top][col], then top += 1\\n#    b) Go DOWN: iterate row from top to bottom, add matrix[row][right], then right -= 1\\n#    c) Go LEFT (if top <= bottom): iterate col from right to left, add matrix[bottom][col], then bottom -= 1\\n#    d) Go UP (if left <= right): iterate row from bottom to top, add matrix[row][left], then left += 1\\n# 4) Return result list",
+  "solution": "def spiral_order(matrix: List[List[int]]) -> List[int]:\\n    if not matrix or not matrix[0]:\\n        return []\\n    \\n    result = []\\n    top, bottom = 0, len(matrix) - 1\\n    left, right = 0, len(matrix[0]) - 1\\n    \\n    while top <= bottom and left <= right:\\n        # Go right across top row\\n        for col in range(left, right + 1):\\n            result.append(matrix[top][col])\\n        top += 1\\n        \\n        # Go down right column\\n        for row in range(top, bottom + 1):\\n            result.append(matrix[row][right])\\n        right -= 1\\n        \\n        # Go left across bottom row (if rows remain)\\n        if top <= bottom:\\n            for col in range(right, left - 1, -1):\\n                result.append(matrix[bottom][col])\\n            bottom -= 1\\n        \\n        # Go up left column (if columns remain)\\n        if left <= right:\\n            for row in range(bottom, top - 1, -1):\\n                result.append(matrix[row][left])\\n            left += 1\\n    \\n    return result"
+}
+HINTS'''
+
+
 def spiral_order(matrix: List[List[int]]) -> List[int]:
     """
     Return matrix elements in spiral order.

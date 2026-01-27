@@ -32,6 +32,15 @@ Dict alternative: Store char -> index for O(1) jump to after duplicate.
 """
 
 
+'''HINTS
+{
+  "hint1": "def length_of_longest_substring(s: str) -> int:\\n    # Use sliding window with a set to track characters in current window\\n    # Two pointers: left (start) and right (expanding end)\\n    seen = set()\\n    left = 0\\n    max_len = 0",
+  "hint2": "def length_of_longest_substring(s: str) -> int:\\n    # Pseudocode:\\n    # 1. Initialize: seen = set(), left = 0, max_len = 0\\n    # 2. For each right pointer position:\\n    #    a. While s[right] is in seen:\\n    #       - Remove s[left] from seen\\n    #       - Increment left\\n    #    b. Add s[right] to seen\\n    #    c. Update max_len = max(max_len, right - left + 1)\\n    # 3. Return max_len",
+  "solution": "def length_of_longest_substring(s: str) -> int:\\n    seen = set()\\n    left = 0\\n    max_len = 0\\n    \\n    for right in range(len(s)):\\n        while s[right] in seen:\\n            seen.remove(s[left])\\n            left += 1\\n        seen.add(s[right])\\n        max_len = max(max_len, right - left + 1)\\n    \\n    return max_len"
+}
+HINTS'''
+
+
 def length_of_longest_substring(s: str) -> int:
     """
     Find length of longest substring without repeating characters.

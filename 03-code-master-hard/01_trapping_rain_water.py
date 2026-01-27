@@ -42,6 +42,15 @@ The key insight: water at any position = min(max_left, max_right) - height[i].
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def trap(height: List[int]) -> int:\\n    # Use two pointers from both ends\\n    # Track left_max and right_max as you iterate\\n    left, right = 0, len(height) - 1\\n    left_max, right_max = 0, 0",
+  "hint2": "# Pseudocode:\\n# 1. Initialize two pointers: left = 0, right = len(height) - 1\\n# 2. Track left_max and right_max, both starting at 0\\n# 3. While left < right:\\n#    - Update left_max = max(left_max, height[left])\\n#    - Update right_max = max(right_max, height[right])\\n#    - If left_max < right_max: water += left_max - height[left], move left++\\n#    - Else: water += right_max - height[right], move right--\\n# 4. Return total water",
+  "solution": "def trap(height: List[int]) -> int:\\n    if not height:\\n        return 0\\n    \\n    left, right = 0, len(height) - 1\\n    left_max, right_max = 0, 0\\n    water = 0\\n    \\n    while left < right:\\n        left_max = max(left_max, height[left])\\n        right_max = max(right_max, height[right])\\n        \\n        if left_max < right_max:\\n            water += left_max - height[left]\\n            left += 1\\n        else:\\n            water += right_max - height[right]\\n            right -= 1\\n    \\n    return water"
+}
+HINTS'''
+
+
 def trap(height: List[int]) -> int:
     """
     Calculate total trapped rain water.

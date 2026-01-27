@@ -40,6 +40,15 @@ Backtracking:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def exist(board: List[List[str]], word: str) -> bool:\\n    Use DFS/backtracking starting from each cell.\\n    Mark cells as visited (e.g., change to '#') to avoid reuse.\\n    Unmark after recursive call returns (backtrack).",
+  "hint2": "Pseudocode:\\n1. For each cell (r, c) in grid, try starting DFS from there\\n2. DFS(r, c, index):\\n   - If index == len(word): return True (found all chars)\\n   - If out of bounds or board[r][c] != word[index]: return False\\n   - Save char, mark visited (board[r][c] = '#')\\n   - Recurse in 4 directions (up, down, left, right) with index+1\\n   - Restore char (backtrack)\\n   - Return True if any direction succeeded",
+  "solution": "def exist(board: List[List[str]], word: str) -> bool:\\n    rows, cols = len(board), len(board[0])\\n    \\n    def dfs(r, c, i):\\n        if i == len(word):\\n            return True\\n        if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[i]:\\n            return False\\n        temp = board[r][c]\\n        board[r][c] = '#'\\n        found = (dfs(r+1, c, i+1) or dfs(r-1, c, i+1) or\\n                 dfs(r, c+1, i+1) or dfs(r, c-1, i+1))\\n        board[r][c] = temp\\n        return found\\n    \\n    for r in range(rows):\\n        for c in range(cols):\\n            if dfs(r, c, 0):\\n                return True\\n    return False"
+}
+HINTS'''
+
+
 def exist(board: List[List[str]], word: str) -> bool:
     """
     Return True if word can be found in the grid using adjacent cells.

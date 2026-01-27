@@ -25,6 +25,14 @@ The optimal solution uses a hash map (dict) for O(n) time complexity.
 
 from typing import List
 
+'''HINTS
+{
+  "hint1": "from typing import List\n\n\ndef two_sum(nums: List[int], target: int) -> List[int]:\n    seen = {}  # Store number -> index mapping\n    ...",
+  "hint2": "from typing import List\n\n\ndef two_sum(nums: List[int], target: int) -> List[int]:\n    # 1. Create empty dict to store seen numbers\n    # 2. Loop through nums with enumerate(nums)\n    # 3. Calculate complement = target - num\n    # 4. If complement in seen dict, return [seen[complement], i]\n    # 5. Otherwise, store seen[num] = i\n    ...",
+  "solution": "from typing import List\n\n\ndef two_sum(nums: List[int], target: int) -> List[int]:\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []"
+}
+HINTS'''
+
 
 def two_sum(nums: List[int], target: int) -> List[int]:
     """

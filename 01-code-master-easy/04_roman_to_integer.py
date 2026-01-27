@@ -27,6 +27,13 @@ JS to Python Tips:
 Key insight: Scan left to right. If a smaller value precedes a larger one, subtract it.
 """
 
+'''HINTS
+{
+  "hint1": "def roman_to_int(s: str) -> int:\\n    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\\n    # Your code here\\n    ...",
+  "hint2": "def roman_to_int(s: str) -> int:\\n    # 1. Create a dict mapping Roman chars to integer values\\n    # 2. Initialize total to 0\\n    # 3. Loop through each index in the string\\n    # 4. If current value < next value, subtract current from total\\n    # 5. Otherwise, add current value to total\\n    # 6. Return total\\n    ...",
+  "solution": "def roman_to_int(s: str) -> int:\\n    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\\n    total = 0\\n    for i in range(len(s)):\\n        if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:\\n            total -= values[s[i]]\\n        else:\\n            total += values[s[i]]\\n    return total"
+}
+HINTS'''
 
 def roman_to_int(s: str) -> int:
     """

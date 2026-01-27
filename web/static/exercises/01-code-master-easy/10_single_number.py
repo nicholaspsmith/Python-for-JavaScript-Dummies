@@ -35,6 +35,15 @@ The XOR trick is elegant:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def single_number(nums: List[int]) -> int:\\n\\nUse the XOR operator (^) which has the property that a ^ a = 0 and a ^ 0 = a. When you XOR all numbers together, duplicates cancel out.",
+  "hint2": "1. Initialize result = 0\\n2. Loop through each number in nums\\n3. XOR the current number with result: result ^= num\\n4. After all numbers are processed, result contains the single number (duplicates canceled out)",
+  "solution": "def single_number(nums: List[int]) -> int:\\n    result = 0\\n    for num in nums:\\n        result ^= num\\n    return result\\n\\n# Alternative using reduce:\\n# from functools import reduce\\n# def single_number(nums: List[int]) -> int:\\n#     return reduce(lambda a, b: a ^ b, nums)"
+}
+HINTS'''
+
+
 def single_number(nums: List[int]) -> int:
     """
     Find the number that appears only once (all others appear twice).

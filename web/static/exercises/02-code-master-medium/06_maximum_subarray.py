@@ -36,6 +36,15 @@ This is a classic DP problem with O(n) time, O(1) space.
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def max_subarray(nums: List[int]) -> int:\\n    # Track current_sum (running sum of current subarray)\\n    # Track max_sum (best sum seen so far)\\n    ...",
+  "hint2": "# Pseudocode:\\n# 1. Initialize max_sum = nums[0], current_sum = 0\\n# 2. For each num in nums:\\n#    current_sum = max(num, current_sum + num)  # extend or start fresh\\n#    max_sum = max(max_sum, current_sum)  # update best\\n# 3. Return max_sum",
+  "solution": "def max_subarray(nums: List[int]) -> int:\\n    max_sum = nums[0]\\n    current_sum = 0\\n    for num in nums:\\n        current_sum = max(num, current_sum + num)\\n        max_sum = max(max_sum, current_sum)\\n    return max_sum"
+}
+HINTS'''
+
+
 def max_subarray(nums: List[int]) -> int:
     """
     Find the maximum sum of any contiguous subarray.

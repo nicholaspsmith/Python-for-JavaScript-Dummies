@@ -32,6 +32,15 @@ List comprehension is the Pythonic way to filter and transform:
 """
 
 
+'''HINTS
+{
+  "hint1": "def is_palindrome(s: str) -> bool:\\n    # Filter only alphanumeric characters and convert to lowercase\\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())",
+  "hint2": "# Pseudocode:\\n# 1. Filter string to keep only alphanumeric chars using isalnum()\\n# 2. Convert all characters to lowercase using lower()\\n# 3. Compare the cleaned string with its reverse using [::-1]\\n# 4. Return True if they match, False otherwise",
+  "solution": "def is_palindrome(s: str) -> bool:\\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\\n    return cleaned == cleaned[::-1]"
+}
+HINTS'''
+
+
 def is_palindrome(s: str) -> bool:
     """
     Return True if s is a valid palindrome (ignoring case and non-alphanumeric chars).

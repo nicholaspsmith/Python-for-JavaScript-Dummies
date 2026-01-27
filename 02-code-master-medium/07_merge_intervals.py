@@ -34,6 +34,15 @@ Approach:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def merge(intervals: List[List[int]]) -> List[List[int]]:\\n    intervals.sort(key=lambda x: x[0])\\n    result = [intervals[0]]",
+  "hint2": "1) Sort intervals by start: intervals.sort(key=lambda x: x[0])\\n2) Initialize result with first interval: result = [intervals[0]]\\n3) For each interval in intervals[1:]:\\n   - If current start <= result[-1][1], merge: result[-1][1] = max(result[-1][1], current end)\\n   - Else append current interval to result\\n4) Return result",
+  "solution": "def merge(intervals: List[List[int]]) -> List[List[int]]:\\n    if not intervals:\\n        return []\\n    intervals.sort(key=lambda x: x[0])\\n    result = [intervals[0]]\\n    for start, end in intervals[1:]:\\n        if start <= result[-1][1]:\\n            result[-1][1] = max(result[-1][1], end)\\n        else:\\n            result.append([start, end])\\n    return result"
+}
+HINTS'''
+
+
 def merge(intervals: List[List[int]]) -> List[List[int]]:
     """
     Merge overlapping intervals.

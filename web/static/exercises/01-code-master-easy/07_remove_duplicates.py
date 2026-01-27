@@ -33,6 +33,15 @@ Use a "write pointer" that only advances when you find a new unique value.
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def remove_duplicates(nums: List[int]) -> int:\\n    if not nums:\\n        return 0\\n    write = 0  # write pointer starts at 0",
+  "hint2": "# Pseudocode:\\n# 1. Handle empty array - return 0\\n# 2. Initialize write pointer to 0\\n# 3. Loop through array with read pointer from 1 to len(nums)\\n# 4. If nums[read] != nums[write], increment write and copy value\\n# 5. Return write + 1 (length of unique elements)",
+  "solution": "def remove_duplicates(nums: List[int]) -> int:\\n    if not nums:\\n        return 0\\n    write = 0\\n    for read in range(1, len(nums)):\\n        if nums[read] != nums[write]:\\n            write += 1\\n            nums[write] = nums[read]\\n    return write + 1"
+}
+HINTS'''
+
+
 def remove_duplicates(nums: List[int]) -> int:
     """
     Remove duplicates in-place and return the new length.

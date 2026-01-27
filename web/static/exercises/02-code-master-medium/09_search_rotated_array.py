@@ -40,6 +40,15 @@ Key insight: In a rotated sorted array, at least one half is always properly sor
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def search(nums: List[int], target: int) -> int:\\n    # Use binary search with left, right, mid pointers\\n    left, right = 0, len(nums) - 1\\n    while left <= right:\\n        mid = (left + right) // 2\\n        # Your logic here\\n    return -1",
+  "hint2": "Pseudocode:\\n1) Initialize left = 0, right = len(nums) - 1\\n2) While left <= right:\\n   a) Calculate mid = (left + right) // 2\\n   b) If nums[mid] == target, return mid\\n   c) Check if left half is sorted: nums[left] <= nums[mid]\\n      - If target is in sorted left half (nums[left] <= target < nums[mid]), search left: right = mid - 1\\n      - Else search right: left = mid + 1\\n   d) Else right half is sorted:\\n      - If target is in sorted right half (nums[mid] < target <= nums[right]), search right: left = mid + 1\\n      - Else search left: right = mid - 1\\n3) Return -1 if not found",
+  "solution": "def search(nums: List[int], target: int) -> int:\\n    left, right = 0, len(nums) - 1\\n    \\n    while left <= right:\\n        mid = (left + right) // 2\\n        \\n        if nums[mid] == target:\\n            return mid\\n        \\n        # Check if left half is sorted\\n        if nums[left] <= nums[mid]:\\n            # Target is in the sorted left half\\n            if nums[left] <= target < nums[mid]:\\n                right = mid - 1\\n            else:\\n                left = mid + 1\\n        else:\\n            # Right half is sorted\\n            # Target is in the sorted right half\\n            if nums[mid] < target <= nums[right]:\\n                left = mid + 1\\n            else:\\n                right = mid - 1\\n    \\n    return -1"
+}
+HINTS'''
+
+
 def search(nums: List[int], target: int) -> int:
     """
     Search for target in rotated sorted array. Return index or -1.

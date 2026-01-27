@@ -29,6 +29,13 @@ JS to Python Tips:
 This is a classic stack problem - push opening brackets, pop and match closing ones.
 """
 
+'''HINTS
+{
+  "hint1": "def is_valid(s: str) -> bool:\\n    stack = []\\n    mapping = {')': '(', ']': '[', '}': '{'}\\n    # Your code here\\n    ...",
+  "hint2": "def is_valid(s: str) -> bool:\\n    # 1. Create empty stack and mapping dict (closing -> opening)\\n    # 2. For each char in s:\\n    #    3. If char is opening bracket, push to stack\\n    #    4. If char is closing bracket:\\n    #       - If stack empty or top doesn't match, return False\\n    #       - Otherwise pop from stack\\n    # 5. Return True if stack is empty, False otherwise\\n    ...",
+  "solution": "def is_valid(s: str) -> bool:\\n    stack = []\\n    mapping = {')': '(', ']': '[', '}': '{'}\\n    \\n    for char in s:\\n        if char in mapping:\\n            # Closing bracket\\n            if not stack or stack[-1] != mapping[char]:\\n                return False\\n            stack.pop()\\n        else:\\n            # Opening bracket\\n            stack.append(char)\\n    \\n    return len(stack) == 0"
+}
+HINTS'''
 
 def is_valid(s: str) -> bool:
     """

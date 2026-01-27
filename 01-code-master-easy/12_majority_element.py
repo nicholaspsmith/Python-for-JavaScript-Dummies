@@ -33,6 +33,15 @@ Boyer-Moore Algorithm:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def majority_element(nums: List[int]) -> int:\\n    # Use Boyer-Moore voting algorithm\\n    # Track a candidate and a count variable",
+  "hint2": "def majority_element(nums: List[int]) -> int:\\n    # 1) Initialize candidate = None, count = 0\\n    # 2) For each num in nums:\\n    #    - If count == 0, set candidate = num\\n    #    - If num == candidate, increment count\\n    #    - Else decrement count\\n    # 3) Return candidate",
+  "solution": "def majority_element(nums: List[int]) -> int:\\n    candidate = None\\n    count = 0\\n    for num in nums:\\n        if count == 0:\\n            candidate = num\\n        count += 1 if num == candidate else -1\\n    return candidate"
+}
+HINTS'''
+
+
 def majority_element(nums: List[int]) -> int:
     """
     Find the element that appears more than n/2 times.

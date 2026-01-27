@@ -34,6 +34,15 @@ O(n) time, O(1) space with two pointers.
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def max_area(height: List[int]) -> int:\\n    # Use two pointers starting from both ends of the array\\n    # left = 0, right = len(height) - 1",
+  "hint2": "# Pseudocode:\\n# 1. Initialize left = 0, right = len(height) - 1, max_area = 0\\n# 2. While left < right:\\n#    a. Calculate area = min(height[left], height[right]) * (right - left)\\n#    b. Update max_area if current area is larger\\n#    c. Move the pointer with the smaller height inward\\n# 3. Return max_area",
+  "solution": "def max_area(height: List[int]) -> int:\\n    left, right = 0, len(height) - 1\\n    max_area = 0\\n    \\n    while left < right:\\n        width = right - left\\n        h = min(height[left], height[right])\\n        area = width * h\\n        max_area = max(max_area, area)\\n        \\n        if height[left] < height[right]:\\n            left += 1\\n        else:\\n            right -= 1\\n    \\n    return max_area"
+}
+HINTS'''
+
+
 def max_area(height: List[int]) -> int:
     """
     Find the maximum water container area.

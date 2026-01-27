@@ -35,6 +35,15 @@ Dynamic Programming approach:
 """
 
 
+'''HINTS
+{
+  "hint1": "def climb_stairs(n: int) -> int:\\n    # This is the Fibonacci pattern!\\n    # ways(n) = ways(n-1) + ways(n-2)\\n    # Initialize: prev = 1 (ways to climb 1 stair), curr = 2 (ways to climb 2 stairs)",
+  "hint2": "# Pseudocode:\\n# 1. Handle base cases: if n == 1, return 1; if n == 2, return 2\\n# 2. Initialize prev = 1, curr = 2\\n# 3. Loop from 3 to n (inclusive):\\n#    - Update using Fibonacci: prev, curr = curr, prev + curr\\n# 4. Return curr",
+  "solution": "def climb_stairs(n: int) -> int:\\n    if n == 1:\\n        return 1\\n    if n == 2:\\n        return 2\\n    prev, curr = 1, 2\\n    for _ in range(3, n + 1):\\n        prev, curr = curr, prev + curr\\n    return curr"
+}
+HINTS'''
+
+
 def climb_stairs(n: int) -> int:
     """
     Return the number of distinct ways to climb n stairs.

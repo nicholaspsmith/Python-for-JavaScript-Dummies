@@ -49,6 +49,15 @@ class ListNode:
         self.next = next
 
 
+'''HINTS
+{
+  "hint1": "def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:\\n    # Use heapq for min heap\\n    # Push tuples of (value, unique_index, node) to handle comparison\\n    # The unique_index serves as a tiebreaker when values are equal",
+  "hint2": "# Pseudocode:\\n# 1. Create empty heap and dummy head for result\\n# 2. Push (node.val, index, node) for first node of each non-empty list\\n# 3. While heap not empty:\\n#    - Pop smallest (val, idx, node)\\n#    - Add node to result list\\n#    - If node.next exists, push (node.next.val, idx, node.next) to heap\\n# 4. Return dummy.next",
+  "solution": "def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:\\n    heap = []\\n    for i, node in enumerate(lists):\\n        if node:\\n            heapq.heappush(heap, (node.val, i, node))\\n    \\n    dummy = ListNode(0)\\n    current = dummy\\n    \\n    while heap:\\n        val, idx, node = heapq.heappop(heap)\\n        current.next = node\\n        current = current.next\\n        if node.next:\\n            heapq.heappush(heap, (node.next.val, idx, node.next))\\n    \\n    return dummy.next"
+}
+HINTS'''
+
+
 def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     """
     Merge k sorted linked lists into one sorted list.

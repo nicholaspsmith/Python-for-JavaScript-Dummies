@@ -31,6 +31,15 @@ Multiple approaches work:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def longest_common_prefix(strs: List[str]) -> str:\\n    # Handle empty list edge case\\n    if not strs:\\n        return ''\\n    # Start with first string as prefix\\n    prefix = strs[0]\\n    # Your code here: shrink prefix for each string\\n    ...",
+  "hint2": "# Pseudocode:\\n# 1) Handle empty list - return ''\\n# 2) Start with first string as the prefix\\n# 3) For each string in the list:\\n#    - While the string doesn't start with prefix:\\n#      - Remove last character from prefix\\n#      - If prefix is empty, return ''\\n# 4) Return the prefix",
+  "solution": "def longest_common_prefix(strs: List[str]) -> str:\\n    if not strs:\\n        return ''\\n    prefix = strs[0]\\n    for s in strs[1:]:\\n        while not s.startswith(prefix):\\n            prefix = prefix[:-1]\\n            if not prefix:\\n                return ''\\n    return prefix"
+}
+HINTS'''
+
+
 def longest_common_prefix(strs: List[str]) -> str:
     """
     Find the longest common prefix among all strings.

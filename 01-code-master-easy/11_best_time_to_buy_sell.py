@@ -32,6 +32,15 @@ One-pass solution:
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def max_profit(prices: List[int]) -> int:\\n    # Track the minimum price seen so far\\n    # Track the maximum profit we can achieve\\n    # One pass through the array is sufficient",
+  "hint2": "# Pseudocode:\\n# 1. Handle edge cases: empty list or single element returns 0\\n# 2. Initialize min_price = prices[0], max_profit = 0\\n# 3. For each price in prices:\\n#    - Update min_price = min(min_price, price)\\n#    - Update max_profit = max(max_profit, price - min_price)\\n# 4. Return max_profit",
+  "solution": "def max_profit(prices: List[int]) -> int:\\n    if len(prices) < 2:\\n        return 0\\n    \\n    min_price = prices[0]\\n    max_profit = 0\\n    \\n    for price in prices:\\n        min_price = min(min_price, price)\\n        max_profit = max(max_profit, price - min_price)\\n    \\n    return max_profit"
+}
+HINTS'''
+
+
 def max_profit(prices: List[int]) -> int:
     """
     Find the maximum profit from buying and selling once.

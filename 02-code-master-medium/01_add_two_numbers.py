@@ -39,6 +39,15 @@ class ListNode:
         self.next = next
 
 
+'''HINTS
+{
+  "hint1": "def add_two_numbers(l1: ListNode, l2: ListNode) -> ListNode:\\n    dummy = ListNode(0)\\n    current = dummy\\n    carry = 0",
+  "hint2": "1) Create dummy node and current pointer, set carry=0\\n2) While l1 or l2 or carry:\\n   - Get val1 = l1.val if l1 else 0\\n   - Get val2 = l2.val if l2 else 0\\n   - Calculate total = val1 + val2 + carry\\n   - Create new node with total % 10\\n   - Update carry = total // 10\\n   - Move pointers forward\\n3) Return dummy.next",
+  "solution": "def add_two_numbers(l1: ListNode, l2: ListNode) -> ListNode:\\n    dummy = ListNode(0)\\n    current = dummy\\n    carry = 0\\n\\n    while l1 or l2 or carry:\\n        val1 = l1.val if l1 else 0\\n        val2 = l2.val if l2 else 0\\n        total = val1 + val2 + carry\\n\\n        carry, digit = divmod(total, 10)\\n        current.next = ListNode(digit)\\n        current = current.next\\n\\n        if l1:\\n            l1 = l1.next\\n        if l2:\\n            l2 = l2.next\\n\\n    return dummy.next"
+}
+HINTS'''
+
+
 def add_two_numbers(l1: ListNode, l2: ListNode) -> ListNode:
     """
     Add two numbers represented as reversed linked lists.

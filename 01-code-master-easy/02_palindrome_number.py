@@ -27,6 +27,14 @@ JS to Python Tips:
 Challenge: Can you solve it without converting to a string?
 """
 
+'''HINTS
+{
+  "hint1": "def is_palindrome(x: int) -> bool:\\n    # Convert number to string and use slicing to reverse\\n    s = str(x)\\n    # Use [::-1] to reverse the string\\n    ...",
+  "hint2": "def is_palindrome(x: int) -> bool:\\n    # Step 1: Handle negative numbers (they can't be palindromes)\\n    # if x < 0: return False\\n    \\n    # Step 2: Convert integer to string\\n    # s = str(x)\\n    \\n    # Step 3: Compare string with its reverse using [::-1]\\n    # return s == s[::-1]\\n    ...",
+  "solution": "def is_palindrome(x: int) -> bool:\\n    if x < 0:\\n        return False\\n    return str(x) == str(x)[::-1]"
+}
+HINTS'''
+
 
 def is_palindrome(x: int) -> bool:
     """

@@ -36,6 +36,15 @@ Approach (O(n^2)):
 from typing import List
 
 
+'''HINTS
+{
+  "hint1": "def three_sum(nums: List[int]) -> List[List[int]]:\\n    # Sort the array first: nums.sort()\\n    # Use two pointers for the inner loop: left = i + 1, right = len(nums) - 1",
+  "hint2": "# Pseudocode:\\n# 1) Sort the array: nums.sort()\\n# 2) For each index i from 0 to len(nums)-3:\\n#    - Skip if nums[i] == nums[i-1] (avoid duplicates)\\n#    - Set left = i + 1, right = len(nums) - 1\\n#    - While left < right:\\n#      - Calculate total = nums[i] + nums[left] + nums[right]\\n#      - If total < 0: move left pointer right (left += 1)\\n#      - If total > 0: move right pointer left (right -= 1)\\n#      - If total == 0: add triplet, skip duplicates, move both pointers",
+  "solution": "def three_sum(nums: List[int]) -> List[List[int]]:\\n    result = []\\n    nums.sort()\\n    \\n    for i in range(len(nums) - 2):\\n        # Skip duplicates for i\\n        if i > 0 and nums[i] == nums[i - 1]:\\n            continue\\n        \\n        left, right = i + 1, len(nums) - 1\\n        \\n        while left < right:\\n            total = nums[i] + nums[left] + nums[right]\\n            \\n            if total < 0:\\n                left += 1\\n            elif total > 0:\\n                right -= 1\\n            else:\\n                result.append([nums[i], nums[left], nums[right]])\\n                # Skip duplicates for left\\n                while left < right and nums[left] == nums[left + 1]:\\n                    left += 1\\n                # Skip duplicates for right\\n                while left < right and nums[right] == nums[right - 1]:\\n                    right -= 1\\n                left += 1\\n                right -= 1\\n    \\n    return result"
+}
+HINTS'''
+
+
 def three_sum(nums: List[int]) -> List[List[int]]:
     """
     Find all unique triplets that sum to zero.

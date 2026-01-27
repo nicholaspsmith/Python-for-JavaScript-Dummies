@@ -45,6 +45,15 @@ from typing import List
 from collections import deque
 
 
+'''HINTS
+{
+  "hint1": "def max_sliding_window(nums: List[int], k: int) -> List[int]:\\n    Use collections.deque to store indices (not values).\\n    Keep the deque monotonically decreasing - front always has index of max.",
+  "hint2": "Pseudocode:\\n1) Create deque for indices, result list\\n2) For i in range(len(nums)):\\n   - While deque front index is outside window (i - k), popleft()\\n   - While deque not empty and nums[deque[-1]] < nums[i], pop()\\n   - Append i to deque\\n   - If i >= k - 1, append nums[deque[0]] to result\\n3) Return result",
+  "solution": "def max_sliding_window(nums: List[int], k: int) -> List[int]:\\n    dq = deque()  # stores indices\\n    result = []\\n    for i in range(len(nums)):\\n        # Remove indices outside window\\n        while dq and dq[0] <= i - k:\\n            dq.popleft()\\n        # Remove smaller elements from back\\n        while dq and nums[dq[-1]] < nums[i]:\\n            dq.pop()\\n        dq.append(i)\\n        # Add max to result when window is full\\n        if i >= k - 1:\\n            result.append(nums[dq[0]])\\n    return result"
+}
+HINTS'''
+
+
 def max_sliding_window(nums: List[int], k: int) -> List[int]:
     """
     Return the maximum in each sliding window of size k.
