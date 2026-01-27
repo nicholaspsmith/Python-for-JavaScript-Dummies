@@ -103,20 +103,27 @@
     if (!currentExercise?.hints || !codeEditor || hintLevel >= 3) return;
 
     const hints = currentExercise.hints;
+    const currentCode = codeEditor.getValue();
     hintLevel++;
 
-    let newCode: string;
+    let hintText: string;
+    let hintLabel: string;
+
     if (hintLevel === 1) {
-      // Add 1-2 lines of starter code
-      newCode = hints.hint1;
+      hintLabel = 'HINT 1 - Starter code';
+      hintText = hints.hint1;
     } else if (hintLevel === 2) {
-      // Show pseudocode
-      newCode = hints.hint2;
+      hintLabel = 'HINT 2 - Pseudocode';
+      hintText = hints.hint2;
     } else {
-      // Show full solution
-      newCode = hints.solution;
+      hintLabel = 'SOLUTION';
+      hintText = hints.solution;
     }
 
+    // Format hint as a comment block appended to user's code
+    const formattedHint = `\n\n# === ${hintLabel} ===\n# ${hintText.split('\n').join('\n# ')}\n# === END ${hintLabel} ===`;
+
+    const newCode = currentCode + formattedHint;
     codeEditor.reset(newCode);
     dispatch('codeChange', { value: newCode });
     dispatch('codeSave', { value: newCode });
