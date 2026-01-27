@@ -32,3 +32,10 @@ temp_files/
 # CLI progress tracking
 .progress.json
 .claude/practice-progress.json
+
+# MCP tool cache (lance-context)
+.lance-context.json
+.lance-context/
+
+# Bun lock file (project uses npm)
+web/bun.lock
