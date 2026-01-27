@@ -5,13 +5,11 @@
 	import { theme } from '$lib/stores/theme';
 	import { registerPyodideCleanup } from '$lib/stores/pyodide';
 	import { cancelPendingSync } from '$lib/stores/progress';
-	import { initHints } from '$lib/stores/hints';
 
 	let { children } = $props();
 
 	onMount(() => {
 		theme.init();
-		initHints();
 
 		// Register cleanup handlers for page unload
 		if (browser) {
