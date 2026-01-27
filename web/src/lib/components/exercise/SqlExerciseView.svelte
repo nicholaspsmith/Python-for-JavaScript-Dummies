@@ -5,6 +5,7 @@
   import { sqljsReady, initSqlJs } from '../../stores/sqljs';
   import { parseSQLExercise } from '../../utils/sqlExerciseParser';
   import { runSQLTests, runQuery } from '../../utils/sqlRunner';
+  import { hintsEnabled } from '../../stores/hints';
 
   export let metadata: ExerciseMetadata | null = null;
   export let savedCode: string | undefined = undefined;
@@ -20,8 +21,11 @@
   let previewResult: { columns: string[]; rows: unknown[][] } | null = null;
   let previewError: string | null = null;
   let mounted = false;
+  let hintLevel = 0;
 
   $: currentCode = savedCode ?? currentExercise?.solutionTemplate ?? '';
+  $: hasHints = !!currentExercise?.hints;
+  $: hintsRemaining = 3 - hintLevel;
 
   // Initialize sql.js on mount
   onMount(() => {
@@ -44,6 +48,7 @@
       testResult = null;
       previewResult = null;
       previewError = null;
+      hintLevel = 0;
     } catch (error) {
       console.error('Failed to load SQL exercise:', error);
     }
@@ -115,7 +120,38 @@
       testResult = null;
       previewResult = null;
       previewError = null;
+      hintLevel = 0;
     }
+  }
+
+  function handleHint() {
+    if (!currentExercise?.hints || !codeEditor || hintLevel >= 3) return;
+
+    const hints = currentExercise.hints;
+    const currentCode = codeEditor.getValue();
+    hintLevel++;
+
+    let hintText: string;
+    let hintLabel: string;
+
+    if (hintLevel === 1) {
+      hintLabel = 'HINT 1 - Starter code';
+      hintText = hints.hint1;
+    } else if (hintLevel === 2) {
+      hintLabel = 'HINT 2 - Pseudocode';
+      hintText = hints.hint2;
+    } else {
+      hintLabel = 'SOLUTION';
+      hintText = hints.solution;
+    }
+
+    // Format hint as a comment block appended to user's code
+    const formattedHint = `\n\n-- === ${hintLabel} ===\n-- ${hintText.split('\n').join('\n-- ')}\n-- === END ${hintLabel} ===`;
+
+    const newCode = currentCode + formattedHint;
+    codeEditor.reset(newCode);
+    dispatch('codeChange', { value: newCode });
+    dispatch('codeSave', { value: newCode });
   }
 
   function toggleInstructions() {
@@ -184,6 +220,16 @@
         <button class="btn btn-secondary" on:click={handleReset} disabled={!currentExercise}>
           Reset
         </button>
+        {#if $hintsEnabled && hasHints && hintsRemaining > 0}
+          <button
+            class="btn btn-hint"
+            on:click={handleHint}
+            disabled={!currentExercise}
+            title={hintLevel === 0 ? 'Get starter code' : hintLevel === 1 ? 'Get pseudocode' : 'Get solution'}
+          >
+            💡 Hint ({hintsRemaining})
+          </button>
+        {/if}
         <button
           class="btn btn-secondary"
           on:click={handlePreview}
@@ -595,6 +641,15 @@
 
   .btn-success:hover {
     background: #16a34a;
+  }
+
+  .btn-hint {
+    background: #f59e0b;
+    color: #fff;
+  }
+
+  .btn-hint:hover:not(:disabled) {
+    background: #d97706;
   }
 
   .editor-wrapper {

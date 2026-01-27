@@ -4,6 +4,7 @@
   import CodeEditor from '../CodeEditor.svelte';
   import { sandpackReady, initSandpack, loadSandpackClient } from '../../stores/sandpack';
   import { createSandpackFiles, getDefaultDependencies, mergeDependencies } from '../../utils/reactExerciseParser';
+  import { hintsEnabled } from '../../stores/hints';
 
   export let metadata: ExerciseMetadata | null = null;
   export let savedCode: string | undefined = undefined;
@@ -21,8 +22,11 @@
   let instructionsExpanded = false;
   let mounted = false;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let hintLevel = 0;
 
   $: currentCode = savedCode ?? starterCode;
+  $: hasHints = !!exerciseConfig?.hints;
+  $: hintsRemaining = 3 - hintLevel;
 
   // Initialize Sandpack on mount
   onMount(() => {
@@ -59,6 +63,7 @@
 
     isLoading = true;
     previewError = null;
+    hintLevel = 0;
 
     try {
       // Fetch exercise.json
@@ -163,7 +168,38 @@
       codeEditor.reset(starterCode);
       dispatch('codeChange', { value: starterCode });
       dispatch('codeSave', { value: starterCode });
+      hintLevel = 0;
     }
+  }
+
+  function handleHint() {
+    if (!exerciseConfig?.hints || !codeEditor || hintLevel >= 3) return;
+
+    const hints = exerciseConfig.hints;
+    const currentCode = codeEditor.getValue();
+    hintLevel++;
+
+    let hintText: string;
+    let hintLabel: string;
+
+    if (hintLevel === 1) {
+      hintLabel = 'HINT 1 - Starter code';
+      hintText = hints.hint1;
+    } else if (hintLevel === 2) {
+      hintLabel = 'HINT 2 - Pseudocode';
+      hintText = hints.hint2;
+    } else {
+      hintLabel = 'SOLUTION';
+      hintText = hints.solution;
+    }
+
+    // Format hint as a comment block appended to user's code
+    const formattedHint = `\n\n{/* === ${hintLabel} ===\n${hintText}\n=== END ${hintLabel} === */}`;
+
+    const newCode = currentCode + formattedHint;
+    codeEditor.reset(newCode);
+    dispatch('codeChange', { value: newCode });
+    dispatch('codeSave', { value: newCode });
   }
 
   function handleNext() {
@@ -243,6 +279,16 @@
           <button class="btn btn-secondary" on:click={handleReset} disabled={!starterCode}>
             Reset
           </button>
+          {#if $hintsEnabled && hasHints && hintsRemaining > 0}
+            <button
+              class="btn btn-hint"
+              on:click={handleHint}
+              disabled={!exerciseConfig}
+              title={hintLevel === 0 ? 'Get starter code' : hintLevel === 1 ? 'Get pseudocode' : 'Get solution'}
+            >
+              💡 Hint ({hintsRemaining})
+            </button>
+          {/if}
           <button class="btn btn-success" on:click={handleComplete}>
             Mark Complete
           </button>
@@ -551,6 +597,15 @@
 
   .btn-success:hover {
     background: #16a34a;
+  }
+
+  .btn-hint {
+    background: #f59e0b;
+    color: #fff;
+  }
+
+  .btn-hint:hover:not(:disabled) {
+    background: #d97706;
   }
 
   .editor-wrapper {
