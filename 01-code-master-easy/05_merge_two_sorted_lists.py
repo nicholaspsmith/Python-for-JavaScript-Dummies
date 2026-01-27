@@ -73,63 +73,79 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Basic merge
+    _t1_input = "list1=[1,2,4], list2=[1,3,4]"
+    _t1_expected = [1, 1, 2, 3, 4, 4]
     try:
         l1 = list_to_linked([1, 2, 4])
         l2 = list_to_linked([1, 3, 4])
         result = linked_to_list(merge_two_lists(l1, l2))
-        assert result == [1, 1, 2, 3, 4, 4], f"Expected [1,1,2,3,4,4], got {result}"
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Basic merge")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Empty first list
+    _t2_input = "list1=[], list2=[0]"
+    _t2_expected = [0]
     try:
         l1 = list_to_linked([])
         l2 = list_to_linked([0])
         result = linked_to_list(merge_two_lists(l1, l2))
-        assert result == [0], f"Expected [0], got {result}"
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Empty first list")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: Both empty
+    _t3_input = "list1=[], list2=[]"
+    _t3_expected = []
     try:
         l1 = list_to_linked([])
         l2 = list_to_linked([])
         result = linked_to_list(merge_two_lists(l1, l2))
-        assert result == [], f"Expected [], got {result}"
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: Both empty")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: Different lengths
+    _t4_input = "list1=[1,2,3,4,5], list2=[2,4]"
+    _t4_expected = [1, 2, 2, 3, 4, 4, 5]
     try:
         l1 = list_to_linked([1, 2, 3, 4, 5])
         l2 = list_to_linked([2, 4])
         result = linked_to_list(merge_two_lists(l1, l2))
-        assert result == [1, 2, 2, 3, 4, 4, 5], f"Expected [1,2,2,3,4,4,5], got {result}"
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: Different lengths")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

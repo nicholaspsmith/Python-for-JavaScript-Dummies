@@ -59,93 +59,121 @@ if __name__ == "__main__":
 
     # Test 1: Target in rotated part
     try:
-
-        assert search([4, 5, 6, 7, 0, 1, 2], 0) == 4
+        _t1_input = {"nums": [4, 5, 6, 7, 0, 1, 2], "target": 0}
+        _t1_expected = 4
+        result = search([4, 5, 6, 7, 0, 1, 2], 0)
+        assert result == _t1_expected
         print("✓ Test 1 passed: Target in rotated part")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{e}")
         _tests_failed += 1
 
     # Test 2: Target not found
     try:
-
-        assert search([4, 5, 6, 7, 0, 1, 2], 3) == -1
+        _t2_input = {"nums": [4, 5, 6, 7, 0, 1, 2], "target": 3}
+        _t2_expected = -1
+        result = search([4, 5, 6, 7, 0, 1, 2], 3)
+        assert result == _t2_expected
         print("✓ Test 2 passed: Target not found")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{e}")
         _tests_failed += 1
 
     # Test 3: Single element not found
     try:
-
-        assert search([1], 0) == -1
+        _t3_input = {"nums": [1], "target": 0}
+        _t3_expected = -1
+        result = search([1], 0)
+        assert result == _t3_expected
         print("✓ Test 3 passed: Single element not found")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{e}")
         _tests_failed += 1
 
     # Test 4: Single element found
     try:
-
-        assert search([1], 1) == 0
+        _t4_input = {"nums": [1], "target": 1}
+        _t4_expected = 0
+        result = search([1], 1)
+        assert result == _t4_expected
         print("✓ Test 4 passed: Single element found")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{e}")
         _tests_failed += 1
 
     # Test 5: Target in first half
     try:
-
-        assert search([4, 5, 6, 7, 0, 1, 2], 5) == 1
+        _t5_input = {"nums": [4, 5, 6, 7, 0, 1, 2], "target": 5}
+        _t5_expected = 1
+        result = search([4, 5, 6, 7, 0, 1, 2], 5)
+        assert result == _t5_expected
         print("✓ Test 5 passed: Target in first half")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{e}")
         _tests_failed += 1
 
     # Test 6: Not rotated (edge case)
     try:
-
-        assert search([1, 2, 3, 4, 5], 3) == 2
+        _t6_input = {"nums": [1, 2, 3, 4, 5], "target": 3}
+        _t6_expected = 2
+        result = search([1, 2, 3, 4, 5], 3)
+        assert result == _t6_expected
         print("✓ Test 6 passed: Not rotated (edge case)")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{e}")
         _tests_failed += 1
 
     # Test 7: Fully rotated (same as original)
     try:
-
-        assert search([2, 1], 1) == 1
+        _t7_input = {"nums": [2, 1], "target": 1}
+        _t7_expected = 1
+        result = search([2, 1], 1)
+        assert result == _t7_expected
         print("✓ Test 7 passed: Fully rotated (same as original)")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 7 failed: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 7 error: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|{e}")
         _tests_failed += 1
 
     # Summary

@@ -54,13 +54,14 @@ ${testCode}
     const stderr = pyodide.runPython('_get_errors()');
 
     const output = stdout + (stderr ? '\n' + stderr : '');
-    const { passed, failed } = parseTestOutput(output);
+    const { passed, failed, failedDetails } = parseTestOutput(output);
 
     return {
       success: allTestsPassed(output),
       output,
       passedTests: passed,
-      failedTests: failed
+      failedTests: failed,
+      failedTestDetails: failedDetails
     };
   } catch (error) {
     // Get any output before the error
@@ -92,14 +93,15 @@ ${testCode}
     }
 
     const output = stdout + (stderr ? '\n' + stderr : '');
-    const { passed, failed } = parseTestOutput(output);
+    const { passed, failed, failedDetails } = parseTestOutput(output);
 
     return {
       success: false,
       output,
       error: cleanError,
       passedTests: passed,
-      failedTests: [...failed, cleanError]
+      failedTests: [...failed, cleanError],
+      failedTestDetails: failedDetails
     };
   } finally {
     // Restore stdout/stderr

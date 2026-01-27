@@ -26,12 +26,20 @@ export interface ParsedExercise {
   fullContent: string;
 }
 
+export interface FailedTestDetail {
+  testNum: string;
+  input: string;
+  expected: string;
+  actual: string;
+}
+
 export interface TestResult {
   success: boolean;
   output: string;
   error?: string;
   passedTests: string[];
   failedTests: string[];
+  failedTestDetails?: FailedTestDetail[];
 }
 
 export interface Progress {

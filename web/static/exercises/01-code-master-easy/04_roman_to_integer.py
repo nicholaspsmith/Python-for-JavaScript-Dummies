@@ -45,81 +45,105 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Simple
+    _t1_input = "s='III'"
+    _t1_expected = 3
     try:
-
-        assert roman_to_int("III") == 3, "III should be 3"
+        result = roman_to_int("III")
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Simple")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Subtraction case
+    _t2_input = "s='IV'"
+    _t2_expected = 4
     try:
-
-        assert roman_to_int("IV") == 4, "IV should be 4"
+        result = roman_to_int("IV")
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Subtraction case")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: Mixed
+    _t3_input = "s='LVIII'"
+    _t3_expected = 58
     try:
-
-        assert roman_to_int("LVIII") == 58, "LVIII should be 58"
+        result = roman_to_int("LVIII")
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: Mixed")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: Complex
+    _t4_input = "s='MCMXCIV'"
+    _t4_expected = 1994
     try:
-
-        assert roman_to_int("MCMXCIV") == 1994, "MCMXCIV should be 1994"
+        result = roman_to_int("MCMXCIV")
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: Complex")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 5: Nine
+    _t5_input = "s='IX'"
+    _t5_expected = 9
     try:
-
-        assert roman_to_int("IX") == 9, "IX should be 9"
+        result = roman_to_int("IX")
+        assert result == _t5_expected, f"Expected {_t5_expected}, got {result}"
         print("✓ Test 5 passed: Nine")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 6: Large number
+    _t6_input = "s='MMMCMXCIX'"
+    _t6_expected = 3999
     try:
-
-        assert roman_to_int("MMMCMXCIX") == 3999, "MMMCMXCIX should be 3999"
+        result = roman_to_int("MMMCMXCIX")
+        assert result == _t6_expected, f"Expected {_t6_expected}, got {result}"
         print("✓ Test 6 passed: Large number")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

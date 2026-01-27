@@ -51,73 +51,98 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Basic case
+    _t1_input = "nums=[1,1,2]"
+    _t1_expected = [1, 2]
     try:
         nums = [1, 1, 2]
         k = remove_duplicates(nums)
-        assert nums[:k] == [1, 2], f"Expected [1,2], got {nums[:k]}"
+        result = nums[:k]
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Basic case")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Longer array
+    _t2_input = "nums=[0,0,1,1,1,2,2,3,3,4]"
+    _t2_expected = [0, 1, 2, 3, 4]
     try:
         nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
         k = remove_duplicates(nums)
-        assert nums[:k] == [0, 1, 2, 3, 4], f"Expected [0,1,2,3,4], got {nums[:k]}"
+        result = nums[:k]
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Longer array")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: No duplicates
+    _t3_input = "nums=[1,2,3]"
+    _t3_expected = [1, 2, 3]
     try:
         nums = [1, 2, 3]
         k = remove_duplicates(nums)
-        assert nums[:k] == [1, 2, 3], f"Expected [1,2,3], got {nums[:k]}"
+        result = nums[:k]
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: No duplicates")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: All duplicates
+    _t4_input = "nums=[5,5,5,5]"
+    _t4_expected = [5]
     try:
         nums = [5, 5, 5, 5]
         k = remove_duplicates(nums)
-        assert nums[:k] == [5], f"Expected [5], got {nums[:k]}"
+        result = nums[:k]
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: All duplicates")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 5: Empty array
+    _t5_input = "nums=[]"
+    _t5_expected = 0
     try:
         nums = []
         k = remove_duplicates(nums)
-        assert k == 0, f"Expected length 0, got {k}"
+        result = k
+        assert result == _t5_expected, f"Expected {_t5_expected}, got {result}"
         print("✓ Test 5 passed: Empty array")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

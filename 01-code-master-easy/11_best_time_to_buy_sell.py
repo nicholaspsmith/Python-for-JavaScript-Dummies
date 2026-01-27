@@ -49,81 +49,105 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Normal case with profit
+    _t1_input = "prices=[7,1,5,3,6,4]"
+    _t1_expected = 5
     try:
-
-        assert max_profit([7, 1, 5, 3, 6, 4]) == 5
+        result = max_profit([7, 1, 5, 3, 6, 4])
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Normal case with profit")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Decreasing prices
+    _t2_input = "prices=[7,6,4,3,1]"
+    _t2_expected = 0
     try:
-
-        assert max_profit([7, 6, 4, 3, 1]) == 0
+        result = max_profit([7, 6, 4, 3, 1])
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Decreasing prices")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: Two elements with profit
+    _t3_input = "prices=[1,2]"
+    _t3_expected = 1
     try:
-
-        assert max_profit([1, 2]) == 1
+        result = max_profit([1, 2])
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: Two elements with profit")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: Two elements no profit
+    _t4_input = "prices=[2,1]"
+    _t4_expected = 0
     try:
-
-        assert max_profit([2, 1]) == 0
+        result = max_profit([2, 1])
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: Two elements no profit")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 5: All same prices
+    _t5_input = "prices=[3,3,3,3]"
+    _t5_expected = 0
     try:
-
-        assert max_profit([3, 3, 3, 3]) == 0
+        result = max_profit([3, 3, 3, 3])
+        assert result == _t5_expected, f"Expected {_t5_expected}, got {result}"
         print("✓ Test 5 passed: All same prices")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 6: Single element
+    _t6_input = "prices=[5]"
+    _t6_expected = 0
     try:
-
-        assert max_profit([5]) == 0
+        result = max_profit([5])
+        assert result == _t6_expected, f"Expected {_t6_expected}, got {result}"
         print("✓ Test 6 passed: Single element")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

@@ -66,74 +66,104 @@ if __name__ == "__main__":
 
     # Test 1: Word exists
     try:
-        assert exist(board, "ABCCED") == True
+        _t1_input = (board, "ABCCED")
+        _t1_expected = True
+        result = exist(board, "ABCCED")
+        assert result == _t1_expected
         print("✓ Test 1 passed: Word exists")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{e}")
         _tests_failed += 1
 
     # Test 2: Another valid word
     try:
-        assert exist(board, "SEE") == True
+        _t2_input = (board, "SEE")
+        _t2_expected = True
+        result = exist(board, "SEE")
+        assert result == _t2_expected
         print("✓ Test 2 passed: Another valid word")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{e}")
         _tests_failed += 1
 
     # Test 3: Can't reuse cell
     try:
-        assert exist(board, "ABCB") == False
+        _t3_input = (board, "ABCB")
+        _t3_expected = False
+        result = exist(board, "ABCB")
+        assert result == _t3_expected
         print("✓ Test 3 passed: Can't reuse cell")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{e}")
         _tests_failed += 1
 
     # Test 4: Single cell
     try:
-        assert exist([["A"]], "A") == True
+        _t4_input = ([["A"]], "A")
+        _t4_expected = True
+        result = exist([["A"]], "A")
+        assert result == _t4_expected
         print("✓ Test 4 passed: Single cell")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{e}")
         _tests_failed += 1
 
     # Test 5: Word not in grid
     try:
-        assert exist(board, "XYZ") == False
+        _t5_input = (board, "XYZ")
+        _t5_expected = False
+        result = exist(board, "XYZ")
+        assert result == _t5_expected
         print("✓ Test 5 passed: Word not in grid")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{e}")
         _tests_failed += 1
 
     # Test 6: Word longer than grid
     try:
-        assert exist([["A"]], "AB") == False
+        _t6_input = ([["A"]], "AB")
+        _t6_expected = False
+        result = exist([["A"]], "AB")
+        assert result == _t6_expected
         print("✓ Test 6 passed: Word longer than grid")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{e}")
         _tests_failed += 1
 
     # Summary

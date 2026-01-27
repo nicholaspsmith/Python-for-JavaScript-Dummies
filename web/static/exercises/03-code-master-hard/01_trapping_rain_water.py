@@ -61,93 +61,121 @@ if __name__ == "__main__":
 
     # Test 1: Standard example
     try:
-
-        assert trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6
+        _t1_input = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+        _t1_expected = 6
+        result = trap(_t1_input)
+        assert result == _t1_expected
         print("✓ Test 1 passed: Standard example")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|None")
         _tests_failed += 1
 
     # Test 2: Another example
     try:
-
-        assert trap([4, 2, 0, 3, 2, 5]) == 9
+        _t2_input = [4, 2, 0, 3, 2, 5]
+        _t2_expected = 9
+        result = trap(_t2_input)
+        assert result == _t2_expected
         print("✓ Test 2 passed: Another example")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|None")
         _tests_failed += 1
 
     # Test 3: No water (ascending)
     try:
-
-        assert trap([1, 2, 3, 4]) == 0
+        _t3_input = [1, 2, 3, 4]
+        _t3_expected = 0
+        result = trap(_t3_input)
+        assert result == _t3_expected
         print("✓ Test 3 passed: No water (ascending)")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|None")
         _tests_failed += 1
 
     # Test 4: No water (descending)
     try:
-
-        assert trap([4, 3, 2, 1]) == 0
+        _t4_input = [4, 3, 2, 1]
+        _t4_expected = 0
+        result = trap(_t4_input)
+        assert result == _t4_expected
         print("✓ Test 4 passed: No water (descending)")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|None")
         _tests_failed += 1
 
     # Test 5: Empty
     try:
-
-        assert trap([]) == 0
+        _t5_input = []
+        _t5_expected = 0
+        result = trap(_t5_input)
+        assert result == _t5_expected
         print("✓ Test 5 passed: Empty")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|None")
         _tests_failed += 1
 
     # Test 6: Single/double elements
     try:
-
-        assert trap([5, 4]) == 0
+        _t6_input = [5, 4]
+        _t6_expected = 0
+        result = trap(_t6_input)
+        assert result == _t6_expected
         print("✓ Test 6 passed: Single/double elements")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|None")
         _tests_failed += 1
 
     # Test 7: Valley
     try:
-
-        assert trap([5, 0, 5]) == 5
+        _t7_input = [5, 0, 5]
+        _t7_expected = 5
+        result = trap(_t7_input)
+        assert result == _t7_expected
         print("✓ Test 7 passed: Valley")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 7 failed: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 7 error: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|None")
         _tests_failed += 1
 
     # Summary

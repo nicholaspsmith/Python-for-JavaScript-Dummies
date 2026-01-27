@@ -63,6 +63,8 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Standard example
+    _t1_input = {"nums": [1, 3, -1, -3, 5, 3, 6, 7], "k": 3}
+    _t1_expected = [3, 3, 5, 5, 6, 7]
     try:
         result = max_sliding_window([1, 3, -1, -3, 5, 3, 6, 7], 3)
         assert result == [3, 3, 5, 5, 6, 7], f"Got {result}"
@@ -70,12 +72,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|None")
         _tests_failed += 1
 
     # Test 2: Single element
+    _t2_input = {"nums": [1], "k": 1}
+    _t2_expected = [1]
     try:
         result = max_sliding_window([1], 1)
         assert result == [1], f"Got {result}"
@@ -83,12 +89,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|None")
         _tests_failed += 1
 
     # Test 3: Window size equals array
+    _t3_input = {"nums": [1, 3, 2], "k": 3}
+    _t3_expected = [3]
     try:
         result = max_sliding_window([1, 3, 2], 3)
         assert result == [3], f"Got {result}"
@@ -96,12 +106,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|None")
         _tests_failed += 1
 
     # Test 4: Descending array
+    _t4_input = {"nums": [9, 8, 7, 6, 5], "k": 2}
+    _t4_expected = [9, 8, 7, 6]
     try:
         result = max_sliding_window([9, 8, 7, 6, 5], 2)
         assert result == [9, 8, 7, 6], f"Got {result}"
@@ -109,12 +123,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|None")
         _tests_failed += 1
 
     # Test 5: Ascending array
+    _t5_input = {"nums": [1, 2, 3, 4, 5], "k": 2}
+    _t5_expected = [2, 3, 4, 5]
     try:
         result = max_sliding_window([1, 2, 3, 4, 5], 2)
         assert result == [2, 3, 4, 5], f"Got {result}"
@@ -122,12 +140,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|None")
         _tests_failed += 1
 
     # Test 6: All same
+    _t6_input = {"nums": [5, 5, 5, 5], "k": 2}
+    _t6_expected = [5, 5, 5]
     try:
         result = max_sliding_window([5, 5, 5, 5], 2)
         assert result == [5, 5, 5], f"Got {result}"
@@ -135,12 +157,16 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|None")
         _tests_failed += 1
 
     # Test 7: Negative numbers
+    _t7_input = {"nums": [-1, -2, -3, -4], "k": 2}
+    _t7_expected = [-1, -2, -3]
     try:
         result = max_sliding_window([-1, -2, -3, -4], 2)
         assert result == [-1, -2, -3], f"Got {result}"
@@ -148,9 +174,11 @@ if __name__ == "__main__":
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 7 failed: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 7 error: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|None")
         _tests_failed += 1
 
     # Summary

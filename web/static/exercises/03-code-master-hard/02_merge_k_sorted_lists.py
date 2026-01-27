@@ -87,6 +87,9 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Three lists
+    _t1_input = [[1, 4, 5], [1, 3, 4], [2, 6]]
+    _t1_expected = [1, 1, 2, 3, 4, 4, 5, 6]
+    result = None
     try:
         lists = [
         list_to_linked([1, 4, 5]),
@@ -94,81 +97,108 @@ if __name__ == "__main__":
         list_to_linked([2, 6])
         ]
         result = linked_to_list(merge_k_lists(lists))
-        assert result == [1, 1, 2, 3, 4, 4, 5, 6], f"Got {result}"
+        assert result == _t1_expected, f"Got {result}"
         print("✓ Test 1 passed: Three lists")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
 
     # Test 2: Empty input
+    _t2_input = []
+    _t2_expected = []
+    result = None
     try:
         result = linked_to_list(merge_k_lists([]))
-        assert result == [], f"Got {result}"
+        assert result == _t2_expected, f"Got {result}"
         print("✓ Test 2 passed: Empty input")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
 
     # Test 3: Single empty list
+    _t3_input = [None]
+    _t3_expected = []
+    result = None
     try:
         result = linked_to_list(merge_k_lists([None]))
-        assert result == [], f"Got {result}"
+        assert result == _t3_expected, f"Got {result}"
         print("✓ Test 3 passed: Single empty list")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
 
     # Test 4: Single list
+    _t4_input = [[1, 2, 3]]
+    _t4_expected = [1, 2, 3]
+    result = None
     try:
         result = linked_to_list(merge_k_lists([list_to_linked([1, 2, 3])]))
-        assert result == [1, 2, 3], f"Got {result}"
+        assert result == _t4_expected, f"Got {result}"
         print("✓ Test 4 passed: Single list")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
 
     # Test 5: Two lists
+    _t5_input = [[1, 3, 5], [2, 4, 6]]
+    _t5_expected = [1, 2, 3, 4, 5, 6]
+    result = None
     try:
         lists = [list_to_linked([1, 3, 5]), list_to_linked([2, 4, 6])]
         result = linked_to_list(merge_k_lists(lists))
-        assert result == [1, 2, 3, 4, 5, 6], f"Got {result}"
+        assert result == _t5_expected, f"Got {result}"
         print("✓ Test 5 passed: Two lists")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
 
     # Test 6: Some empty lists
+    _t6_input = [None, [1], None, [2]]
+    _t6_expected = [1, 2]
+    result = None
     try:
         lists = [None, list_to_linked([1]), None, list_to_linked([2])]
         result = linked_to_list(merge_k_lists(lists))
-        assert result == [1, 2], f"Got {result}"
+        assert result == _t6_expected, f"Got {result}"
         print("✓ Test 6 passed: Some empty lists")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
 
     # Summary

@@ -76,63 +76,79 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Basic addition
+    _t1_input = "l1=[2,4,3], l2=[5,6,4]"
+    _t1_expected = [7, 0, 8]
     try:
         l1 = list_to_linked([2, 4, 3])  # 342
         l2 = list_to_linked([5, 6, 4])  # 465
         result = linked_to_list(add_two_numbers(l1, l2))
-        assert result == [7, 0, 8], f"Expected [7,0,8], got {result}"  # 807
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Basic addition")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Large numbers with carry
+    _t2_input = "l1=[9,9,9,9], l2=[9,9,9,9]"
+    _t2_expected = [8, 9, 9, 9, 1]
     try:
         l1 = list_to_linked([9, 9, 9, 9])  # 9999
         l2 = list_to_linked([9, 9, 9, 9])  # 9999
         result = linked_to_list(add_two_numbers(l1, l2))
-        assert result == [8, 9, 9, 9, 1], f"Expected [8,9,9,9,1], got {result}"  # 19998
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Large numbers with carry")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: Zeros
+    _t3_input = "l1=[0], l2=[0]"
+    _t3_expected = [0]
     try:
         l1 = list_to_linked([0])
         l2 = list_to_linked([0])
         result = linked_to_list(add_two_numbers(l1, l2))
-        assert result == [0], f"Expected [0], got {result}"
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: Zeros")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: Different lengths
+    _t4_input = "l1=[9,9], l2=[1]"
+    _t4_expected = [0, 0, 1]
     try:
         l1 = list_to_linked([9, 9])
         l2 = list_to_linked([1])
         result = linked_to_list(add_two_numbers(l1, l2))
-        assert result == [0, 0, 1], f"Expected [0,0,1], got {result}"
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: Different lengths")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

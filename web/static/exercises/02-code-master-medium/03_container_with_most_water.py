@@ -53,67 +53,87 @@ if __name__ == "__main__":
 
     # Test 1: Example case
     try:
-
-        assert max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]) == 49
+        _t1_input = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+        _t1_expected = 49
+        result = max_area(_t1_input)
+        assert result == _t1_expected
         print("✓ Test 1 passed: Example case")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{e}")
         _tests_failed += 1
 
     # Test 2: Two elements
     try:
-
-        assert max_area([1, 1]) == 1
+        _t2_input = [1, 1]
+        _t2_expected = 1
+        result = max_area(_t2_input)
+        assert result == _t2_expected
         print("✓ Test 2 passed: Two elements")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{e}")
         _tests_failed += 1
 
     # Test 3: Decreasing heights
     try:
-
-        assert max_area([4, 3, 2, 1, 4]) == 16
+        _t3_input = [4, 3, 2, 1, 4]
+        _t3_expected = 16
+        result = max_area(_t3_input)
+        assert result == _t3_expected
         print("✓ Test 3 passed: Decreasing heights")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{e}")
         _tests_failed += 1
 
     # Test 4: All same height
     try:
-
-        assert max_area([5, 5, 5, 5]) == 15
+        _t4_input = [5, 5, 5, 5]
+        _t4_expected = 15
+        result = max_area(_t4_input)
+        assert result == _t4_expected
         print("✓ Test 4 passed: All same height")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{e}")
         _tests_failed += 1
 
     # Test 5: Two different heights
     try:
-
-        assert max_area([1, 2]) == 1
+        _t5_input = [1, 2]
+        _t5_expected = 1
+        result = max_area(_t5_input)
+        assert result == _t5_expected
         print("✓ Test 5 passed: Two different heights")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{e}")
         _tests_failed += 1
 
     # Summary

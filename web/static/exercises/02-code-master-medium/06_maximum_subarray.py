@@ -55,80 +55,104 @@ if __name__ == "__main__":
 
     # Test 1: Mixed positives and negatives
     try:
-
-        assert max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
+        _t1_input = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+        _t1_expected = 6
+        result = max_subarray(_t1_input)
+        assert result == _t1_expected
         print("✓ Test 1 passed: Mixed positives and negatives")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|None")
         _tests_failed += 1
 
     # Test 2: Single element
     try:
-
-        assert max_subarray([1]) == 1
+        _t2_input = [1]
+        _t2_expected = 1
+        result = max_subarray(_t2_input)
+        assert result == _t2_expected
         print("✓ Test 2 passed: Single element")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|None")
         _tests_failed += 1
 
     # Test 3: All positive
     try:
-
-        assert max_subarray([5, 4, -1, 7, 8]) == 23
+        _t3_input = [5, 4, -1, 7, 8]
+        _t3_expected = 23
+        result = max_subarray(_t3_input)
+        assert result == _t3_expected
         print("✓ Test 3 passed: All positive")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|None")
         _tests_failed += 1
 
     # Test 4: All negative
     try:
-
-        assert max_subarray([-3, -2, -1, -4]) == -1
+        _t4_input = [-3, -2, -1, -4]
+        _t4_expected = -1
+        result = max_subarray(_t4_input)
+        assert result == _t4_expected
         print("✓ Test 4 passed: All negative")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|None")
         _tests_failed += 1
 
     # Test 5: Single negative
     try:
-
-        assert max_subarray([-1]) == -1
+        _t5_input = [-1]
+        _t5_expected = -1
+        result = max_subarray(_t5_input)
+        assert result == _t5_expected
         print("✓ Test 5 passed: Single negative")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|None")
         _tests_failed += 1
 
     # Test 6: Zero included
     try:
-
-        assert max_subarray([-2, 0, -1]) == 0
+        _t6_input = [-2, 0, -1]
+        _t6_expected = 0
+        result = max_subarray(_t6_input)
+        assert result == _t6_expected
         print("✓ Test 6 passed: Zero included")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|None")
         _tests_failed += 1
 
     # Summary

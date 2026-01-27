@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { TestResult } from '../types';
+  import type { TestResult, FailedTestDetail } from '../types';
   import { filterOutput } from '../utils/exerciseParser';
 
   export let result: TestResult | null = null;
   export let isRunning: boolean = false;
   export let jsHabits: string[] = [];
+
+  $: failedDetails = result?.failedTestDetails ?? [];
 
   $: cleanOutput = result?.output ? filterOutput(result.output) : '';
 
@@ -88,11 +90,32 @@
             Test {test} passed
           </div>
         {/each}
-        {#each result.failedTests as test}
+        {#each result.failedTests as test, idx}
+          {@const detail = failedDetails.find(d => test.includes(`Test ${d.testNum}`))}
           <div class="test-item failed">
             <span class="cross">✗</span>
             {test}
           </div>
+          {#if detail}
+            <div class="test-table-wrapper">
+              <table class="test-table">
+                <thead>
+                  <tr>
+                    <th>Input</th>
+                    <th>Expected</th>
+                    <th>Your Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>{detail.input}</code></td>
+                    <td><code class="expected">{detail.expected}</code></td>
+                    <td><code class="actual">{detail.actual}</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          {/if}
         {/each}
       </div>
     {/if}
@@ -266,6 +289,54 @@
   }
 
   .cross {
+    color: #f87171;
+  }
+
+  .test-table-wrapper {
+    margin: 0.5rem 0 0.75rem 1.5rem;
+    overflow-x: auto;
+  }
+
+  .test-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .test-table th,
+  .test-table td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .test-table th {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .test-table td {
+    vertical-align: top;
+  }
+
+  .test-table code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+
+  .test-table code.expected {
+    color: #4ade80;
+  }
+
+  .test-table code.actual {
     color: #f87171;
   }
 

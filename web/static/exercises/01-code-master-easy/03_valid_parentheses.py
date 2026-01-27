@@ -47,94 +47,122 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Simple valid
+    _t1_input = "s='()'"
+    _t1_expected = True
     try:
-
-        assert is_valid("()") == True, "() should be valid"
+        result = is_valid("()")
+        assert result == _t1_expected, f"Expected {_t1_expected}, got {result}"
         print("✓ Test 1 passed: Simple valid")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 2: Multiple types
+    _t2_input = "s='()[]{}'"
+    _t2_expected = True
     try:
-
-        assert is_valid("()[]{}") == True, "()[]{} should be valid"
+        result = is_valid("()[]{}")
+        assert result == _t2_expected, f"Expected {_t2_expected}, got {result}"
         print("✓ Test 2 passed: Multiple types")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 3: Mismatched
+    _t3_input = "s='(]'"
+    _t3_expected = False
     try:
-
-        assert is_valid("(]") == False, "(] should be invalid"
+        result = is_valid("(]")
+        assert result == _t3_expected, f"Expected {_t3_expected}, got {result}"
         print("✓ Test 3 passed: Mismatched")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 4: Wrong order
+    _t4_input = "s='([)]'"
+    _t4_expected = False
     try:
-
-        assert is_valid("([)]") == False, "([)] should be invalid"
+        result = is_valid("([)]")
+        assert result == _t4_expected, f"Expected {_t4_expected}, got {result}"
         print("✓ Test 4 passed: Wrong order")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 5: Nested valid
+    _t5_input = "s='{[]}'"
+    _t5_expected = True
     try:
-
-        assert is_valid("{[]}") == True, "{[]} should be valid"
+        result = is_valid("{[]}")
+        assert result == _t5_expected, f"Expected {_t5_expected}, got {result}"
         print("✓ Test 5 passed: Nested valid")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 6: Empty string
+    _t6_input = "s=''"
+    _t6_expected = True
     try:
-
-        assert is_valid("") == True, "Empty string should be valid"
+        result = is_valid("")
+        assert result == _t6_expected, f"Expected {_t6_expected}, got {result}"
         print("✓ Test 6 passed: Empty string")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|Error: {e}")
         _tests_failed += 1
 
     # Test 7: Only closing
+    _t7_input = "s=']'"
+    _t7_expected = False
     try:
-
-        assert is_valid("]") == False, "Single closing should be invalid"
+        result = is_valid("]")
+        assert result == _t7_expected, f"Expected {_t7_expected}, got {result}"
         print("✓ Test 7 passed: Only closing")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 7 failed: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 7 error: {e}")
+        print(f"__TD__|{_t7_input}|{_t7_expected}|Error: {e}")
         _tests_failed += 1
 
     # Summary

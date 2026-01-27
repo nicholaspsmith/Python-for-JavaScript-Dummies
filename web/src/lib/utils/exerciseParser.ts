@@ -73,15 +73,25 @@ export function parseExercise(content: string): ParsedExercise {
   };
 }
 
+export interface FailedTestDetail {
+  testNum: string;
+  input: string;
+  expected: string;
+  actual: string;
+}
+
 /**
  * Parse test output to extract passed/failed tests
  */
-export function parseTestOutput(output: string): { passed: string[]; failed: string[] } {
+export function parseTestOutput(output: string): { passed: string[]; failed: string[]; failedDetails: FailedTestDetail[] } {
   const passed: string[] = [];
   const failed: string[] = [];
+  const failedDetails: FailedTestDetail[] = [];
 
   const lines = output.split('\n');
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
     // Look for "✓ Test N passed"
     const passMatch = line.match(/✓\s*Test\s+(\d+)\s+passed/i);
     if (passMatch) {
@@ -93,11 +103,26 @@ export function parseTestOutput(output: string): { passed: string[]; failed: str
     const failMatch = line.match(/✗\s*Test\s+(\d+)\s+(?:failed|error):\s*(.+)/i);
     if (failMatch) {
       failed.push(`Test ${failMatch[1]} failed: ${failMatch[2]}`);
+
+      // Check if next line has structured test data: __TD__|input|expected|actual
+      if (i + 1 < lines.length) {
+        const nextLine = lines[i + 1];
+        const tdMatch = nextLine.match(/^__TD__\|(.+?)\|(.+?)\|(.+)$/);
+        if (tdMatch) {
+          failedDetails.push({
+            testNum: failMatch[1],
+            input: tdMatch[1],
+            expected: tdMatch[2],
+            actual: tdMatch[3]
+          });
+          i++; // Skip the __TD__ line
+        }
+      }
       continue;
     }
   }
 
-  return { passed, failed };
+  return { passed, failed, failedDetails };
 }
 
 /**
@@ -116,6 +141,11 @@ export function filterOutput(output: string): string {
   let inTraceback = false;
 
   for (const line of lines) {
+    // Skip test data lines (used for table display)
+    if (line.startsWith('__TD__|')) {
+      continue;
+    }
+
     // Start of traceback
     if (line.startsWith('Traceback (most recent call last):')) {
       inTraceback = true;

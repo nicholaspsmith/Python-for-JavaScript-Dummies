@@ -51,81 +51,105 @@ if __name__ == "__main__":
     _tests_failed = 0
 
     # Test 1: Some overlap
+    _t1_input = [[1, 3], [2, 6], [8, 10], [15, 18]]
+    _t1_expected = [[1, 6], [8, 10], [15, 18]]
     try:
-        result = merge([[1, 3], [2, 6], [8, 10], [15, 18]])
-        assert result == [[1, 6], [8, 10], [15, 18]], f"Got {result}"
+        result = merge(_t1_input)
+        assert result == _t1_expected, f"Got {result}"
         print("✓ Test 1 passed: Some overlap")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 1 failed: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 1 error: {e}")
+        print(f"__TD__|{_t1_input}|{_t1_expected}|None")
         _tests_failed += 1
 
     # Test 2: Touching intervals
+    _t2_input = [[1, 4], [4, 5]]
+    _t2_expected = [[1, 5]]
     try:
-        result = merge([[1, 4], [4, 5]])
-        assert result == [[1, 5]], f"Got {result}"
+        result = merge(_t2_input)
+        assert result == _t2_expected, f"Got {result}"
         print("✓ Test 2 passed: Touching intervals")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 2 failed: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 2 error: {e}")
+        print(f"__TD__|{_t2_input}|{_t2_expected}|None")
         _tests_failed += 1
 
     # Test 3: No overlap
+    _t3_input = [[1, 2], [3, 4], [5, 6]]
+    _t3_expected = [[1, 2], [3, 4], [5, 6]]
     try:
-        result = merge([[1, 2], [3, 4], [5, 6]])
-        assert result == [[1, 2], [3, 4], [5, 6]], f"Got {result}"
+        result = merge(_t3_input)
+        assert result == _t3_expected, f"Got {result}"
         print("✓ Test 3 passed: No overlap")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 3 failed: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 3 error: {e}")
+        print(f"__TD__|{_t3_input}|{_t3_expected}|None")
         _tests_failed += 1
 
     # Test 4: Single interval
+    _t4_input = [[1, 5]]
+    _t4_expected = [[1, 5]]
     try:
-        result = merge([[1, 5]])
-        assert result == [[1, 5]], f"Got {result}"
+        result = merge(_t4_input)
+        assert result == _t4_expected, f"Got {result}"
         print("✓ Test 4 passed: Single interval")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 4 failed: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 4 error: {e}")
+        print(f"__TD__|{_t4_input}|{_t4_expected}|None")
         _tests_failed += 1
 
     # Test 5: All merge into one
+    _t5_input = [[1, 4], [2, 5], [3, 6]]
+    _t5_expected = [[1, 6]]
     try:
-        result = merge([[1, 4], [2, 5], [3, 6]])
-        assert result == [[1, 6]], f"Got {result}"
+        result = merge(_t5_input)
+        assert result == _t5_expected, f"Got {result}"
         print("✓ Test 5 passed: All merge into one")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 5 failed: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 5 error: {e}")
+        print(f"__TD__|{_t5_input}|{_t5_expected}|None")
         _tests_failed += 1
 
     # Test 6: Unsorted input
+    _t6_input = [[3, 4], [1, 2], [2, 3]]
+    _t6_expected = [[1, 4]]
     try:
-        result = merge([[3, 4], [1, 2], [2, 3]])
-        assert result == [[1, 4]], f"Got {result}"
+        result = merge(_t6_input)
+        assert result == _t6_expected, f"Got {result}"
         print("✓ Test 6 passed: Unsorted input")
         _tests_passed += 1
     except AssertionError as e:
         print(f"✗ Test 6 failed: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|{result}")
         _tests_failed += 1
     except Exception as e:
         print(f"✗ Test 6 error: {e}")
+        print(f"__TD__|{_t6_input}|{_t6_expected}|None")
         _tests_failed += 1
 
     # Summary
