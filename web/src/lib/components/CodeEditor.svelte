@@ -32,8 +32,10 @@
     return currentTheme === 'light' ? 'vs' : 'vs-dark';
   }
 
-  // Track if we've already registered the Python completion provider
+  // Track if we've already registered completion providers
   let pythonCompletionsRegistered = false;
+  let tsCompletionsRegistered = false;
+  let sqlCompletionsRegistered = false;
 
   function registerPythonCompletions(monacoInstance: typeof Monaco) {
     if (pythonCompletionsRegistered) return;
@@ -106,6 +108,198 @@
 
         // Add snippets
         for (const snippet of pythonSnippets) {
+          suggestions.push({
+            label: snippet.label,
+            kind: monacoInstance.languages.CompletionItemKind.Snippet,
+            insertText: snippet.insertText,
+            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            documentation: snippet.documentation,
+            range
+          });
+        }
+
+        return { suggestions };
+      }
+    });
+  }
+
+  function registerTypeScriptCompletions(monacoInstance: typeof Monaco) {
+    if (tsCompletionsRegistered) return;
+    tsCompletionsRegistered = true;
+
+    const tsKeywords = [
+      'abstract', 'any', 'as', 'async', 'await', 'boolean', 'break', 'case',
+      'catch', 'class', 'const', 'continue', 'debugger', 'declare', 'default',
+      'delete', 'do', 'else', 'enum', 'export', 'extends', 'false', 'finally',
+      'for', 'from', 'function', 'get', 'if', 'implements', 'import', 'in',
+      'instanceof', 'interface', 'let', 'module', 'namespace', 'new', 'null',
+      'number', 'object', 'of', 'package', 'private', 'protected', 'public',
+      'readonly', 'return', 'set', 'static', 'string', 'super', 'switch',
+      'this', 'throw', 'true', 'try', 'type', 'typeof', 'undefined', 'var',
+      'void', 'while', 'with', 'yield'
+    ];
+
+    const tsBuiltins = [
+      'Array', 'Boolean', 'console', 'Date', 'Error', 'Function', 'JSON',
+      'Math', 'Number', 'Object', 'Promise', 'RegExp', 'String', 'Symbol',
+      'Map', 'Set', 'WeakMap', 'WeakSet', 'parseInt', 'parseFloat', 'isNaN',
+      'isFinite', 'encodeURI', 'decodeURI', 'setTimeout', 'setInterval',
+      'clearTimeout', 'clearInterval', 'fetch', 'Response', 'Request'
+    ];
+
+    const tsSnippets = [
+      { label: 'function', insertText: 'function ${1:name}(${2:params}) {\n  ${3}\n}', documentation: 'Function declaration' },
+      { label: 'arrow function', insertText: 'const ${1:name} = (${2:params}) => {\n  ${3}\n};', documentation: 'Arrow function' },
+      { label: 'async function', insertText: 'async function ${1:name}(${2:params}) {\n  ${3}\n}', documentation: 'Async function' },
+      { label: 'class', insertText: 'class ${1:Name} {\n  constructor(${2:params}) {\n    ${3}\n  }\n}', documentation: 'Class declaration' },
+      { label: 'interface', insertText: 'interface ${1:Name} {\n  ${2:property}: ${3:type};\n}', documentation: 'Interface declaration' },
+      { label: 'type', insertText: 'type ${1:Name} = ${2:type};', documentation: 'Type alias' },
+      { label: 'if', insertText: 'if (${1:condition}) {\n  ${2}\n}', documentation: 'If statement' },
+      { label: 'for', insertText: 'for (let ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++) {\n  ${3}\n}', documentation: 'For loop' },
+      { label: 'for...of', insertText: 'for (const ${1:item} of ${2:iterable}) {\n  ${3}\n}', documentation: 'For...of loop' },
+      { label: 'forEach', insertText: '${1:array}.forEach((${2:item}) => {\n  ${3}\n});', documentation: 'forEach loop' },
+      { label: 'map', insertText: '${1:array}.map((${2:item}) => ${3});', documentation: 'Array map' },
+      { label: 'filter', insertText: '${1:array}.filter((${2:item}) => ${3});', documentation: 'Array filter' },
+      { label: 'reduce', insertText: '${1:array}.reduce((${2:acc}, ${3:item}) => {\n  ${4}\n}, ${5:initial});', documentation: 'Array reduce' },
+      { label: 'try/catch', insertText: 'try {\n  ${1}\n} catch (${2:error}) {\n  ${3}\n}', documentation: 'Try/catch block' },
+      { label: 'promise', insertText: 'new Promise((resolve, reject) => {\n  ${1}\n});', documentation: 'New Promise' },
+      { label: 'console.log', insertText: 'console.log(${1});', documentation: 'Console log' },
+      { label: 'useState', insertText: 'const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initial});', documentation: 'React useState hook' },
+      { label: 'useEffect', insertText: 'useEffect(() => {\n  ${1}\n}, [${2}]);', documentation: 'React useEffect hook' },
+    ];
+
+    // Register for both JavaScript and TypeScript
+    const languages = ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'];
+
+    for (const lang of languages) {
+      monacoInstance.languages.registerCompletionItemProvider(lang, {
+        provideCompletionItems: (model, position) => {
+          const word = model.getWordUntilPosition(position);
+          const range = {
+            startLineNumber: position.lineNumber,
+            endLineNumber: position.lineNumber,
+            startColumn: word.startColumn,
+            endColumn: word.endColumn
+          };
+
+          const suggestions: Monaco.languages.CompletionItem[] = [];
+
+          for (const keyword of tsKeywords) {
+            suggestions.push({
+              label: keyword,
+              kind: monacoInstance.languages.CompletionItemKind.Keyword,
+              insertText: keyword,
+              range
+            });
+          }
+
+          for (const builtin of tsBuiltins) {
+            suggestions.push({
+              label: builtin,
+              kind: monacoInstance.languages.CompletionItemKind.Class,
+              insertText: builtin,
+              detail: 'Built-in',
+              range
+            });
+          }
+
+          for (const snippet of tsSnippets) {
+            suggestions.push({
+              label: snippet.label,
+              kind: monacoInstance.languages.CompletionItemKind.Snippet,
+              insertText: snippet.insertText,
+              insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: snippet.documentation,
+              range
+            });
+          }
+
+          return { suggestions };
+        }
+      });
+    }
+  }
+
+  function registerSqlCompletions(monacoInstance: typeof Monaco) {
+    if (sqlCompletionsRegistered) return;
+    sqlCompletionsRegistered = true;
+
+    const sqlKeywords = [
+      'SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'BETWEEN',
+      'IS', 'NULL', 'AS', 'JOIN', 'INNER', 'LEFT', 'RIGHT', 'OUTER', 'FULL',
+      'ON', 'GROUP', 'BY', 'HAVING', 'ORDER', 'ASC', 'DESC', 'LIMIT', 'OFFSET',
+      'INSERT', 'INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE', 'CREATE', 'TABLE',
+      'DROP', 'ALTER', 'ADD', 'COLUMN', 'INDEX', 'PRIMARY', 'KEY', 'FOREIGN',
+      'REFERENCES', 'UNIQUE', 'DEFAULT', 'CHECK', 'CONSTRAINT', 'CASCADE',
+      'UNION', 'ALL', 'DISTINCT', 'EXISTS', 'CASE', 'WHEN', 'THEN', 'ELSE',
+      'END', 'CAST', 'CONVERT', 'COALESCE', 'NULLIF', 'WITH', 'RECURSIVE',
+      'OVER', 'PARTITION', 'ROW_NUMBER', 'RANK', 'DENSE_RANK', 'NTILE',
+      'LEAD', 'LAG', 'FIRST_VALUE', 'LAST_VALUE'
+    ];
+
+    const sqlFunctions = [
+      'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'ABS', 'ROUND', 'CEIL', 'FLOOR',
+      'UPPER', 'LOWER', 'TRIM', 'LTRIM', 'RTRIM', 'LENGTH', 'SUBSTRING',
+      'CONCAT', 'REPLACE', 'INSTR', 'LEFT', 'RIGHT', 'REVERSE', 'REPEAT',
+      'NOW', 'DATE', 'TIME', 'DATETIME', 'YEAR', 'MONTH', 'DAY', 'HOUR',
+      'MINUTE', 'SECOND', 'DATEDIFF', 'DATEADD', 'STRFTIME', 'JULIANDAY',
+      'IFNULL', 'IIF', 'TYPEOF', 'PRINTF', 'RANDOM', 'GROUP_CONCAT'
+    ];
+
+    const sqlSnippets = [
+      { label: 'SELECT', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nWHERE ${3:condition};', documentation: 'Basic SELECT query' },
+      { label: 'SELECT JOIN', insertText: 'SELECT ${1:columns}\nFROM ${2:table1}\nJOIN ${3:table2} ON ${4:condition}\nWHERE ${5:condition};', documentation: 'SELECT with JOIN' },
+      { label: 'INSERT', insertText: 'INSERT INTO ${1:table} (${2:columns})\nVALUES (${3:values});', documentation: 'INSERT statement' },
+      { label: 'UPDATE', insertText: 'UPDATE ${1:table}\nSET ${2:column} = ${3:value}\nWHERE ${4:condition};', documentation: 'UPDATE statement' },
+      { label: 'DELETE', insertText: 'DELETE FROM ${1:table}\nWHERE ${2:condition};', documentation: 'DELETE statement' },
+      { label: 'CREATE TABLE', insertText: 'CREATE TABLE ${1:table_name} (\n  ${2:id} INTEGER PRIMARY KEY,\n  ${3:column} ${4:TEXT}\n);', documentation: 'CREATE TABLE statement' },
+      { label: 'GROUP BY', insertText: 'SELECT ${1:column}, COUNT(*)\nFROM ${2:table}\nGROUP BY ${1:column};', documentation: 'GROUP BY query' },
+      { label: 'ORDER BY', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nORDER BY ${3:column} ${4|ASC,DESC|};', documentation: 'ORDER BY clause' },
+      { label: 'CASE', insertText: 'CASE\n  WHEN ${1:condition} THEN ${2:result}\n  ELSE ${3:default}\nEND', documentation: 'CASE expression' },
+      { label: 'CTE', insertText: 'WITH ${1:cte_name} AS (\n  ${2:query}\n)\nSELECT * FROM ${1:cte_name};', documentation: 'Common Table Expression' },
+      { label: 'subquery', insertText: 'SELECT ${1:columns}\nFROM ${2:table}\nWHERE ${3:column} IN (\n  SELECT ${4:column}\n  FROM ${5:table2}\n);', documentation: 'Subquery in WHERE' },
+    ];
+
+    monacoInstance.languages.registerCompletionItemProvider('sql', {
+      provideCompletionItems: (model, position) => {
+        const word = model.getWordUntilPosition(position);
+        const range = {
+          startLineNumber: position.lineNumber,
+          endLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endColumn: word.endColumn
+        };
+
+        const suggestions: Monaco.languages.CompletionItem[] = [];
+
+        for (const keyword of sqlKeywords) {
+          suggestions.push({
+            label: keyword,
+            kind: monacoInstance.languages.CompletionItemKind.Keyword,
+            insertText: keyword,
+            range
+          });
+          // Also add lowercase version
+          suggestions.push({
+            label: keyword.toLowerCase(),
+            kind: monacoInstance.languages.CompletionItemKind.Keyword,
+            insertText: keyword.toLowerCase(),
+            range
+          });
+        }
+
+        for (const func of sqlFunctions) {
+          suggestions.push({
+            label: func,
+            kind: monacoInstance.languages.CompletionItemKind.Function,
+            insertText: func + '(${1})',
+            insertTextRules: monacoInstance.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            detail: 'SQL function',
+            range
+          });
+        }
+
+        for (const snippet of sqlSnippets) {
           suggestions.push({
             label: snippet.label,
             kind: monacoInstance.languages.CompletionItemKind.Snippet,
@@ -231,9 +425,13 @@
       wordBasedSuggestions: 'currentDocument',
     });
 
-    // Register Python autocomplete provider
+    // Register autocomplete providers based on language
     if (language === 'python') {
       registerPythonCompletions(monaco);
+    } else if (language === 'javascript' || language === 'typescript' || language === 'javascriptreact' || language === 'typescriptreact') {
+      registerTypeScriptCompletions(monaco);
+    } else if (language === 'sql') {
+      registerSqlCompletions(monaco);
     }
 
     // Subscribe to theme changes and update editor theme
