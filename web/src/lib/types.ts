@@ -82,6 +82,7 @@ export interface ParsedSQLExercise {
   solutionTemplate: string;
   tests: SQLTestConfig;
   fullContent: string;
+  hints?: ExerciseHints;
 }
 
 export interface SQLTestConfig {
@@ -111,6 +112,7 @@ export interface ReactExerciseConfig {
   title: string;
   instructions: string;
   dependencies?: Record<string, string>;
+  hints?: ExerciseHints;
 }
 
 // TypeScript OOP exercise types
@@ -124,4 +126,5 @@ export interface ParsedTypeScriptExercise {
 export interface TypeScriptExerciseConfig {
   title: string;
   instructions: string;
+  hints?: ExerciseHints;
 }
