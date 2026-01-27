@@ -45,12 +45,7 @@ HINTS'''
 
 
 def single_number(nums: List[int]) -> int:
-    """
-    Find the number that appears only once (all others appear twice).
-
-    Hint: XOR all numbers together. Pairs will cancel out (a ^ a = 0),
-    leaving only the single number.
-    """
+    """Find the number that appears only once (all others appear twice)."""
     # Your code here
     ...
 

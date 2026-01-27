@@ -42,12 +42,7 @@ HINTS'''
 
 
 def max_profit(prices: List[int]) -> int:
-    """
-    Find the maximum profit from buying and selling once.
-
-    Hint: Track min_price seen so far. At each day, the profit would be
-    prices[i] - min_price. Track the maximum of these profits.
-    """
+    """Find the maximum profit from buying and selling once."""
     # Your code here
     ...
 

@@ -46,12 +46,7 @@ HINTS'''
 
 
 def three_sum(nums: List[int]) -> List[List[int]]:
-    """
-    Find all unique triplets that sum to zero.
-
-    Hint: Sort first. For each i, use two pointers (left=i+1, right=end).
-    Skip duplicates by checking if current == previous.
-    """
+    """Find all unique triplets that sum to zero."""
     # Your code here
     ...
 

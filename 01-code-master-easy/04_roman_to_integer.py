@@ -36,12 +36,7 @@ Key insight: Scan left to right. If a smaller value precedes a larger one, subtr
 HINTS'''
 
 def roman_to_int(s: str) -> int:
-    """
-    Convert a Roman numeral string to an integer.
-
-    Hint: Create a dict mapping Roman chars to values.
-    If current char's value < next char's value, subtract it; else add it.
-    """
+    """Convert a Roman numeral string to an integer."""
     # Your code here
     ...
 

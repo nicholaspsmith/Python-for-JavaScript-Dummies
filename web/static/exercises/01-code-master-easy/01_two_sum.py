@@ -35,12 +35,7 @@ HINTS'''
 
 
 def two_sum(nums: List[int], target: int) -> List[int]:
-    """
-    Return indices of two numbers that add up to target.
-
-    Hint: As you iterate, store each number's index in a dict.
-    For each number, check if (target - num) exists in your dict.
-    """
+    """Return indices of two numbers that add up to target."""
     # Your code here
     ...
 

@@ -38,12 +38,7 @@ This is a classic stack problem - push opening brackets, pop and match closing o
 HINTS'''
 
 def is_valid(s: str) -> bool:
-    """
-    Return True if the string has valid matching brackets.
-
-    Hint: Use a stack (list). Push opening brackets.
-    When you see a closing bracket, pop and check if it matches.
-    """
+    """Return True if the string has valid matching brackets."""
     # Your code here
     ...
 

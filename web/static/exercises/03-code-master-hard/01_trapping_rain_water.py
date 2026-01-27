@@ -52,13 +52,7 @@ HINTS'''
 
 
 def trap(height: List[int]) -> int:
-    """
-    Calculate total trapped rain water.
-
-    Hint: For each position, water trapped = min(max_left, max_right) - height[i].
-    Use two pointers starting from both ends, tracking left_max and right_max.
-    Move the pointer with the smaller max.
-    """
+    """Calculate total trapped rain water."""
     # Your code here
     ...
 

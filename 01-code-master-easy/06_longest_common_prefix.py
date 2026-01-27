@@ -41,12 +41,7 @@ HINTS'''
 
 
 def longest_common_prefix(strs: List[str]) -> str:
-    """
-    Find the longest common prefix among all strings.
-
-    Hint: Try comparing min(strs) and max(strs) character by character.
-    The common prefix of these two is the answer!
-    """
+    """Find the longest common prefix among all strings."""
     # Your code here
     ...
 

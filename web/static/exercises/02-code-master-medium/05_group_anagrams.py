@@ -47,12 +47,7 @@ HINTS'''
 
 
 def group_anagrams(strs: List[str]) -> List[List[str]]:
-    """
-    Group anagrams together.
-
-    Hint: Use a dict where key = sorted characters of word.
-    defaultdict(list) makes this cleaner - just append to any key.
-    """
+    """Group anagrams together."""
     # Your code here
     ...
 

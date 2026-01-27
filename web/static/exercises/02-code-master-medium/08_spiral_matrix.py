@@ -48,13 +48,7 @@ HINTS'''
 
 
 def spiral_order(matrix: List[List[int]]) -> List[int]:
-    """
-    Return matrix elements in spiral order.
-
-    Hint: Use four boundaries (top, bottom, left, right).
-    Go right, then down, then left, then up.
-    After each direction, shrink that boundary and check if done.
-    """
+    """Return matrix elements in spiral order."""
     # Your code here
     ...
 

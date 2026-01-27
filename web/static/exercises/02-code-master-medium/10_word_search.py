@@ -50,13 +50,7 @@ HINTS'''
 
 
 def exist(board: List[List[str]], word: str) -> bool:
-    """
-    Return True if word can be found in the grid using adjacent cells.
-
-    Hint: Use DFS/backtracking. For each starting position, try to match
-    the word character by character. Mark cells as visited by changing
-    them temporarily (e.g., to '#'), then restore after backtracking.
-    """
+    """Return True if word can be found in the grid using adjacent cells."""
     # Your code here
     ...
 

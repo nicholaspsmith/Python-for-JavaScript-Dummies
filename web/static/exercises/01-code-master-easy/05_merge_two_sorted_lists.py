@@ -44,12 +44,7 @@ HINTS'''
 
 
 def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:
-    """
-    Merge two sorted linked lists and return the merged list's head.
-
-    Hint: Use a dummy node to simplify edge cases.
-    Compare values from each list, append the smaller one, advance that pointer.
-    """
+    """Merge two sorted linked lists and return the merged list's head."""
     # Your code here
     ...
 

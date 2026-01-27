@@ -37,12 +37,7 @@ HINTS'''
 
 
 def is_palindrome(x: int) -> bool:
-    """
-    Return True if x is a palindrome integer.
-
-    Hint: Negative numbers are never palindromes.
-    Think about how to reverse a number mathematically, or use string slicing.
-    """
+    """Return True if x is a palindrome integer."""
     # Your code here
     ...
 

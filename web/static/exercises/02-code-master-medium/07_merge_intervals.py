@@ -44,12 +44,7 @@ HINTS'''
 
 
 def merge(intervals: List[List[int]]) -> List[List[int]]:
-    """
-    Merge overlapping intervals.
-
-    Hint: Sort by start time. For each interval, check if it overlaps
-    with the last merged interval. If yes, extend; if no, add new.
-    """
+    """Merge overlapping intervals."""
     # Your code here
     ...
 

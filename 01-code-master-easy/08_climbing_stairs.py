@@ -45,13 +45,7 @@ HINTS'''
 
 
 def climb_stairs(n: int) -> int:
-    """
-    Return the number of distinct ways to climb n stairs.
-
-    Hint: This is Fibonacci! Start with base cases (1 step = 1 way, 2 steps = 2 ways).
-    Each step n = sum of ways to reach (n-1) and (n-2).
-    Use tuple unpacking: a, b = b, a + b
-    """
+    """Return the number of distinct ways to climb n stairs."""
     # Your code here
     ...
 

@@ -55,13 +55,7 @@ HINTS'''
 
 
 def max_sliding_window(nums: List[int], k: int) -> List[int]:
-    """
-    Return the maximum in each sliding window of size k.
-
-    Hint: Use a monotonic deque storing indices.
-    Keep it decreasing: when adding a new element, pop smaller elements from back.
-    The front is always the max. Remove front if it's outside the window.
-    """
+    """Return the maximum in each sliding window of size k."""
     # Your code here
     ...
 

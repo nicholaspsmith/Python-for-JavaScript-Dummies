@@ -44,13 +44,7 @@ HINTS'''
 
 
 def max_area(height: List[int]) -> int:
-    """
-    Find the maximum water container area.
-
-    Hint: Two pointers starting from both ends.
-    Calculate area, then move the pointer with the shorter height.
-    Track maximum area found.
-    """
+    """Find the maximum water container area."""
     # Your code here
     ...
 

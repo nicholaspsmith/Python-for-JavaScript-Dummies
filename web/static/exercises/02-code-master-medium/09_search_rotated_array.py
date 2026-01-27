@@ -50,13 +50,7 @@ HINTS'''
 
 
 def search(nums: List[int], target: int) -> int:
-    """
-    Search for target in rotated sorted array. Return index or -1.
-
-    Hint: Binary search with modification. At each step, determine which
-    half is sorted. Then check if target falls in the sorted range.
-    Use Python's chained comparisons: `left <= target < right`.
-    """
+    """Search for target in rotated sorted array."""
     # Your code here
     ...
 

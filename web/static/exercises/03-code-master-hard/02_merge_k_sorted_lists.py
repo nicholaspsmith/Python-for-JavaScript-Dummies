@@ -59,13 +59,7 @@ HINTS'''
 
 
 def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-    """
-    Merge k sorted linked lists into one sorted list.
-
-    Hint: Use a min-heap. Push (value, index, node) tuples.
-    Pop smallest, add to result, push its next if exists.
-    The index acts as a tiebreaker for nodes with equal values.
-    """
+    """Merge k sorted linked lists into one sorted list."""
     # Your code here
     ...
 

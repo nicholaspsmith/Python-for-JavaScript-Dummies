@@ -49,12 +49,7 @@ HINTS'''
 
 
 def add_two_numbers(l1: ListNode, l2: ListNode) -> ListNode:
-    """
-    Add two numbers represented as reversed linked lists.
-
-    Hint: Use a dummy head. Iterate while either list has nodes OR there's a carry.
-    Use divmod(sum, 10) to get (carry, digit) at each step.
-    """
+    """Add two numbers represented as reversed linked lists."""
     # Your code here
     ...
 

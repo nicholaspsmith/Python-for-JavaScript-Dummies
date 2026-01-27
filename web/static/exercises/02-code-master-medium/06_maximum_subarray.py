@@ -46,13 +46,7 @@ HINTS'''
 
 
 def max_subarray(nums: List[int]) -> int:
-    """
-    Find the maximum sum of any contiguous subarray.
-
-    Hint: Kadane's algorithm. Track current_sum and max_sum.
-    At each element: current_sum = max(num, current_sum + num)
-    This decides whether to extend or start fresh.
-    """
+    """Find the maximum sum of any contiguous subarray."""
     # Your code here
     ...
 

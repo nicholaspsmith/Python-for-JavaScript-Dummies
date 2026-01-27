@@ -43,14 +43,7 @@ HINTS'''
 
 
 def majority_element(nums: List[int]) -> int:
-    """
-    Find the element that appears more than n/2 times.
-
-    Hint: Use Boyer-Moore Voting: maintain a candidate and count.
-    When count hits 0, switch candidate. The majority will always win.
-
-    Or simpler: use collections.Counter and find the most common.
-    """
+    """Find the element that appears more than n/2 times."""
     # Your code here
     ...
 

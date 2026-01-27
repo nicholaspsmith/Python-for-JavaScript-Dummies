@@ -42,12 +42,7 @@ HINTS'''
 
 
 def is_palindrome(s: str) -> bool:
-    """
-    Return True if s is a valid palindrome (ignoring case and non-alphanumeric chars).
-
-    Hint: Either clean the string first with a list comprehension,
-    or use two pointers that skip non-alphanumeric characters.
-    """
+    """Return True if s is a valid palindrome (ignoring case and non-alphanumeric chars)."""
     # Your code here
     ...
 

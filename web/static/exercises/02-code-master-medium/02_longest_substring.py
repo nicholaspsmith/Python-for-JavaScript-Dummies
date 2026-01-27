@@ -42,12 +42,7 @@ HINTS'''
 
 
 def length_of_longest_substring(s: str) -> int:
-    """
-    Find length of longest substring without repeating characters.
-
-    Hint: Sliding window with a set. Expand right, when duplicate found,
-    shrink left until duplicate is removed. Track max length.
-    """
+    """Find length of longest substring without repeating characters."""
     # Your code here
     ...
 

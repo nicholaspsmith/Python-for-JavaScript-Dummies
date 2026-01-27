@@ -43,13 +43,7 @@ HINTS'''
 
 
 def remove_duplicates(nums: List[int]) -> int:
-    """
-    Remove duplicates in-place and return the new length.
-
-    Hint: Use two pointers - one to track where to write (k),
-    one to iterate through the array.
-    When you find a new number different from nums[k-1], write it at nums[k].
-    """
+    """Remove duplicates in-place and return the new length."""
     # Your code here
     ...
 
