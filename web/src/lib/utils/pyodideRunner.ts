@@ -144,6 +144,22 @@ ${testCode}
     const output = stdout + (stderr ? '\n' + stderr : '');
     const { passed, failed, failedDetails } = parseTestOutput(output);
 
+    // Check if stderr contains an error that should be reported
+    if (stderr && (stderr.includes('Error') || stderr.includes('Traceback'))) {
+      const errorInfo = parseErrorMessage(stderr);
+      return {
+        success: false,
+        output,
+        error: errorInfo.message,
+        errorType: errorInfo.type,
+        errorLine: errorInfo.line,
+        errorDetails: errorInfo.details,
+        passedTests: passed,
+        failedTests: failed,
+        failedTestDetails: failedDetails
+      };
+    }
+
     return {
       success: allTestsPassed(output),
       output,
@@ -157,9 +173,11 @@ ${testCode}
     const stderr = pyodide.runPython('_get_errors()');
 
     const errorMessage = error instanceof Error ? error.message : String(error);
+    console.log('Python error caught:', errorMessage);
 
     // Parse the error to extract useful information
     const errorInfo = parseErrorMessage(errorMessage);
+    console.log('Parsed error info:', errorInfo);
 
     const output = stdout + (stderr ? '\n' + stderr : '');
     const { passed, failed, failedDetails } = parseTestOutput(output);
