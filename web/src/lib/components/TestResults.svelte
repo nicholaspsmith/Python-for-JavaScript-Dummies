@@ -101,6 +101,13 @@
       </div>
     {/if}
 
+    {#if cleanOutput}
+      <div class="console-output">
+        <h4>📋 Console Output</h4>
+        <pre>{cleanOutput}</pre>
+      </div>
+    {/if}
+
     {#if result.passedTests.length > 0 || result.failedTests.length > 0}
       <div class="test-details">
         {#each result.passedTests as test}
@@ -171,12 +178,6 @@
       </div>
     {/if}
 
-    {#if cleanOutput && !result.success}
-      <details class="output-details" open>
-        <summary>Show output</summary>
-        <pre class="output">{cleanOutput}</pre>
-      </details>
-    {/if}
   {:else}
     <div class="status idle">
       <span class="icon">💡</span>
@@ -427,6 +428,33 @@
     color: #f87171;
   }
 
+  .console-output {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    border-left: 3px solid #60a5fa;
+  }
+
+  .console-output h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.8125rem;
+    color: #60a5fa;
+  }
+
+  .console-output pre {
+    margin: 0;
+    padding: 0.5rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
   .js-habits {
     margin-top: 1rem;
     padding: 0.75rem;
@@ -450,33 +478,6 @@
 
   .js-habits li {
     margin-bottom: 0.25rem;
-  }
-
-  .output-details {
-    margin-top: 0.75rem;
-  }
-
-  .output-details summary {
-    cursor: pointer;
-    font-size: 0.8125rem;
-    color: var(--text-tertiary);
-    padding: 0.375rem;
-  }
-
-  .output-details summary:hover {
-    color: var(--text-secondary);
-  }
-
-  .output {
-    margin: 0.5rem 0 0 0;
-    padding: 0.75rem;
-    background: var(--bg-primary);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
   }
 
   kbd {
