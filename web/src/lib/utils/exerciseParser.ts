@@ -53,6 +53,8 @@ export function parseExercise(content: string): ParsedExercise {
     beforeTest = beforeTest.replace(/^#\s*=+\s*TESTS\s*=+\s*$/gm, '');
     // Remove the HINTS block from the template
     beforeTest = beforeTest.replace(/'''HINTS[\s\S]*?HINTS'''\n?/g, '');
+    // Normalize whitespace: collapse 3+ consecutive newlines to 2 (PEP 8: 2 blank lines)
+    beforeTest = beforeTest.replace(/\n{4,}/g, '\n\n\n');
     codeTemplate = beforeTest.trim();
 
     // Test code (without the if __name__ line itself, just the body)
