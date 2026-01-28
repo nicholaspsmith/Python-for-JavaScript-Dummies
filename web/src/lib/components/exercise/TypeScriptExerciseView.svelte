@@ -187,8 +187,11 @@
       hintText = hints.solution;
     }
 
+    // Convert escaped newlines to actual newlines
+    const unescapedHint = hintText.replace(/\\n/g, '\n');
+
     // Format hint as a comment block appended to user's code
-    const formattedHint = `\n\n// === ${hintLabel} ===\n// ${hintText.split('\n').join('\n// ')}\n// === END ${hintLabel} ===`;
+    const formattedHint = `\n\n// === ${hintLabel} ===\n// ${unescapedHint.split('\n').join('\n// ')}\n// === END ${hintLabel} ===`;
 
     const newCode = currentCode + formattedHint;
     codeEditor.reset(newCode);
