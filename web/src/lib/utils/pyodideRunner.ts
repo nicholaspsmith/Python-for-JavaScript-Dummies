@@ -167,13 +167,37 @@ ${testCode}
       failedTests: failed,
       failedTestDetails: failedDetails
     };
-  } catch (error) {
+  } catch (error: unknown) {
     // Get any output before the error
     const stdout = pyodide.runPython('_get_output()');
     const stderr = pyodide.runPython('_get_errors()');
 
-    const errorMessage = error instanceof Error ? error.message : String(error);
+    // Pyodide errors may have different structures - try multiple approaches
+    let errorMessage = '';
+    if (error instanceof Error) {
+      // Try message first, then toString(), then name
+      errorMessage = error.message || error.toString() || error.name || '';
+    }
+    if (!errorMessage && typeof error === 'string') {
+      errorMessage = error;
+    }
+    if (!errorMessage && error && typeof error === 'object') {
+      // Pyodide might return an object with different properties
+      const errObj = error as Record<string, unknown>;
+      errorMessage = String(errObj.message || errObj.toString?.() || errObj.name || '');
+    }
+    if (!errorMessage) {
+      errorMessage = String(error);
+    }
+
+    // If still empty, check stderr for the error
+    if (!errorMessage || errorMessage === '[object Object]') {
+      errorMessage = stderr || 'An unknown error occurred';
+    }
+
     console.log('Python error caught:', errorMessage);
+    console.log('Raw error object:', error);
+    console.log('stderr:', stderr);
 
     // Parse the error to extract useful information
     const errorInfo = parseErrorMessage(errorMessage);
