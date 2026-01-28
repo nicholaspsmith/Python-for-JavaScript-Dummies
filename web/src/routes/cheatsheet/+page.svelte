@@ -1,5 +1,22 @@
 <script lang="ts">
   import { theme } from '$lib/stores/theme';
+  import { onMount } from 'svelte';
+
+  let scrollContainer: HTMLElement;
+  let showBackToTop = false;
+
+  onMount(() => {
+    const handleScroll = () => {
+      showBackToTop = scrollContainer.scrollTop > 300;
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+    return () => scrollContainer.removeEventListener('scroll', handleScroll);
+  });
+
+  function scrollToTop() {
+    scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   const sections = [
     {
@@ -220,7 +237,7 @@
   <title>JS to Python Cheatsheet</title>
 </svelte:head>
 
-<div class="cheatsheet">
+<div class="cheatsheet" bind:this={scrollContainer}>
   <div class="back-bar">
     <a href="/" class="back-link">← Back to Exercises</a>
     <button class="theme-toggle" on:click={() => theme.toggle()} aria-label="Toggle theme">
@@ -285,6 +302,14 @@
       </section>
     {/each}
   </main>
+
+  {#if showBackToTop}
+    <button class="back-to-top" on:click={scrollToTop} aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 15l-6-6-6 6"/>
+      </svg>
+    </button>
+  {/if}
 </div>
 
 <style>
@@ -299,6 +324,7 @@
     color: var(--text-primary);
     height: 100vh;
     overflow-y: auto;
+    scroll-behavior: smooth;
   }
 
   .back-bar {
@@ -475,6 +501,32 @@
 
   tr:hover {
     background: var(--bg-secondary);
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+  }
+
+  .back-to-top:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--text-tertiary);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
