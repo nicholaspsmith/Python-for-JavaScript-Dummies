@@ -488,6 +488,15 @@
     color: #60a5fa;
   }
 
+  /* Light mode overrides for JavaScript colors */
+  :global([data-theme="light"]) th:first-child {
+    color: #459900;
+  }
+
+  :global([data-theme="light"]) td:first-child code {
+    color: #62a63c;
+  }
+
   td:last-child {
     color: var(--text-tertiary);
     font-size: 0.8125rem;
