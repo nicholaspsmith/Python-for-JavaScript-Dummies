@@ -505,6 +505,9 @@
 
   :global([data-theme="light"]) h1 {
     background: linear-gradient(135deg, #079d02 0%, #028bff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   td:last-child {
