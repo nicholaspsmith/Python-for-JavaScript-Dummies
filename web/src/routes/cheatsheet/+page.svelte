@@ -325,6 +325,12 @@
     height: 100vh;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .cheatsheet::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
   }
 
   .back-bar {
@@ -495,6 +501,10 @@
 
   :global([data-theme="light"]) td:first-child code {
     color: #62a63c;
+  }
+
+  :global([data-theme="light"]) h1 {
+    background: linear-gradient(135deg, #079d02 0%, #028bff 100%);
   }
 
   td:last-child {
