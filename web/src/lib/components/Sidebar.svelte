@@ -218,6 +218,15 @@
       {/each}
     {/if}
   </nav>
+
+  {#if !collapsed}
+    <div class="sidebar-footer">
+      <a href="/cheatsheet" class="cheatsheet-link">
+        <span class="cheatsheet-icon">📖</span>
+        <span>JS → Python Cheatsheet</span>
+      </a>
+    </div>
+  {/if}
 </aside>
 
 <style>
@@ -496,6 +505,33 @@
 
   .collapsed-id {
     font-weight: 500;
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .cheatsheet-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.15s;
+  }
+
+  .cheatsheet-link:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+  }
+
+  .cheatsheet-icon {
+    font-size: 1rem;
   }
 
   /* Tablet */
