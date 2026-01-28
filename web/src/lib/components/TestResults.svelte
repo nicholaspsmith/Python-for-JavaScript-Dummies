@@ -11,6 +11,17 @@
 
   $: cleanOutput = result?.output ? filterOutput(result.output) : '';
 
+  // Debug: log test result when it changes
+  $: if (result) {
+    console.log('TestResults received:', {
+      success: result.success,
+      error: result.error,
+      errorType: result.errorType,
+      passedTests: result.passedTests?.length,
+      failedTests: result.failedTests?.length
+    });
+  }
+
   let containerHeight = 200;
   let isDragging = false;
   let startY = 0;
