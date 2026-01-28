@@ -397,7 +397,7 @@
   h1 {
     font-size: 2.5rem;
     margin: 0 0 0.5rem 0;
-    background: linear-gradient(135deg, #f7df1e 0%, #3776ab 100%);
+    background: linear-gradient(135deg, #25f71e 0%, #008aff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -479,7 +479,7 @@
   }
 
   th:first-child {
-    color: #f7df1e;
+    color: #5bf530;
   }
 
   th:nth-child(2) {
@@ -487,7 +487,7 @@
   }
 
   td:first-child code {
-    color: #fbbf24;
+    color: #7bff68;
   }
 
   td:nth-child(2) code {
