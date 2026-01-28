@@ -190,13 +190,21 @@ ${testCode}
       errorMessage = String(error);
     }
 
-    // If still empty, check stderr for the error
-    if (!errorMessage || errorMessage === '[object Object]') {
+    // Prefer stderr if it contains actual Python error details
+    // (errorMessage from Pyodide is often just "PythonError" which isn't helpful)
+    const stderrHasError = stderr && (
+      stderr.includes('Error:') ||
+      stderr.includes('Traceback') ||
+      stderr.includes('Exception')
+    );
+
+    if (stderrHasError) {
+      errorMessage = stderr;
+    } else if (!errorMessage || errorMessage === '[object Object]' || errorMessage === 'PythonError') {
       errorMessage = stderr || 'An unknown error occurred';
     }
 
     console.log('Python error caught:', errorMessage);
-    console.log('Raw error object:', error);
     console.log('stderr:', stderr);
 
     // Parse the error to extract useful information
