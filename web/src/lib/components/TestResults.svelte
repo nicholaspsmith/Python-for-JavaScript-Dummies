@@ -90,24 +90,6 @@
       </div>
     {/if}
 
-    {#if result.error && result.errorType}
-      <div class="error-box">
-        <div class="error-message">
-          <code>{result.error}</code>
-        </div>
-        {#if result.errorLine}
-          <div class="error-location">
-            Line {result.errorLine}
-          </div>
-        {/if}
-        {#if result.errorDetails}
-          <div class="error-code">
-            <code>{result.errorDetails}</code>
-          </div>
-        {/if}
-      </div>
-    {/if}
-
     {#if result.passedTests.length > 0 || result.failedTests.length > 0}
       <div class="test-details">
         {#each result.passedTests as test}
@@ -143,6 +125,24 @@
             </div>
           {/if}
         {/each}
+      </div>
+    {/if}
+
+    {#if result.error && result.errorType}
+      <div class="error-box">
+        <div class="error-message">
+          <code>{result.error}</code>
+        </div>
+        {#if result.errorLine}
+          <div class="error-location">
+            Line {result.errorLine}
+          </div>
+        {/if}
+        {#if result.errorDetails}
+          <div class="error-code">
+            <code>{result.errorDetails}</code>
+          </div>
+        {/if}
       </div>
     {/if}
 
