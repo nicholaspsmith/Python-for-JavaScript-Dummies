@@ -72,11 +72,11 @@
           <span>Great job! Keep up the streak!</span>
         </div>
       </div>
-    {:else if result.error && result.errorType}
+    {:else if result.error}
       <div class="status syntax-error">
         <span class="icon">⚠️</span>
         <div class="message">
-          <strong>{result.errorType}</strong>
+          <strong>{result.errorType || 'Error'}</strong>
           <span>Your code has an error that prevented it from running</span>
         </div>
       </div>
@@ -128,8 +128,11 @@
       </div>
     {/if}
 
-    {#if result.error && result.errorType}
+    {#if result.error}
       <div class="error-box">
+        {#if result.errorType}
+          <div class="error-type">{result.errorType}</div>
+        {/if}
         <div class="error-message">
           <code>{result.error}</code>
         </div>
@@ -252,6 +255,15 @@
     border: 1px solid #422006;
     border-left: 3px solid #f59e0b;
     border-radius: 6px;
+  }
+
+  .error-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f59e0b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
   }
 
   .error-message {
